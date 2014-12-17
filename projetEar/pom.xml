@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>ac.enset.administration.projetAbsence</groupId>
+          	<artifactId>GestionAbSsence</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>projetEar</artifactId>
+	<packaging>ear</packaging>
+
+	<build>
+		<finalName>GestionAbSsence</finalName>
+		<plugins>
+			<!--Ear plugin -creating the ear - watch out skinny WARS! -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<finalName>GestionAbSsence</finalName>
+					<defaultLibBundleDir>lib/</defaultLibBundleDir>
+					<skinnyWars>true</skinnyWars>
+					<modules>
+						<webModule>
+							<groupId>ac.enset.administration.projetAbsence</groupId>
+							<artifactId>projetWeb</artifactId>
+						</webModule>
+						<ejbModule>
+							<groupId>mac.enset.administration.projetAbsence</groupId>
+							<artifactId>projetEjb</artifactId>
+						</ejbModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<!-- our in app dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>ac.enset.administration.projetAbsence</groupId>
+			<artifactId>projetWeb</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>ac.enset.administration.projetAbsence</groupId>
+			<artifactId>projetEjb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+	</dependencies>
+</project>
