@@ -1,127 +1,137 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>ac.enset.administration.projetAbsence</groupId>
-    <artifactId>GestionAbSsence</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ac.enset.administration.projetAbsence</groupId>
+	<artifactId>GestionAbSsence</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-    <modules>
-        <module>projetEar</module>
-        <module>projetWeb</module>
-        <module>projetEjb</module>
-    </modules>
+	<modules>
+		<module>projetEar</module>
+		<module>projetWeb</module>
+		<module>projetEjb</module>
+	</modules>
 
-    <properties>
-        <!-- encoding -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--java version -->
-        <java-version>1.7</java-version>
-        <!-- plugin versions -->
-        <ejb-plugin-version>2.3</ejb-plugin-version>
-        <war-plugin-version>2.4</war-plugin-version>
-        <ear-plugin-version>2.9</ear-plugin-version>
-        <compiler-plugin-version>3.1</compiler-plugin-version>
-        <!-- dependency versions -->
-        <javaee-api-version>6.0</javaee-api-version>
-        <junit-version>4.11</junit-version>
-        <!-- EJB spec version -->
-        <ejb-spec-version>3.1</ejb-spec-version>
-    </properties>
-    <developers>
-        <developer>
-            <id>ab</id>
-            <name>bakri anouar</name>
-            <email>bakri.anouar@gmail.com</email>
-            <organization>enset</organization>
-            <roles>
-              <role>tester</role>
-              <role>developer</role>
-              <role>architect</role>
-            </roles>
+	<properties>
+		<!-- encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!--java version -->
+		<java-version>1.7</java-version>
+		<!-- plugin versions -->
+		<ejb-plugin-version>2.3</ejb-plugin-version>
+		<war-plugin-version>2.4</war-plugin-version>
+		<ear-plugin-version>2.9</ear-plugin-version>
+		<compiler-plugin-version>3.1</compiler-plugin-version>
+		<!-- dependency versions -->
+		<javaee-api-version>3.0.3.Final</javaee-api-version>
+		<junit-version>4.11</junit-version>
+		<!-- EJB spec version -->
+		<ejb-spec-version>3.1</ejb-spec-version>
+	</properties>
+	<developers>
+		<developer>
+			<id>ab</id>
+			<name>bakri anouar</name>
+			<email>bakri.anouar@gmail.com</email>
+			<organization>enset</organization>
+			<roles>
+				<role>tester</role>
+				<role>developer</role>
+				<role>architect</role>
+			</roles>
 
-        </developer>
-    </developers>
+		</developer>
+	</developers>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>javax</groupId>
-                <artifactId>javaee-api</artifactId>
-                <version>${javaee-api-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit-version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-web-6.0</artifactId>
+				<version>${javaee-api-version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit-version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <!-- compiler plugin -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${compiler-plugin-version}</version>
-                    <configuration>
-                        <source>${java-version}</source>
-                        <target>${java-version}</target>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                    </configuration>
-                </plugin>
-                <!-- ejb plugin -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-ejb-plugin</artifactId>
-                    <version>${ejb-plugin-version}</version>
-                    <configuration>
-                        <ejbVersion>${ejb-spec-version}</ejbVersion>
-                    </configuration>
-                </plugin>
-                <!-- ear plugin -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-ear-plugin</artifactId>
-                    <version>${ear-plugin-version}</version>
-                </plugin>
-                <!-- war plugin -skinny wars mode! -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>${war-plugin-version}</version>
-                    <configuration>
-                        <!-- Whether or not to fail the build if the web.xml file is missing. Set to false if you want you WAR built without a web.xml file. This may be useful if you are building an overlay that has no web.xml file. -->
-                        <failOnMissingWebXml>false</failOnMissingWebXml>
-                        <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
-                        <archive>
-                            <manifest>
-                                <addClasspath>true</addClasspath>
-                                <classpathPrefix>lib/</classpathPrefix>
-                            </manifest>
-                        </archive>
-                        <webResources>
-                            <resource>
-                                <filtering>true</filtering>
-                                <directory>src/main/webapp</directory>
-                                <includes>
-                                    <include>**/web.xml</include>
-                                </includes>
-                            </resource>
-                        </webResources>
-                    </configuration>
-                </plugin>
-<plugin>
-            <groupId>external.atlassian.jgitflow</groupId>
-            <artifactId>jgitflow-maven-plugin</artifactId>
-            <version>1.0-m4.3</version>
-            <configuration>
-	      <noDeploy>true</noDeploy>
-            </configuration>
-        </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- compiler plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${compiler-plugin-version}</version>
+					<configuration>
+						<source>${java-version}</source>
+						<target>${java-version}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<!-- ejb plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>${ejb-plugin-version}</version>
+					<configuration>
+						<ejbVersion>${ejb-spec-version}</ejbVersion>
+					</configuration>
+				</plugin>
+				<!-- ear plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>${ear-plugin-version}</version>
+				</plugin>
+				<!-- war plugin -skinny wars mode! -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${war-plugin-version}</version>
+					<configuration>
+						<!-- Whether or not to fail the build if the web.xml file is missing. 
+							Set to false if you want you WAR built without a web.xml file. This may be 
+							useful if you are building an overlay that has no web.xml file. -->
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+								<classpathPrefix>lib/</classpathPrefix>
+							</manifest>
+						</archive>
+						<webResources>
+							<resource>
+								<filtering>true</filtering>
+								<directory>src/main/webapp</directory>
+								<includes>
+									<include>**/web.xml</include>
+								</includes>
+							</resource>
+						</webResources>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>external.atlassian.jgitflow</groupId>
+					<artifactId>jgitflow-maven-plugin</artifactId>
+					<version>1.0-m4.3</version>
+					<configuration>
+						<noDeploy>true</noDeploy>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<repositories>
+    <repository>
+        <id>jboss-repo</id>
+        <name>jboss-repo</name>
+        <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
+    </repository>
+</repositories>
 </project>

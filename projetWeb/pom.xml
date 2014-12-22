@@ -27,9 +27,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<scope>provided</scope>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-web-6.0</artifactId>
+			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>ac.enset.administration.projetAbsence</groupId>

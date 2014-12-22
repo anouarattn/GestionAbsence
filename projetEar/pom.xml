@@ -27,7 +27,7 @@
 							<artifactId>projetWeb</artifactId>
 						</webModule>
 						<ejbModule>
-							<groupId>mac.enset.administration.projetAbsence</groupId>
+							<groupId>ac.enset.administration.projetAbsence</groupId>
 							<artifactId>projetEjb</artifactId>
 						</ejbModule>
 					</modules>
@@ -43,7 +43,6 @@
 			<version>${project.version}</version>
 			<type>war</type>
 		</dependency>
-
 		<dependency>
 			<groupId>ac.enset.administration.projetAbsence</groupId>
 			<artifactId>projetEjb</artifactId>
