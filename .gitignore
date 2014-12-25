@@ -1,11 +1,14 @@
 .project
-projetEar/.project
+
+
+
 projetWeb/.project
+
 projetEjb/.project
+projetEar/.project
 
 
+projetWeb/target/
 
-
-log/
-
-target/
+projetEjb/target/
+projetEar/target/
