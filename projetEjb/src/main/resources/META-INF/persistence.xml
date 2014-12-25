@@ -12,7 +12,6 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 		<jta-data-source>java:/MySqlDS2</jta-data-source>
 		<!-- glassfish -->
 		<!-- <jta-data-source>jdbc/mysql_projetabsencetest</jta-data-source> -->	
-		<class>entites.Personne</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
