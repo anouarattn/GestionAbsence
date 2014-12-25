@@ -1,9 +1,11 @@
 .project
-# Intellij
-.idea/
-*.iml
-*.iws
+projetEar/.project
+projetWeb/.project
+projetEjb/.project
 
-# Maven
+
+
+
 log/
+
 target/
