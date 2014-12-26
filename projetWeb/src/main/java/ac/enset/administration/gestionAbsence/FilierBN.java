@@ -8,10 +8,6 @@ import javax.faces.bean.RequestScoped;
 
 import ac.enset.administration.gestionAbsence.session.IAbsenceRemote;
 
-//import lib.metier.Filier;
-//import lib.session.IAbsenceRemote;
-
-
 @ManagedBean(name="filierBN")
 @RequestScoped
 public class FilierBN {
