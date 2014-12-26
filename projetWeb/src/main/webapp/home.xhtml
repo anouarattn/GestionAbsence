@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      <h:head>
+     	 <meta charset="utf-8"/>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	    <meta name="description" content=""/>
+	    <meta name="author" content=""/>
+      	<link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+      	<link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" />
+      	<script src="bootstrap/js/bootstrap.min.js"></script>
+    	<script src="bootstrap/js/ie-emulation-modes-warning.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      </h:head>
+      
+	<body>
+	 <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	<br></br><br></br>
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Projet Absence V 0.1 </h1>
+        
+        <p class="lead">Use this document as a way to quickly start any new project.<br/> All you get is this text and a mostly Barebones HTML document.</p>
+      </div>
+
+    </div>
+<div class="col-md-4">
+<div class="panel panel-default">
+	<div class="panel-heading">
+          <i class="fa fa-bell fa-fw"></i> Ajouter Filière
+     </div>
+     <div class="panel-body">
+		<h:form>
+			<h:panelGrid columns="2"   >	
+				<h:outputText value="Code : " />
+				<h:inputText value="#{filierBN.code}" styleClass="form-control" ></h:inputText>
+				<h:outputText value="annee : " />
+				<h:inputText value="#{filierBN.annee}" styleClass="form-control" ></h:inputText>
+				<h:outputText value="Lib Filier : " />
+				<h:inputText value="#{filierBN.lib_fil}" styleClass="form-control" ></h:inputText>	
+				<h:commandButton value="Ajouter Filire" action="#{filierBN.ajouter}" styleClass="btn btn-primary" ></h:commandButton>
+			</h:panelGrid>
+		</h:form>
+	</div>
+</div>
+</div>
+
+<div class="col-md-4">
+	<div class="panel panel-default">
+	<div class="panel-heading">
+	          <i class="fa fa-bell fa-fw"></i> Ajouter Filière
+	     </div>
+	     <div class="panel-body">
+			<h:dataTable value="#{filierBN.listFilier}" var="fil" class="table table-striped"> 
+				<h:column>
+					<f:facet name="header">
+						Code filier
+					</f:facet>
+					<h:outputText value="#{fil.codefil}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header"  >
+						Libelle Filier
+					</f:facet>
+					<h:outputText value="#{fil.libfil}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						Annee Universitaire
+					</f:facet>
+					<h:outputText value="#{fil.annee}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+		</div>
+</div>
+		
+	</body>
+</html>
