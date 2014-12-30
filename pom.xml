@@ -128,10 +128,10 @@
 		</pluginManagement>
 	</build>
 	<repositories>
-    <repository>
-        <id>jboss-repo</id>
-        <name>jboss-repo</name>
-        <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
-    </repository>
-</repositories>
+		<repository>
+			<id>jboss-repo</id>
+			<name>jboss-repo</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
+		</repository>
+	</repositories>
 </project>
