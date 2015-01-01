@@ -1,0 +1,15 @@
+.navbar-top-links .dropdown-anneeScolaire {
+    width: 310px;
+    min-width: 0;
+}
+
+.navbar-top-links .dropdown-anneeScolaire {
+    margin-left: -123px;
+}
+
+
+@media(min-width:768px) {
+    .navbar-top-links .dropdown-anneeScolaire {
+        margin-left: auto;
+    }
+}

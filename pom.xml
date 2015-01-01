@@ -24,7 +24,7 @@
 		<compiler-plugin-version>3.1</compiler-plugin-version>
 		<!-- dependency versions -->
 		<javaee-api-version>3.0.3.Final</javaee-api-version>
-		<junit-version>4.11</junit-version>
+		<junit-version>4.12</junit-version>
 		<!-- EJB spec version -->
 		<ejb-spec-version>3.1</ejb-spec-version>
 	</properties>
@@ -114,14 +114,6 @@
 								</includes>
 							</resource>
 						</webResources>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>external.atlassian.jgitflow</groupId>
-					<artifactId>jgitflow-maven-plugin</artifactId>
-					<version>1.0-m4.3</version>
-					<configuration>
-						<noDeploy>true</noDeploy>
 					</configuration>
 				</plugin>
 			</plugins>

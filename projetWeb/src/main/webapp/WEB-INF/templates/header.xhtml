@@ -17,6 +17,18 @@
 		<!-- /.navbar-header -->
 
 		<ul class="nav navbar-top-links navbar-right">
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <strong>Année Scolaire </strong> <i class="fa fa-caret-down"></i>
+			</a>
+				<ul class="dropdown-menu dropdown-anneeScolaire">
+					<ui:repeat value="#{anneeScolaireControlleur.getAnneesScolaires()}" var="annees" >
+						<li><a href="#">Année Scolaire #{annees.annee}/#{annees.annee+1}</a></li>
+					</ui:repeat>
+						<li class="divider"></li>
+						<li>
+							<a href="#"><i class="fa fa-plus"></i> <strong>Nouvelle Année Scolaire</strong></a>
+					    </li>
+				</ul></li>
 			<!-- /.dropdown -->
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-fw"></i>
@@ -70,10 +82,10 @@
 					<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
 							Edition des données<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level collapse">
-							<li><a href="flot.html">Etudiant</a></li>
+							<li><a href="flot.html">Formation</a></li>
 							<li><a href="morris.html">prof</a></li>
 						</ul> <!-- /.nav-second-level --></li>
-					
+
 				</ul>
 			</div>
 			<!-- /.sidebar-collapse -->
