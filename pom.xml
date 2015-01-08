@@ -27,6 +27,7 @@
 		<junit-version>4.12</junit-version>
 		<!-- EJB spec version -->
 		<ejb-spec-version>3.1</ejb-spec-version>
+		<primefaces-version>5.1</primefaces-version>
 	</properties>
 	<developers>
 		<developer>
@@ -55,6 +56,11 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+				<version>${primefaces-version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -94,16 +100,14 @@
 					<artifactId>maven-war-plugin</artifactId>
 					<version>${war-plugin-version}</version>
 					<configuration>
-						<!-- Whether or not to fail the build if the web.xml file is missing. 
-							Set to false if you want you WAR built without a web.xml file. This may be 
-							useful if you are building an overlay that has no web.xml file. -->
+						<!-- Whether or not to fail the build if the web.xml file is missing. Set to false if you want you WAR built 
+							without a web.xml file. This may be useful if you are building an overlay that has no web.xml file. -->
 						<failOnMissingWebXml>false</failOnMissingWebXml>
-						<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
 						<archive>
 							<manifest>
 								<addClasspath>true</addClasspath>
-								<classpathPrefix>lib/</classpathPrefix>
-							</manifest>
+<!-- 								<classpathPrefix>lib/</classpathPrefix>
+ -->							</manifest>
 						</archive>
 						<webResources>
 							<resource>

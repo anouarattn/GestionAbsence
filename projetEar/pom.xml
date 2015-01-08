@@ -20,8 +20,8 @@
 				<configuration>
 					<finalName>GestionAbSsence</finalName>
 					<defaultLibBundleDir>lib/</defaultLibBundleDir>
-					<skinnyWars>true</skinnyWars>
-					<modules>
+<!-- 					<skinnyWars>true</skinnyWars>
+ -->					<modules>
 						<webModule>
 							<groupId>ac.enset.administration.projetAbsence</groupId>
 							<artifactId>projetWeb</artifactId>
@@ -54,6 +54,9 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+        <!-- <dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+		</dependency> -->
 	</dependencies>
 </project>
