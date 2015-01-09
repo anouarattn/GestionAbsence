@@ -30,18 +30,55 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-		<h:form>
-						 <p:contextMenu for="departementTable">
+					<h:form>
+						<p:contextMenu for="departementTable">
 							<p:menuitem value="View" update="departementDetail"
 								icon="ui-icon-search"
 								oncomplete="PF('departementDialog').show()" />
 							<p:menuitem value="Delete" update="departementTable"
-								icon="ui-icon-close" actionListener="departementControlleur.supprimeDepartement()" />
+								icon="ui-icon-close"
+								actionListener="departementControlleur.supprimeDepartement()" />
 						</p:contextMenu>
+						<p:dataTable emptyMessage="pas de données dans la base"
+							value="#{departementControlleur.departements}" var="departement"
+							paginator="true" rows="40" rowKey="#{departement.id}"
+							filteredValue="#{departementControlleur.filtredDepartements}"
+							widgetVar="departementTableVar" id="departementTable"
+							paginatorPosition="bottom"
+							selection="#{departementControlleur.selectedDepartement}"
+							selectionMode="single">
 
-							<p:dialog header="Departement détail" widgetVar="departementDialog"
-							modal="true" showEffect="fade" hideEffect="fade"
-							resizable="false">
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="Recherche :" />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('departementTableVar').filter()"
+										placeholder="Enter keyword" />
+								</p:outputPanel>
+							</f:facet>
+							<p:column filterBy="#{departement.id}" headerText="Id"
+								sortBy="#{departement.id}" filterMatchMode="contains"
+								filterStyle="display:none">
+								<h:outputText value="#{departement.id}" />
+							</p:column>
+							<p:column filterBy="#{departement.nom}" headerText="Departement"
+								sortBy="#{departement.nom}" filterMatchMode="contains"
+								filterStyle="display:none">
+								<h:outputText value="#{departement.nom}" />
+							</p:column>
+
+							<p:column filterBy="#{departement.chef}"
+								headerText="Chef de Departement" sortBy="#{departement.chef}"
+								filterStyle="display:none" filterMatchMode="contains">
+								<h:outputText value="#{departement.chef}" />
+							</p:column>
+							<p:column headerText="Edition">
+								<h:outputText value="edit/delete" />
+							</p:column>
+						</p:dataTable>
+						<p:dialog header="Departement détail"
+							widgetVar="departementDialog" modal="true" showEffect="fade"
+							hideEffect="fade" resizable="false">
 							<p:outputPanel id="departementDetail" style="text-align:center;">
 								<p:panelGrid columns="2"
 									rendered="#{not empty departementControlleur.selectedDepartement}"
@@ -51,13 +88,16 @@
 									</f:facet>
 
 									<h:outputText value="Id" />
-									<h:outputText value="#{departementControlleur.selectedDepartement.id}" />
+									<h:outputText
+										value="#{departementControlleur.selectedDepartement.id}" />
 
 									<h:outputText value="Nom" />
-									<h:outputText value="#{departementControlleur.selectedDepartement.nom}" />
+									<h:outputText
+										value="#{departementControlleur.selectedDepartement.nom}" />
 
 									<h:outputText value="Chef" />
-									<h:outputText value="#{departementControlleur.selectedDepartement.chef}"/>
+									<h:outputText
+										value="#{departementControlleur.selectedDepartement.chef}" />
 								</p:panelGrid>
 							</p:outputPanel>
 						</p:dialog> -->

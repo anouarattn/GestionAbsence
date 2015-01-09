@@ -15,10 +15,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
+					<packagingExcludes>WEB-INF/lib/projetEjb-${project.version}.jar</packagingExcludes>
 					<archive>
 						<manifestEntries>
-							<Class-Path>project-ejb-${project.version}.jar</Class-Path>
-						</manifestEntries>
+<!-- 							<Class-Path>project-ejb-${project.version}.jar</Class-Path>
+ -->						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
@@ -42,5 +43,9 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+			</dependency>
 	</dependencies>
 </project>
