@@ -27,7 +27,7 @@
 		<junit-version>4.12</junit-version>
 		<!-- EJB spec version -->
 		<ejb-spec-version>3.1</ejb-spec-version>
-		<primefaces-version>5.1</primefaces-version>
+		<primefaces-version>5.0</primefaces-version>
 	</properties>
 	<developers>
 		<developer>
