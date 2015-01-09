@@ -28,6 +28,8 @@ public interface IAbsenceLocal {
     public void ajouterClasse(Classe c, Long idNiveauFiliere, Long idAnneeScolaire);    
     
     public List<AnneeScolaire> getAnneesScollaires();
+
+    public List<Departement> getDepartements();
     
 
 }

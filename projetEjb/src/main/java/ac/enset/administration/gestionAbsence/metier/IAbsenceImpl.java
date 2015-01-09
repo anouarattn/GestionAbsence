@@ -3,6 +3,8 @@ package ac.enset.administration.gestionAbsence.metier;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -70,6 +72,12 @@ public class IAbsenceImpl implements IAbsenceLocal {
     {
 	Query q = em.createQuery("select annees from AnneeScolaire annees");
 	return q.getResultList();
+    }
+    public List<Departement> getDepartements(){
+	
+	Query q = em.createQuery("select deps from Departement deps");
+	List<Departement> deps = q.getResultList();
+	return deps;
     }
 
 

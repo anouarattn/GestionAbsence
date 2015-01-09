@@ -11,13 +11,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</f:facet>
-
-	<link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.css" />
-	<link rel="stylesheet" href="resources/bower_components/metisMenu/dist/metisMenu.css" />
-	<link rel="stylesheet" href="resources/bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" />
-	<link rel="stylesheet" href="resources/bower_components/font-awesome/css/font-awesome.css" />
-	<link rel="stylesheet" href="resources/css/styles.css" />
-
+		<link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="resources/bower_components/metisMenu/dist/metisMenu.css" />
+		<link rel="stylesheet" href="resources/bower_components/font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="resources/css/styles.css" />
+		<ui:insert name="css"/>
+		<link rel="stylesheet" href="resources/bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" />
+		
 </h:head>
 
 <h:body>
@@ -30,11 +30,14 @@
 
 		<!-- Placed at the end of the document so the pages load faster -->
 		<!-- scripts -->
-		<script src="resources/bower_components/jquery/dist/jquery.js"></script>
+		<ui:insert name="jquery">
+				<script src="resources/bower_components/jquery/dist/jquery.js"></script>
+		</ui:insert>
 		<script src="resources/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 		<script src="resources/bower_components/metisMenu/dist/metisMenu.js"></script>
+		<ui:insert name="js"/>
 		<script src="resources/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
-
+	
 
 </h:body>
 

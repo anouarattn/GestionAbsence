@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/main.xhtml">
+	<ui:define name="css">
+		<!-- 	<link rel="stylesheet"
+			href="resources/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" />
+		<link rel="stylesheet"
+			href="resources/bower_components/datatables-responsive/css/dataTables.responsive.css" /> -->
+
+	</ui:define>
+	<ui:define name="jquery"></ui:define>
+	<ui:define name="js">
+
+		<!-- <script
+			src="resources/bower_components/DataTables/media/js/jquery.dataTables.js"></script>
+		<script
+			src="resources/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+		<script src="resources/js/scripts.js"></script> -->
+	</ui:define>
+	<ui:define name="content">
+		<div id="page-wrapper" style="min-height: 588px;">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Departement</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+		<h:form>
+						 <p:contextMenu for="departementTable">
+							<p:menuitem value="View" update="departementDetail"
+								icon="ui-icon-search"
+								oncomplete="PF('departementDialog').show()" />
+							<p:menuitem value="Delete" update="departementTable"
+								icon="ui-icon-close" actionListener="departementControlleur.supprimeDepartement()" />
+						</p:contextMenu>
+
+							<p:dialog header="Departement détail" widgetVar="departementDialog"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false">
+							<p:outputPanel id="departementDetail" style="text-align:center;">
+								<p:panelGrid columns="2"
+									rendered="#{not empty departementControlleur.selectedDepartement}"
+									columnClasses="label,value">
+									<f:facet name="header">
+										<h:outputText value="Departement" />
+									</f:facet>
+
+									<h:outputText value="Id" />
+									<h:outputText value="#{departementControlleur.selectedDepartement.id}" />
+
+									<h:outputText value="Nom" />
+									<h:outputText value="#{departementControlleur.selectedDepartement.nom}" />
+
+									<h:outputText value="Chef" />
+									<h:outputText value="#{departementControlleur.selectedDepartement.chef}"/>
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:dialog> -->
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

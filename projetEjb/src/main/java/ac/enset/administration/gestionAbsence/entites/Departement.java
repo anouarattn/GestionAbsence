@@ -22,6 +22,7 @@ public class Departement implements Serializable {
     private Long id;
 
     private String nom;
+    private String chef;
 
     @OneToMany(fetch=FetchType.LAZY,mappedBy="departement")
     private Set<Filiere> filieres;
@@ -43,6 +44,15 @@ public class Departement implements Serializable {
     public void setNom(String nom) {
 	this.nom = nom;
     }
+    
+
+    public String getChef() {
+        return chef;
+    }
+
+    public void setChef(String chef) {
+        this.chef = chef;
+    }
 
     public Departement(String nom) {
 	super();
@@ -53,5 +63,12 @@ public class Departement implements Serializable {
 	super();
 	// TODO Auto-generated constructor stub
     }
+
+    public Departement(String nom, String chef) {
+	super();
+	this.nom = nom;
+	this.chef = chef;
+    }
+    
 
 }
