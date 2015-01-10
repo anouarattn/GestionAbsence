@@ -17,7 +17,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<h:form>
+					<h:form id="form">
 						<p:contextMenu for="departementTable">
 							<p:menuitem value="View" update="departementDetail"
 								icon="ui-icon-search"
@@ -33,7 +33,7 @@
 							widgetVar="departementTableVar" id="departementTable"
 							paginatorPosition="bottom"
 							selection="#{departementControlleur.selectedDepartement}"
-							selectionMode="single">
+							selectionMode="single" >
 
 							<f:facet name="header">
 								<p:outputPanel>
@@ -43,24 +43,25 @@
 										placeholder="Enter keyword" />
 								</p:outputPanel>
 							</f:facet>
+  					        
 							<p:column filterBy="#{departement.id}" headerText="Id"
 								sortBy="#{departement.id}" filterMatchMode="contains"
 								filterStyle="display:none" style="width:77px;text-align: center;">
 								<h:outputText value="#{departement.id}"  />
-							</p:column>
+								</p:column>
+							
 							<p:column filterBy="#{departement.nom}" headerText="Departement"
 								sortBy="#{departement.nom}" filterMatchMode="contains"
 								filterStyle="display:none">
-								<h:outputText value="#{departement.nom}" />
+	 								<h:outputText value="#{departement.nom}" />
 							</p:column>
 
 							<p:column filterBy="#{departement.chef}"
 								headerText="Chef de Departement" sortBy="#{departement.chef}"
 								filterStyle="display:none" filterMatchMode="contains">
 								<h:outputText value="#{departement.chef}" />
-							</p:column>
-							<p:column style="width:32px;text-align: center;">
-								  <p:rowEditor />
+ 								</p:column>
+							<p:column style="width:32px;text-align: center;" >
 							</p:column>
 						</p:dataTable>
 						<p:dialog header="Departement détail"
