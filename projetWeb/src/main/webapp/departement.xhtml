@@ -5,22 +5,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/WEB-INF/templates/main.xhtml">
-	<ui:define name="css">
-		<!-- 	<link rel="stylesheet"
-			href="resources/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" />
-		<link rel="stylesheet"
-			href="resources/bower_components/datatables-responsive/css/dataTables.responsive.css" /> -->
 
-	</ui:define>
 	<ui:define name="jquery"></ui:define>
-	<ui:define name="js">
 
-		<!-- <script
-			src="resources/bower_components/DataTables/media/js/jquery.dataTables.js"></script>
-		<script
-			src="resources/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-		<script src="resources/js/scripts.js"></script> -->
-	</ui:define>
 	<ui:define name="content">
 		<div id="page-wrapper" style="min-height: 588px;">
 			<div class="row">
@@ -58,8 +45,8 @@
 							</f:facet>
 							<p:column filterBy="#{departement.id}" headerText="Id"
 								sortBy="#{departement.id}" filterMatchMode="contains"
-								filterStyle="display:none">
-								<h:outputText value="#{departement.id}" />
+								filterStyle="display:none" style="width:77px;text-align: center;">
+								<h:outputText value="#{departement.id}"  />
 							</p:column>
 							<p:column filterBy="#{departement.nom}" headerText="Departement"
 								sortBy="#{departement.nom}" filterMatchMode="contains"
@@ -72,8 +59,8 @@
 								filterStyle="display:none" filterMatchMode="contains">
 								<h:outputText value="#{departement.chef}" />
 							</p:column>
-							<p:column headerText="Edition">
-								<h:outputText value="edit/delete" />
+							<p:column style="width:32px;text-align: center;">
+								  <p:rowEditor />
 							</p:column>
 						</p:dataTable>
 						<p:dialog header="Departement détail"
@@ -100,7 +87,7 @@
 										value="#{departementControlleur.selectedDepartement.chef}" />
 								</p:panelGrid>
 							</p:outputPanel>
-						</p:dialog> -->
+						</p:dialog>
 					</h:form>
 				</div>
 			</div>
