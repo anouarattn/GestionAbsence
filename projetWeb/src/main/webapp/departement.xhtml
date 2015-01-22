@@ -31,16 +31,16 @@
 
 							<p:menuitem value="Supprimer" update=":formDataTable:departementTable"
 								icon="ui-icon-close"
-								action="#{ModelBeanDepartement.supprimeDepartement()}" />
+								action="#{modelBeanDepartement.supprimeDepartement()}" />
 
 						</p:contextMenu>
 						<p:dataTable emptyMessage="pas de données dans la base"
-							value="#{ModelBeanDepartement.departements}" var="departement"
+							value="#{modelBeanDepartement.departements}" var="departement"
 							paginator="true" rows="40" rowKey="#{departement.id}"
-							filteredValue="#{ControllerBeanDepartement.filtredDepartements}"
+							filteredValue="#{controllerBeanDepartement.filtredDepartements}"
 							widgetVar="departementTableVar" id="departementTable"
 							paginatorPosition="bottom"
-							selection="#{ModelBeanDepartement.selectedDepartement}"
+							selection="#{modelBeanDepartement.selectedDepartement}"
 							selectionMode="single">
 
 							<f:facet name="header">
@@ -78,20 +78,20 @@
 							hideEffect="fade" resizable="false">
 							<p:outputPanel id="departementDetail" style="text-align:center;">
 								<p:panelGrid columns="2"
-									rendered="#{not empty ModelBeanDepartement.selectedDepartement}"
+									rendered="#{not empty modelBeanDepartement.selectedDepartement}"
 									columnClasses="value">
 
 									<h:outputText value="Id" />
 									<h:outputText
-										value="#{ModelBeanDepartement.selectedDepartement.id}" />
+										value="#{modelBeanDepartement.selectedDepartement.id}" />
 
 									<h:outputText value="Nom" />
 									<h:outputText
-										value="#{ModelBeanDepartement.selectedDepartement.nom}" />
+										value="#{modelBeanDepartement.selectedDepartement.nom}" />
 
 									<h:outputText value="Chef" />
 									<h:outputText
-										value="#{ModelBeanDepartement.selectedDepartement.chef}" />
+										value="#{modelBeanDepartement.selectedDepartement.chef}" />
 								</p:panelGrid>
 							</p:outputPanel>
 						</p:dialog>
@@ -103,24 +103,24 @@
 						<h:form id="modificateur">
 
 								<p:panelGrid columns="2"
-									rendered="#{not empty ModelBeanDepartement.selectedDepartement}"
+									rendered="#{not empty modelBeanDepartement.selectedDepartement}"
 									columnClasses="value">
 
 									<h:outputText value="Id" />
 									<p:inputText
-										value="#{ModelBeanDepartement.selectedDepartement.id}" />
+										value="#{modelBeanDepartement.selectedDepartement.id}" />
 
 									<h:outputText value="Nom" />
 									<p:inputText
-										value="#{ModelBeanDepartement.selectedDepartement.nom}" />
+										value="#{modelBeanDepartement.selectedDepartement.nom}" />
 
 									<h:outputText value="Chef" />
 									<p:inputText
-										value="#{ModelBeanDepartement.selectedDepartement.chef}" />
+										value="#{modelBeanDepartement.selectedDepartement.chef}" />
 								</p:panelGrid>
 									<p:commandButton value="Modifier"
 										update=":formDataTable:departementTable"
-										actionListener="#{ModelBeanDepartement.modifierDepartement()}" 
+										actionListener="#{modelBeanDepartement.modifierDepartement()}" 
 										oncomplete="handleRequest(xhr, status, args)" />
 						</h:form>
 
