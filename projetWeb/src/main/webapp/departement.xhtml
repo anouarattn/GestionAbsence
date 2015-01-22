@@ -17,23 +17,31 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<h:form id="form">
+					<h:form id="formDataTable">
 						<p:contextMenu for="departementTable">
-							<p:menuitem value="View" update="departementDetail"
+
+							<p:menuitem value="Afficher" update="departementDetail"
 								icon="ui-icon-search"
 								oncomplete="PF('departementDialog').show()" />
-							<p:menuitem value="Delete" update="departementTable"
+
+							<p:menuitem value="Modifier" update=":departementModificationDialog"
 								icon="ui-icon-close"
-								actionListener="departementControlleur.supprimeDepartement()" />
+								oncomplete="PF('departementModificationDialogVar').show()" 
+								 />
+
+							<p:menuitem value="Supprimer" update=":formDataTable:departementTable"
+								icon="ui-icon-close"
+								action="#{ModelBeanDepartement.supprimeDepartement()}" />
+
 						</p:contextMenu>
 						<p:dataTable emptyMessage="pas de données dans la base"
-							value="#{departementControlleur.departements}" var="departement"
+							value="#{ModelBeanDepartement.departements}" var="departement"
 							paginator="true" rows="40" rowKey="#{departement.id}"
-							filteredValue="#{departementControlleur.filtredDepartements}"
+							filteredValue="#{ControllerBeanDepartement.filtredDepartements}"
 							widgetVar="departementTableVar" id="departementTable"
 							paginatorPosition="bottom"
-							selection="#{departementControlleur.selectedDepartement}"
-							selectionMode="single" >
+							selection="#{ModelBeanDepartement.selectedDepartement}"
+							selectionMode="single">
 
 							<f:facet name="header">
 								<p:outputPanel>
@@ -43,25 +51,26 @@
 										placeholder="Enter keyword" />
 								</p:outputPanel>
 							</f:facet>
-  					        
+
 							<p:column filterBy="#{departement.id}" headerText="Id"
 								sortBy="#{departement.id}" filterMatchMode="contains"
-								filterStyle="display:none" style="width:77px;text-align: center;">
-								<h:outputText value="#{departement.id}"  />
-								</p:column>
-							
+								filterStyle="display:none"
+								style="width:77px;text-align: center;">
+								<h:outputText value="#{departement.id}" />
+							</p:column>
+
 							<p:column filterBy="#{departement.nom}" headerText="Departement"
 								sortBy="#{departement.nom}" filterMatchMode="contains"
 								filterStyle="display:none">
-	 								<h:outputText value="#{departement.nom}" />
+								<h:outputText value="#{departement.nom}" />
 							</p:column>
 
 							<p:column filterBy="#{departement.chef}"
 								headerText="Chef de Departement" sortBy="#{departement.chef}"
 								filterStyle="display:none" filterMatchMode="contains">
 								<h:outputText value="#{departement.chef}" />
- 								</p:column>
-							<p:column style="width:32px;text-align: center;" >
+							</p:column>
+							<p:column style="width:32px;text-align: center;">
 							</p:column>
 						</p:dataTable>
 						<p:dialog header="Departement détail"
@@ -69,30 +78,62 @@
 							hideEffect="fade" resizable="false">
 							<p:outputPanel id="departementDetail" style="text-align:center;">
 								<p:panelGrid columns="2"
-									rendered="#{not empty departementControlleur.selectedDepartement}"
-									columnClasses="label,value">
-									<f:facet name="header">
-										<h:outputText value="Departement" />
-									</f:facet>
+									rendered="#{not empty ModelBeanDepartement.selectedDepartement}"
+									columnClasses="value">
 
 									<h:outputText value="Id" />
 									<h:outputText
-										value="#{departementControlleur.selectedDepartement.id}" />
+										value="#{ModelBeanDepartement.selectedDepartement.id}" />
 
 									<h:outputText value="Nom" />
 									<h:outputText
-										value="#{departementControlleur.selectedDepartement.nom}" />
+										value="#{ModelBeanDepartement.selectedDepartement.nom}" />
 
 									<h:outputText value="Chef" />
 									<h:outputText
-										value="#{departementControlleur.selectedDepartement.chef}" />
+										value="#{ModelBeanDepartement.selectedDepartement.chef}" />
 								</p:panelGrid>
 							</p:outputPanel>
 						</p:dialog>
 					</h:form>
+
+					<p:dialog header="Departement Modification"
+						widgetVar="departementModificationDialogVar" id="departementModificationDialog" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" >
+						<h:form id="modificateur">
+
+								<p:panelGrid columns="2"
+									rendered="#{not empty ModelBeanDepartement.selectedDepartement}"
+									columnClasses="value">
+
+									<h:outputText value="Id" />
+									<p:inputText
+										value="#{ModelBeanDepartement.selectedDepartement.id}" />
+
+									<h:outputText value="Nom" />
+									<p:inputText
+										value="#{ModelBeanDepartement.selectedDepartement.nom}" />
+
+									<h:outputText value="Chef" />
+									<p:inputText
+										value="#{ModelBeanDepartement.selectedDepartement.chef}" />
+								</p:panelGrid>
+									<p:commandButton value="Modifier"
+										update=":formDataTable:departementTable"
+										actionListener="#{ModelBeanDepartement.modifierDepartement()}" 
+										oncomplete="handleRequest(xhr, status, args)" />
+						</h:form>
+
+					</p:dialog>
+
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
+    function handleRequest(xhr, status, args) {
+            PF('departementModificationDialogVar').hide();      
+    }
+</script>
 	</ui:define>
 
 </ui:composition>

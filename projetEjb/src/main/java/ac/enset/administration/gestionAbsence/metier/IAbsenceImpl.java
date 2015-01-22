@@ -80,5 +80,15 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return deps;
     }
 
+    @Override
+    public void supprimerDepartement(Departement departement) {
+	em.remove(em.contains(departement) ? departement : em.merge(departement));
+    }
+
+    @Override
+    public void modifierDepartement(Departement departement) {
+	em.merge(departement);
+    }
+
 
 }

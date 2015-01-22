@@ -31,5 +31,9 @@ public interface IAbsenceLocal {
 
     public List<Departement> getDepartements();
     
+    public void supprimerDepartement(Departement departement);
+    
+    public void modifierDepartement(Departement departement);
+    
 
 }
