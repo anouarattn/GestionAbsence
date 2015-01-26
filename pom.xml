@@ -29,6 +29,7 @@
 		<ejb-spec-version>3.1</ejb-spec-version>
 
 		<primefaces-version>5.1</primefaces-version>
+		<primefaces-theme-version>1.0.10</primefaces-theme-version>
 
 	</properties>
 	<developers>
@@ -63,6 +64,11 @@
 				<groupId>org.primefaces</groupId>
 				<artifactId>primefaces</artifactId>
 				<version>${primefaces-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.primefaces.themes</groupId>
+				<artifactId>bootstrap</artifactId>
+				<version>${primefaces-theme-version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -102,16 +108,15 @@
 					<artifactId>maven-war-plugin</artifactId>
 					<version>${war-plugin-version}</version>
 					<configuration>
-						<!-- Whether or not to fail the build if the web.xml file is missing. 
-							Set to false if you want you WAR built without a web.xml file. This may be 
-							useful if you are building an overlay that has no web.xml file. -->
+						<!-- Whether or not to fail the build if the web.xml file is missing. Set to false if you want you WAR built 
+							without a web.xml file. This may be useful if you are building an overlay that has no web.xml file. -->
 						<failOnMissingWebXml>false</failOnMissingWebXml>
-<!-- 						<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
- -->						<archive>
+						<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->
+						<archive>
 							<manifest>
 								<addClasspath>true</addClasspath>
-<!-- 								<classpathPrefix>lib/</classpathPrefix>
- -->							</manifest>
+								<!-- <classpathPrefix>lib/</classpathPrefix> -->
+							</manifest>
 						</archive>
 						<webResources>
 							<resource>
@@ -132,6 +137,12 @@
 			<id>jboss-repo</id>
 			<name>jboss-repo</name>
 			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
+		</repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
 		</repository>
 	</repositories>
 </project>

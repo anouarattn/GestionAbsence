@@ -25,6 +25,7 @@ public class ModelBeanDepartement implements Serializable
     
     private List<Departement> departements;
     private Departement selectedDepartement;
+    private List<Departement> selectedDepartements;
 
     
 
@@ -46,27 +47,54 @@ public class ModelBeanDepartement implements Serializable
     public void modifierDepartement()
     {
 	metier.modifierDepartement(selectedDepartement);
-	setSelectedDepartement(null);
-	// peut etre optimiser
 	departements = metier.getDepartements();
+	unselect();
     }
     
     public void supprimeDepartement(){
-	metier.supprimerDepartement(selectedDepartement);
-	departements.remove(selectedDepartement);
-	setSelectedDepartement(null);
-    }
+	for (Departement departement : selectedDepartements) {
+		metier.supprimerDepartement(departement);
+		departements.remove(departement);
+	}
+	unselect();
+	}
 
     public Departement getSelectedDepartement() {
-        return selectedDepartement;
+	Departement tmp = selectedDepartement;
+        return tmp;
     }
 
     public void setSelectedDepartement(Departement selectedDepartement) {
         this.selectedDepartement = selectedDepartement;
     }
-
     
-  
- 
+    public void unselect()
+    {
+	setSelectedDepartements(null);
+    }
+
+    public void annulerModifierDepartement()
+    {
+	departements = metier.getDepartements();
+	unselect();
+    }
+
+    public List<Departement> getSelectedDepartements() {
+        return selectedDepartements;
+    }
+
+    public void setSelectedDepartements(List<Departement> selectedDepartements) {
+	if(selectedDepartements != null && selectedDepartements.size() != 0)
+	this.selectedDepartement = selectedDepartements.get(selectedDepartements.size()-1);
+	else 
+	this.selectedDepartement = null;
+        this.selectedDepartements = selectedDepartements;
+    }
+    
+    public void update()
+    {
+	departements = metier.getDepartements();
+	unselect();
+    }
     
 }

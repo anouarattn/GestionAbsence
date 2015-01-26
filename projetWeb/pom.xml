@@ -18,8 +18,8 @@
 					<packagingExcludes>WEB-INF/lib/projetEjb-${project.version}.jar</packagingExcludes>
 					<archive>
 						<manifestEntries>
-<!-- 							<Class-Path>project-ejb-${project.version}.jar</Class-Path>
- -->						</manifestEntries>
+							<!-- <Class-Path>project-ejb-${project.version}.jar</Class-Path> -->
+						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
@@ -44,8 +44,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-				<groupId>org.primefaces</groupId>
-				<artifactId>primefaces</artifactId>
-			</dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>bootstrap</artifactId>
+		</dependency>
 	</dependencies>
 </project>

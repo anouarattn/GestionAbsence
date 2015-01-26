@@ -24,13 +24,12 @@
 								icon="ui-icon-search"
 								oncomplete="PF('departementDialog').show()" />
 
-							<p:menuitem value="Modifier" update=":departementModificationDialog"
-								icon="ui-icon-close"
-								oncomplete="PF('departementModificationDialogVar').show()" 
-								 />
+							<p:menuitem value="Modifier"
+								update=":departementModificationDialog" icon="ui-icon-close"
+								oncomplete="PF('departementModificationDialogVar').show()" />
 
-							<p:menuitem value="Supprimer" update=":formDataTable:departementTable"
-								icon="ui-icon-close"
+							<p:menuitem value="Supprimer"
+								update=":formDataTable:departementTable" icon="ui-icon-close"
 								action="#{modelBeanDepartement.supprimeDepartement()}" />
 
 						</p:contextMenu>
@@ -40,18 +39,31 @@
 							filteredValue="#{controllerBeanDepartement.filtredDepartements}"
 							widgetVar="departementTableVar" id="departementTable"
 							paginatorPosition="bottom"
-							selection="#{modelBeanDepartement.selectedDepartement}"
-							selectionMode="single">
+							selection="#{modelBeanDepartement.selectedDepartements}">
 
 							<f:facet name="header">
-								<p:outputPanel>
-									<h:outputText value="Recherche :" />
+								<p:outputPanel style="text-align: right;">
+
+									<h:commandLink style="margin-right:5px;"
+										onclick="PF('departementAjoutVar').show();return false;">
+										<p:graphicImage name="img/add.png" width="24" />
+									</h:commandLink>
+									<h:commandLink style="margin-right:5px;">
+										<p:graphicImage name="img/excel.png" width="24" />
+										<p:dataExporter type="xls" target="tbl" fileName="cars" />
+									</h:commandLink>
+									<h:commandLink style="margin-right:5px;">
+										<p:graphicImage name="img/pdf.png" width="24" />
+										<p:dataExporter type="xls" target="tbl" fileName="cars" />
+									</h:commandLink>
 									<p:inputText id="globalFilter"
 										onkeyup="PF('departementTableVar').filter()"
-										placeholder="Enter keyword" />
+										placeholder="Rechercher" style="width:150px" />
 								</p:outputPanel>
-							</f:facet>
 
+							</f:facet>
+							<p:column selectionMode="multiple"
+								style="width:46px;text-align:center" />
 							<p:column filterBy="#{departement.id}" headerText="Id"
 								sortBy="#{departement.id}" filterMatchMode="contains"
 								filterStyle="display:none"
@@ -70,12 +82,11 @@
 								filterStyle="display:none" filterMatchMode="contains">
 								<h:outputText value="#{departement.chef}" />
 							</p:column>
-							<p:column style="width:32px;text-align: center;">
-							</p:column>
+
 						</p:dataTable>
 						<p:dialog header="Departement détail"
 							widgetVar="departementDialog" modal="true" showEffect="fade"
-							hideEffect="fade" resizable="false">
+							hideEffect="fade" resizable="false" closable="false">
 							<p:outputPanel id="departementDetail" style="text-align:center;">
 								<p:panelGrid columns="2"
 									rendered="#{not empty modelBeanDepartement.selectedDepartement}"
@@ -93,46 +104,61 @@
 									<h:outputText
 										value="#{modelBeanDepartement.selectedDepartement.chef}" />
 								</p:panelGrid>
+								<p:commandButton value="Fermer"
+									update=":formDataTable:departementTable"
+									actionListener="#{modelBeanDepartement.unselect()}"
+									oncomplete="handleRequestAffichage(xhr, status, args)" />
 							</p:outputPanel>
 						</p:dialog>
 					</h:form>
 
 					<p:dialog header="Departement Modification"
-						widgetVar="departementModificationDialogVar" id="departementModificationDialog" modal="true"
-						showEffect="fade" hideEffect="fade" resizable="false" >
+						widgetVar="departementModificationDialogVar"
+						id="departementModificationDialog" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="false" closable="false">
 						<h:form id="modificateur">
 
-								<p:panelGrid columns="2"
-									rendered="#{not empty modelBeanDepartement.selectedDepartement}"
-									columnClasses="value">
+							<p:panelGrid columns="2"
+								rendered="#{not empty modelBeanDepartement.selectedDepartement}"
+								columnClasses="value">
 
-									<h:outputText value="Id" />
-									<p:inputText
-										value="#{modelBeanDepartement.selectedDepartement.id}" />
+								<h:outputText value="Id" />
+								<p:inputText
+									value="#{modelBeanDepartement.selectedDepartement.id}" />
 
-									<h:outputText value="Nom" />
-									<p:inputText
-										value="#{modelBeanDepartement.selectedDepartement.nom}" />
+								<h:outputText value="Nom" />
+								<p:inputText
+									value="#{modelBeanDepartement.selectedDepartement.nom}" />
 
-									<h:outputText value="Chef" />
-									<p:inputText
-										value="#{modelBeanDepartement.selectedDepartement.chef}" />
-								</p:panelGrid>
-									<p:commandButton value="Modifier"
-										update=":formDataTable:departementTable"
-										actionListener="#{modelBeanDepartement.modifierDepartement()}" 
-										oncomplete="handleRequest(xhr, status, args)" />
+								<h:outputText value="Chef" />
+								<p:inputText
+									value="#{modelBeanDepartement.selectedDepartement.chef}" />
+							</p:panelGrid>
+							<p:commandButton value="Modifier"
+								update=":formDataTable:departementTable"
+								actionListener="#{modelBeanDepartement.modifierDepartement()}"
+								oncomplete="handleRequestModification(xhr, status, args)" />
+							<p:commandButton value="Annuler"
+								update=":formDataTable:departementTable"
+								actionListener="#{modelBeanDepartement.annulerModifierDepartement()}"
+								oncomplete="handleRequestModification(xhr, status, args)" />
 						</h:form>
 
 					</p:dialog>
+					
+					
+        <ui:include src="resources/components/departement/addDepartement.xhtml" />
 
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
-    function handleRequest(xhr, status, args) {
+    function handleRequestModification(xhr, status, args) {
             PF('departementModificationDialogVar').hide();      
     }
+    function handleRequestAffichage(xhr, status, args) {
+        PF('departementDialog').hide();      
+}
 </script>
 	</ui:define>
 

@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"   
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+      
+      
+       <composite:interface>
+    	<composite:attribute name="dialog-header" />
+    	<composite:attribute name="dialog-widgetVar" />
+    	<composite:attribute name="dialog-id" />
+    	<composite:attribute name="dialog-form-id" />
+    	<composite:attribute name="dialog-header" />
+    	
+	  </composite:interface>
+ 
+	  <composite:implementation>
+			<p:dialog header="Departement Modification"
+						widgetVar="departementModificationDialogVar" id="departementModificationDialog" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" >
+						<h:form id="modificateur">
+
+								<p:panelGrid columns="2"
+									rendered="#{not empty modelBeanDepartement.selectedDepartement}"
+									columnClasses="value">
+
+									<h:outputText value="Id" />
+									<p:inputText
+										value="#{modelBeanDepartement.selectedDepartement.id}" />
+
+									<h:outputText value="Nom" />
+									<p:inputText
+										value="#{modelBeanDepartement.selectedDepartement.nom}" />
+
+									<h:outputText value="Chef" />
+									<p:inputText
+										value="#{modelBeanDepartement.selectedDepartement.chef}" />
+								</p:panelGrid>
+									<p:commandButton value="Modifier"
+										update=":formDataTable:departementTable"
+										actionListener="#{modelBeanDepartement.modifierDepartement()}" 
+										oncomplete="handleRequest(xhr, status, args)" />
+						</h:form>
+
+					</p:dialog>
+	  </composite:implementation>
+	  
+</html>

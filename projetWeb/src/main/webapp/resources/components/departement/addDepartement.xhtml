@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Departement Ajout" widgetVar="departementAjoutVar"
+		id="departementAjoutDialog" modal="true" showEffect="fade"
+		hideEffect="fade" resizable="false" closable="false">
+		<h:form id="Ajout">
+
+			<p:panelGrid columns="2" columnClasses="value">
+
+				<h:outputText value="Nom" />
+				<p:inputText placeholder="nom" value="#{controllerBeanDepartement.departementToAdd.nom}" />
+
+				<h:outputText value="Chef" />
+				<p:inputText placeholder="chef" value="#{controllerBeanDepartement.departementToAdd.chef}" />
+			</p:panelGrid>
+			<p:commandButton value="Ajout"
+				update=":formDataTable:departementTable"
+				action="#{controllerBeanDepartement.ajoutDepartement()}"
+				oncomplete="handleRequestAjout(xhr, status, args)" />
+			<p:commandButton value="Annuler"
+				oncomplete="handleRequestAjout(xhr, status, args)" />
+		</h:form>
+
+	</p:dialog>
+	<script type="text/javascript">
+		function handleRequestAjout(xhr, status, args) {
+			PF('departementAjoutVar').hide();
+		}
+	</script>
+</ui:composition>
+
+</html>

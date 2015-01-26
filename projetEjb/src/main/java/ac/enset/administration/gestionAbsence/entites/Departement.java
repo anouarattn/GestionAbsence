@@ -69,6 +69,12 @@ public class Departement implements Serializable {
 	this.nom = nom;
 	this.chef = chef;
     }
+
+    @Override
+    public String toString() {
+	return "Departement [id=" + id + ", nom=" + nom + ", chef=" + chef
+		+ "]";
+    }
     
 
 }

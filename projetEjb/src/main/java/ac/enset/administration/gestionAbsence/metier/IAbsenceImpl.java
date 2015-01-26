@@ -3,8 +3,6 @@ package ac.enset.administration.gestionAbsence.metier;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -23,7 +21,11 @@ public class IAbsenceImpl implements IAbsenceLocal {
 
     @Override
     public void ajouterDepartement(Departement d) {
-	em.persist(d);
+	if (em.contains(d))
+	    em.merge(d);
+	else
+	    em.persist(d);
+	
     }
 
     @Override
@@ -61,20 +63,20 @@ public class IAbsenceImpl implements IAbsenceLocal {
     @Override
     public void ajouterClasse(Classe c, Long idNiveauFiliere,
 	    Long idAnneeScolaire) {
-	NiveauFiliere nf = em.find(NiveauFiliere.class,idNiveauFiliere);
-	if( nf != null){
+	NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
+	if (nf != null) {
 	    c.setNiveauFiliere(nf);
 	    em.persist(c);
 	}
     }
-    
-    public List<AnneeScolaire> getAnneesScollaires()
-    {
+
+    public List<AnneeScolaire> getAnneesScollaires() {
 	Query q = em.createQuery("select annees from AnneeScolaire annees");
 	return q.getResultList();
     }
-    public List<Departement> getDepartements(){
-	
+
+    public List<Departement> getDepartements() {
+
 	Query q = em.createQuery("select deps from Departement deps");
 	List<Departement> deps = q.getResultList();
 	return deps;
@@ -82,13 +84,13 @@ public class IAbsenceImpl implements IAbsenceLocal {
 
     @Override
     public void supprimerDepartement(Departement departement) {
-	em.remove(em.contains(departement) ? departement : em.merge(departement));
+	em.remove(em.contains(departement) ? departement : em
+		.merge(departement));
     }
 
     @Override
     public void modifierDepartement(Departement departement) {
 	em.merge(departement);
     }
-
 
 }
