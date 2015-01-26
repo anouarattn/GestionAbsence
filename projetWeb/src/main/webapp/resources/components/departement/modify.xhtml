@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Modification"
+						widgetVar="jsModify"
+						id="modifyDialog" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="false" closable="false">
+						<h:form id="modifyForm">
+
+							<p:panelGrid columns="2"
+								rendered="#{not empty modelBeanDepartement.selectedDepartement}"
+								columnClasses="value">
+
+								<h:outputText value="Id" />
+								<p:inputText
+									value="#{modelBeanDepartement.selectedDepartement.id}" />
+
+								<h:outputText value="Nom" />
+								<p:inputText
+									value="#{modelBeanDepartement.selectedDepartement.nom}" />
+
+								<h:outputText value="Chef" />
+								<p:inputText
+									value="#{modelBeanDepartement.selectedDepartement.chef}" />
+							</p:panelGrid>
+							<p:commandButton value="Modifier"
+								update=":formDataTable:datatable"
+								actionListener="#{modelBeanDepartement.modifierDepartement()}"
+								oncomplete="handleRequestModify(xhr, status, args)" />
+							<p:commandButton value="Annuler"
+								update=":formDataTable:datatable"
+								actionListener="#{modelBeanDepartement.annulerModifierDepartement()}"
+								oncomplete="handleRequestModify(xhr, status, args)" />
+						</h:form>
+
+					</p:dialog>
+
+</ui:composition>
+
+</html>
