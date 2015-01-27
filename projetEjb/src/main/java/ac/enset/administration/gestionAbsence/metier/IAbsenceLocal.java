@@ -34,6 +34,12 @@ public interface IAbsenceLocal {
     public void supprimerDepartement(Departement departement);
     
     public void modifierDepartement(Departement departement);
+
+    public List<Filiere> getFilieres();
+
+    public void modifierFiliere(Filiere selectedFiliere);
+
+    public void supprimerFiliere(Filiere filiere);
     
 
 }

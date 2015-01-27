@@ -12,28 +12,28 @@
 						<h:form id="modifyForm">
 
 							<p:panelGrid columns="2"
-								rendered="#{not empty modelBeanDepartement.selectedDepartement}"
+								rendered="#{not empty modelBeanDepartement.selectedEntity}"
 								columnClasses="value">
 
 								<h:outputText value="Id" />
 								<p:inputText
-									value="#{modelBeanDepartement.selectedDepartement.id}" />
+									value="#{modelBeanDepartement.selectedEntity.id}" />
 
 								<h:outputText value="Nom" />
 								<p:inputText
-									value="#{modelBeanDepartement.selectedDepartement.nom}" />
+									value="#{modelBeanDepartement.selectedEntity.nom}" />
 
 								<h:outputText value="Chef" />
 								<p:inputText
-									value="#{modelBeanDepartement.selectedDepartement.chef}" />
+									value="#{modelBeanDepartement.selectedEntity.chef}" />
 							</p:panelGrid>
 							<p:commandButton value="Modifier"
 								update=":formDataTable:datatable"
-								actionListener="#{modelBeanDepartement.modifierDepartement()}"
+								actionListener="#{modelBeanDepartement.modifyEntity()}"
 								oncomplete="handleRequestModify(xhr, status, args)" />
 							<p:commandButton value="Annuler"
 								update=":formDataTable:datatable"
-								actionListener="#{modelBeanDepartement.annulerModifierDepartement()}"
+								actionListener="#{modelBeanDepartement.cancleModifyEntity()}"
 								oncomplete="handleRequestModify(xhr, status, args)" />
 						</h:form>
 

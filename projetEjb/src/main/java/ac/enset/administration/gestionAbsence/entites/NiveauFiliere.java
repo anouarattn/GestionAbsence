@@ -1,27 +1,18 @@
 package ac.enset.administration.gestionAbsence.entites;
 
-import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name="niveauFiliere")
-public class NiveauFiliere  implements Serializable {
+public class NiveauFiliere extends EntityBase{
     
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id;
-    
+   
     private String nom;
 
     @ManyToOne
@@ -30,15 +21,6 @@ public class NiveauFiliere  implements Serializable {
     
     @OneToMany(fetch=FetchType.LAZY,mappedBy="niveauFiliere")
     private Set<Classe> classes;
-    
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNom() {
         return nom;
@@ -75,7 +57,4 @@ public class NiveauFiliere  implements Serializable {
 	super();
 	this.nom = nom;
     }
-    
-    
-    
 }

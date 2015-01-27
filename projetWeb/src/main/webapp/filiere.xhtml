@@ -9,7 +9,7 @@
 	<ui:define name="jquery"></ui:define>
 
 	<ui:define name="content">
-	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.departement" var="msg"/>
+	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.filiere" var="msg"/>
 	
 		<div id="page-wrapper" style="min-height: 588px;">
 			<div class="row">
@@ -32,16 +32,16 @@
 
 							<p:menuitem value="Supprimer"
 								update=":formDataTable:datatable" icon="ui-icon-close"
-								action="#{modelBeanDepartement.deleteEntity()}" />
+								action="#{modelBeanDepartement.supprimeDepartement()}" />
 
 						</p:contextMenu>
 						<p:dataTable emptyMessage="#{msg.emptyMessage}"
-							value="#{modelBeanDepartement.items}" var="item"
+							value="#{modelBeanDepartement.departements}" var="item"
 							paginator="true" rows="40" rowKey="#{item.id}"
-							filteredValue="#{controllerBeanDepartement.filtredEntities}"
+							filteredValue="#{controllerBeanDepartement.filtredDepartements}"
 							widgetVar="jsTable" id="datatable"
 							paginatorPosition="bottom"
-							selection="#{modelBeanDepartement.selectedEntities}">
+							selection="#{modelBeanDepartement.selectedDepartements}">
 
 							<f:facet name="header">
 								<p:outputPanel style="text-align: right;">

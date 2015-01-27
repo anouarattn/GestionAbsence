@@ -10,19 +10,19 @@
 		closable="false">
 		<h:form id="show">
 			<p:panelGrid columns="2"
-				rendered="#{not empty modelBeanDepartement.selectedDepartement}"
+				rendered="#{not empty modelBeanDepartement.selectedEntity}"
 				columnClasses="value">
 
 				<h:outputText value="Id" />
-				<h:outputText value="#{modelBeanDepartement.selectedDepartement.id}" />
+				<h:outputText value="#{modelBeanDepartement.selectedEntity.id}" />
 
 				<h:outputText value="Nom" />
 				<h:outputText
-					value="#{modelBeanDepartement.selectedDepartement.nom}" />
+					value="#{modelBeanDepartement.selectedEntity.nom}" />
 
 				<h:outputText value="Chef" />
 				<h:outputText
-					value="#{modelBeanDepartement.selectedDepartement.chef}" />
+					value="#{modelBeanDepartement.selectedEntity.chef}" />
 			</p:panelGrid>
 			<p:commandButton value="Fermer"
 				update=":formDataTable:datatable"

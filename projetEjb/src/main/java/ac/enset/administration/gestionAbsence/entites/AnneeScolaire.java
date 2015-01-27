@@ -1,7 +1,6 @@
 package ac.enset.administration.gestionAbsence.entites;
 
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -9,25 +8,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="anneeScolaire")
-public class AnneeScolaire implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id;
-    
+public class AnneeScolaire extends EntityBase {
+
+
     private int annee;
     
     @OneToMany(fetch=FetchType.LAZY,mappedBy="anneeScolaire")
     private Set<Classe> classes;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public int getAnnee() {
         return annee;

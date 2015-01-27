@@ -13,14 +13,14 @@
 			<p:panelGrid columns="2" columnClasses="value">
 
 				<h:outputText value="Nom" />
-				<p:inputText placeholder="nom" value="#{controllerBeanDepartement.departementToAdd.nom}" />
+				<p:inputText placeholder="nom" value="#{controllerBeanDepartement.entityToAdd.nom}" />
 
 				<h:outputText value="Chef" />
-				<p:inputText placeholder="chef" value="#{controllerBeanDepartement.departementToAdd.chef}" />
+				<p:inputText placeholder="chef" value="#{controllerBeanDepartement.entityToAdd.chef}" />
 			</p:panelGrid>
 			<p:commandButton value="Ajout"
 				update=":formDataTable:datatable"
-				action="#{controllerBeanDepartement.ajoutDepartement()}"
+				action="#{controllerBeanDepartement.addEntity()}"
 				oncomplete="handleRequestAdd(xhr, status, args)" />
 			<p:commandButton value="Annuler"
 				oncomplete="handleRequestAdd(xhr, status, args)" />

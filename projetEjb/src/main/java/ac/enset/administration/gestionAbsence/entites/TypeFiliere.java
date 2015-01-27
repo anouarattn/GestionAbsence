@@ -15,24 +15,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="typeFiliere")
-public class TypeFiliere implements Serializable {
+public class TypeFiliere extends EntityBase {
     
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id;
-    
+  
     private String nom;
  
     @OneToMany(fetch=FetchType.LAZY,mappedBy="typeFiliere")
     private Set<Filiere> filieres;
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
 
     public String getNom() {
         return nom;
