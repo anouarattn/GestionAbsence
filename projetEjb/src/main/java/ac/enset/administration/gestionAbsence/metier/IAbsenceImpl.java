@@ -20,53 +20,53 @@ public class IAbsenceImpl implements IAbsenceLocal {
     private EntityManager em;
 
     @Override
-    public void ajouterDepartement(Departement d) {
-	if (em.contains(d))
-	    em.merge(d);
+    public void ajouterDepartement(Departement item) {
+	if (em.contains(item))
+	    em.merge(item);
 	else
-	    em.persist(d);
+	    em.persist(item);
 	
     }
 
     @Override
-    public void ajouterTypeFiliere(TypeFiliere tf) {
-	em.persist(tf);
+    public void ajouterTypeFiliere(TypeFiliere item) {
+	em.persist(item);
     }
 
     @Override
-    public void ajouterFiliere(Filiere f, Long idDepartement, Long idTypeFiliere) {
+    public void ajouterFiliere(Filiere item, Long idDepartement, Long idTypeFiliere) {
 	Departement d = em.find(Departement.class, idDepartement);
 	TypeFiliere tf = em.find(TypeFiliere.class, idTypeFiliere);
 	// test la condition : l'objet filière doit avoir un typeFiliere et
 	// Departement non null
 	if (d != null && tf != null) {
-	    f.setDepartement(d);
-	    f.setTypeFiliere(tf);
-	    em.persist(f);
+	    item.setDepartement(d);
+	    item.setTypeFiliere(tf);
+	    em.persist(item);
 	}
     }
 
     @Override
-    public void ajouterNiveauFiliere(NiveauFiliere nf, Long idFiliere) {
+    public void ajouterNiveauFiliere(NiveauFiliere item, Long idFiliere) {
 	Filiere f = em.find(Filiere.class, idFiliere);
 	if (f != null) {
-	    nf.setFiliere(f);
-	    em.persist(nf);
+	    item.setFiliere(f);
+	    em.persist(item);
 	}
     }
 
     @Override
-    public void ajouterAnneeScolaire(AnneeScolaire as) {
-	em.persist(as);
+    public void ajouterAnneeScolaire(AnneeScolaire item) {
+	em.persist(item);
     }
 
     @Override
-    public void ajouterClasse(Classe c, Long idNiveauFiliere,
+    public void ajouterClasse(Classe item, Long idNiveauFiliere,
 	    Long idAnneeScolaire) {
 	NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
 	if (nf != null) {
-	    c.setNiveauFiliere(nf);
-	    em.persist(c);
+	    item.setNiveauFiliere(nf);
+	    em.persist(item);
 	}
     }
 
@@ -78,19 +78,56 @@ public class IAbsenceImpl implements IAbsenceLocal {
     public List<Departement> getDepartements() {
 
 	Query q = em.createQuery("select deps from Departement deps");
-	List<Departement> deps = q.getResultList();
-	return deps;
+	List<Departement> items = q.getResultList();
+	return items;
     }
 
     @Override
-    public void supprimerDepartement(Departement departement) {
-	em.remove(em.contains(departement) ? departement : em
-		.merge(departement));
+    public void supprimerDepartement(Departement item) {
+	em.remove(em.contains(item) ? item : em
+		.merge(item));
     }
 
     @Override
-    public void modifierDepartement(Departement departement) {
-	em.merge(departement);
+    public void modifierDepartement(Departement item) {
+	em.merge(item);
+    }
+
+    
+    @Override
+    public List<Filiere> getFilieres() {
+	Query q = em.createQuery("select fl from Filiere fl");
+	List<Filiere> item = q.getResultList();
+	return item;
+    }
+
+    @Override
+    public void modifierFiliere(Filiere item) {
+	em.merge(item);
+    }
+
+    @Override
+    public void supprimerFiliere(Filiere item) {
+	em.remove(em.contains(item) ? item : em
+		.merge(item));
+    }
+
+    @Override
+    public List<TypeFiliere> getTypesFilieres() {
+	Query q = em.createQuery("select tf from TypeFiliere tf");
+	List<TypeFiliere> item = q.getResultList();
+	return item;
+    }
+
+    @Override
+    public void modifierTypeFiliere(TypeFiliere item) {
+	em.merge(item);
+    }
+
+    @Override
+    public void supprimerTypeFiliere(TypeFiliere item) {
+	em.remove(em.contains(item) ? item : em
+		.merge(item));
     }
 
 }

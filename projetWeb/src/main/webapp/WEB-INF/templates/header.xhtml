@@ -18,19 +18,22 @@
 
 		<ul class="nav navbar-top-links navbar-right">
 			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> <strong>Année Scolaire </strong> <i class="fa fa-caret-down"></i>
+				data-toggle="dropdown" href="#"> <strong>Année Scolaire
+				</strong> <i class="fa fa-caret-down"></i>
 			</a>
 				<ul class="dropdown-menu dropdown-anneeScolaire">
-				<ui:insert name="anneesListe">
-					<ui:repeat value="#{anneeScolaireControlleur.getAnneesScolaires()}" var="annees" >
-						<li><a href="#">Année Scolaire #{annees.annee}/#{annees.annee+1}</a></li>
-					</ui:repeat>
-					
+					<ui:insert name="anneesListe">
+						<ui:repeat
+							value="#{anneeScolaireControlleur.getAnneesScolaires()}"
+							var="annees">
+							<li><a href="#">Année Scolaire
+									#{annees.annee}/#{annees.annee+1}</a></li>
+						</ui:repeat>
+
 						<li class="divider"></li>
-						<li>
-							<a href="#"><i class="fa fa-plus"></i> <strong>Nouvelle Année Scolaire</strong></a>
-					    </li>
-					    </ui:insert>
+						<li><a href="#"><i class="fa fa-plus"></i> <strong>Nouvelle
+									Année Scolaire</strong></a></li>
+					</ui:insert>
 				</ul></li>
 			<!-- /.dropdown -->
 			<li class="dropdown"><a class="dropdown-toggle"
@@ -85,8 +88,15 @@
 					<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
 							Edition des données<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level collapse">
-						    <li><a href="departement.xhtml">Departement</a></li>
-						    <li><a href="filiere.xhtml">Filière</a></li>
+							<li><a href="departement.xhtml">Departement<span class="fa arrow"></span></a>
+
+								<ul class="nav nav-third-level collapse" aria-expanded="false" style="height: 0px;">
+                                        <li>
+                                            <a href="filiere.xhtml">Filieres</a>
+                                        </li>
+                                      
+                                    </ul></li>
+							<li><a href="filiere.xhtml">Filière</a></li>
 						</ul> <!-- /.nav-second-level --></li>
 
 				</ul>

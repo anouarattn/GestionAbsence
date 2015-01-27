@@ -32,16 +32,16 @@
 
 							<p:menuitem value="Supprimer"
 								update=":formDataTable:datatable" icon="ui-icon-close"
-								action="#{modelBeanDepartement.supprimeDepartement()}" />
+								action="#{modelBeanFiliere.deleteEntity()}" />
 
 						</p:contextMenu>
 						<p:dataTable emptyMessage="#{msg.emptyMessage}"
-							value="#{modelBeanDepartement.departements}" var="item"
+							value="#{modelBeanFiliere.items}" var="item"
 							paginator="true" rows="40" rowKey="#{item.id}"
-							filteredValue="#{controllerBeanDepartement.filtredDepartements}"
+							filteredValue="#{controllerBeanFiliere.filtredEntities}"
 							widgetVar="jsTable" id="datatable"
 							paginatorPosition="bottom"
-							selection="#{modelBeanDepartement.selectedDepartements}">
+							selection="#{modelBeanFiliere.selectedEntities}">
 
 							<f:facet name="header">
 								<p:outputPanel style="text-align: right;">
@@ -79,10 +79,10 @@
 								<h:outputText value="#{item.nom}" />
 							</p:column>
 
-							<p:column filterBy="#{item.chef}"
-								headerText="#{msg.column3}" sortBy="#{item.chef}"
+							<p:column filterBy="#{item.departement.nom}"
+								headerText="#{msg.column3}" sortBy="#{item.departement.nom}"
 								filterStyle="display:none" filterMatchMode="contains">
-								<h:outputText value="#{item.chef}" />
+								<h:outputText value="#{item.departement.nom}" />
 							</p:column>
 
 						</p:dataTable>

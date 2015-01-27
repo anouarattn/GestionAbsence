@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition>
+
 	<p:dialog header="Ajout" widgetVar="jsAdd"
 		id="addDialog" modal="true" showEffect="fade"
 		hideEffect="fade" resizable="false" closable="false">
@@ -12,14 +13,14 @@
 			<p:panelGrid columns="2" columnClasses="value">
 
 				<h:outputText value="#{msg.column2}" />
-				<p:inputText placeholder="#{msg.column2}" value="#{controllerBeanDepartement.entityToAdd.nom}" />
+				<p:inputText placeholder="#{msg.column2}" value="#{controllerBeanFiliere.entityToAdd.nom}" />
 
 				<h:outputText value="#{msg.column3}" />
-				<p:inputText placeholder="#{msg.column3}" value="#{controllerBeanDepartement.entityToAdd.chef}" />
+				<p:inputText placeholder="#{msg.column3}" value="#{controllerBeanFiliere.entityToAdd.departement.nom}" />
 			</p:panelGrid>
 			<p:commandButton value="Ajout"
 				update=":formDataTable:datatable"
-				action="#{controllerBeanDepartement.addEntity()}"
+				action="#{controllerBeanFiliere.addEntity()}"
 				oncomplete="handleRequestAdd(xhr, status, args)" />
 			<p:commandButton value="Annuler"
 				oncomplete="handleRequestAdd(xhr, status, args)" />

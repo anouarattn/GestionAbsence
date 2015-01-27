@@ -1,6 +1,7 @@
 package ac.enset.administration.gestionAbsence.metier;
 
 
+import java.awt.Window.Type;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -40,6 +41,14 @@ public interface IAbsenceLocal {
     public void modifierFiliere(Filiere selectedFiliere);
 
     public void supprimerFiliere(Filiere filiere);
+    
+    public List<TypeFiliere> getTypesFilieres();
+        
+    public void modifierTypeFiliere(TypeFiliere tf);
+    
+    public void supprimerTypeFiliere(TypeFiliere tf);
+
+    
     
 
 }
