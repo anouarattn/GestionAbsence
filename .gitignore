@@ -13,3 +13,8 @@ projetWeb/target/
 projetEjb/target/
 projetEar/target/
 /bin/
+
+projetWeb/bin/
+
+projetEjb/bin/
+projetEar/bin/
