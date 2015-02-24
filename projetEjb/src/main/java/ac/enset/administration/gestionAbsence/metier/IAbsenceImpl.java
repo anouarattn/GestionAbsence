@@ -13,7 +13,7 @@ import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
-
+ 
 @Stateless
 public class IAbsenceImpl implements IAbsenceLocal {
     @PersistenceContext(unitName = "projetAbsenceTest")
@@ -92,5 +92,23 @@ public class IAbsenceImpl implements IAbsenceLocal {
     public void modifierDepartement(Departement departement) {
 	em.merge(departement);
     }
+
+	@Override
+	public List<Filiere> getFilieres() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void modifierFiliere(Filiere selectedFiliere) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void supprimerFiliere(Filiere filiere) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
