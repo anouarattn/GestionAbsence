@@ -93,4 +93,22 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	em.merge(departement);
     }
 
+    @Override
+    public List<Filiere> getFilieres() {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public void modifierFiliere(Filiere selectedFiliere) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void supprimerFiliere(Filiere filiere) {
+	// TODO Auto-generated method stub
+	
+    }
+
 }
