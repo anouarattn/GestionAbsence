@@ -20,8 +20,8 @@
 				<configuration>
 					<finalName>GestionAbSsence</finalName>
 					<defaultLibBundleDir>lib/</defaultLibBundleDir>
-<!-- 					<skinnyWars>true</skinnyWars>
- -->					<modules>
+					<!-- <skinnyWars>true</skinnyWars> -->
+					<modules>
 						<webModule>
 							<groupId>ac.enset.administration.projetAbsence</groupId>
 							<artifactId>projetWeb</artifactId>
@@ -34,9 +34,13 @@
 				</configuration>
 			</plugin>
 			<plugin>
-					<groupId>org.jboss.as.plugins</groupId>
-					<artifactId>jboss-as-maven-plugin</artifactId>
-				</plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 	<!-- our in app dependencies -->
