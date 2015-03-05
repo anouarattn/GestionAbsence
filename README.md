@@ -4,6 +4,7 @@ GestionAbsence
 ## prérequis de deployement ##
 
 - Un serveur Jboss 7.1.1 démarré
+- une base de données avec le nom projetAbsenceTest et le schema suivant(lien)
 - La DataSource suivante
 ```xml 
  <datasource jta="true" jndi-name="java:/MySqlDS2" pool-name="MySqlDS_Pool2" enabled="true">
@@ -14,3 +15,7 @@ GestionAbsence
                     </security>
  </datasource>
 ```
+## deployement ##
+
+- dans le dossier parent  
+``` mvn install ```
