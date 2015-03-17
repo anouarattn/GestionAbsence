@@ -6,11 +6,11 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import ac.enset.administration.gestionAbsence.entites.Departement;
+import ac.enset.administration.gestionAbsence.entites.Filiere;
 
 @Named
 @SessionScoped
-public class ModelBeanDepartement extends ModelBeanBase<Departement> implements Serializable
+public class ModelBeanFiliere extends ModelBeanBase<Filiere> implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
@@ -20,30 +20,30 @@ public class ModelBeanDepartement extends ModelBeanBase<Departement> implements 
 
     @PostConstruct
     public void init() {
-	items = metier.getDepartements();
+	items = metier.getFilieres();
     }
 
     public void modifyEntity() {
-	metier.modifierDepartement(selectedEntity);
-	items = metier.getDepartements();
+	metier.modifierFiliere(selectedEntity);
+	items = metier.getFilieres();
 	unselect();
     }
 
     public void deleteEntity() {
-	for (Departement entity : selectedEntities) {
-	    metier.supprimerDepartement(entity);
+	for (Filiere entity : selectedEntities) {
+	    metier.supprimerFiliere(entity);
 	    items.remove(entity);
 	}
 	unselect();
     }
 
     public void cancleModifyEntity() {
-	items = metier.getDepartements();
+	items = metier.getFilieres();
 	unselect();
     }
 
     public void update() {
-	items = metier.getDepartements();
+	items = metier.getFilieres();
 	unselect();
     }
     

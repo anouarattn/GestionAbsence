@@ -17,7 +17,7 @@ public abstract class ControllerBeanBase<V>
     protected List<V> filtredEntities;
     
 
-    public abstract void addEntity();
+    public abstract void addEntity() throws NotFoundException;
 
     public V getEntityToAdd() {
         return entityToAdd;
@@ -38,7 +38,6 @@ public abstract class ControllerBeanBase<V>
         this.filtredEntities = filtredEntities;
     }
     
-
     
     
 }
