@@ -17,7 +17,6 @@ import javax.inject.Named;
 
 
 import ac.enset.administration.gestionAbsence.entites.Departement;
-import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
 import ac.enset.administration.gestionAbsence.models.ModelBeanDepartement;
 
 

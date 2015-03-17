@@ -11,11 +11,11 @@
 
 			<p:panelGrid columns="2" columnClasses="value">
 
-				<h:outputText value="#{msg.column2}" />
-				<p:inputText placeholder="#{msg.column2}" value="#{controllerBeanDepartement.entityToAdd.nom}" />
+				<h:outputText for="item1" value="#{msg.column2}" />
+				<p:inputText id="item1" placeholder="#{msg.column2}" value="#{controllerBeanDepartement.entityToAdd.nom}" />
 
-				<h:outputText value="#{msg.column3}" />
-				<p:inputText placeholder="#{msg.column3}" value="#{controllerBeanDepartement.entityToAdd.chef}" />
+				<h:outputText for="item2" value="#{msg.column3}" />
+				<p:inputText id="item2" placeholder="#{msg.column3}" value="#{controllerBeanDepartement.entityToAdd.chef}" />
 			</p:panelGrid>
 			<p:commandButton value="Ajout"
 				update=":formDataTable:datatable"

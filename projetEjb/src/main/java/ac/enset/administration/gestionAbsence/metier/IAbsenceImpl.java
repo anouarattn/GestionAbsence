@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
+import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
@@ -37,8 +38,6 @@ public class IAbsenceImpl implements IAbsenceLocal {
     public void ajouterFiliere(Filiere item, Long idDepartement, Long idTypeFiliere) {
 	Departement d = em.find(Departement.class, idDepartement);
 	TypeFiliere tf = em.find(TypeFiliere.class, idTypeFiliere);
-	// test la condition : l'objet filière doit avoir un typeFiliere et
-	// Departement non null
 	if (d != null && tf != null) {
 	    item.setDepartement(d);
 	    item.setTypeFiliere(tf);
@@ -128,6 +127,11 @@ public class IAbsenceImpl implements IAbsenceLocal {
     public void supprimerTypeFiliere(TypeFiliere item) {
 	em.remove(em.contains(item) ? item : em
 		.merge(item));
+    }
+
+    @Override
+    public boolean exist(Class<? extends EntityBase> clazz, Long id) {
+	return  em.find(clazz, id) != null ? true:false;
     }
 
 }

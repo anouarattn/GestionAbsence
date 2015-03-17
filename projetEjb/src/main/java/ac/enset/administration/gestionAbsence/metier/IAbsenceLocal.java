@@ -9,6 +9,7 @@ import javax.ejb.Local;
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
+import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
@@ -49,6 +50,7 @@ public interface IAbsenceLocal {
     public void supprimerTypeFiliere(TypeFiliere tf);
 
     
-    
+    public boolean exist(Class<? extends EntityBase> clazz, Long id);
+
 
 }
