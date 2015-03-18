@@ -1,6 +1,5 @@
 package ac.enset.administration.gestionAbsence.entites;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;

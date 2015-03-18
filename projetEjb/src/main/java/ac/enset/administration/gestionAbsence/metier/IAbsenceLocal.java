@@ -1,7 +1,6 @@
 package ac.enset.administration.gestionAbsence.metier;
 
 
-import java.awt.Window.Type;
 import java.util.List;
 
 import javax.ejb.Local;
