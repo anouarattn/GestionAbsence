@@ -134,22 +134,6 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return  em.find(clazz, id) != null ? true:false;
     }
 
-	@Override
-	public List<Filiere> getFilieres() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void modifierFiliere(Filiere selectedFiliere) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void supprimerFiliere(Filiere filiere) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

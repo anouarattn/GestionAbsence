@@ -18,3 +18,9 @@ projetWeb/bin/
 
 projetEjb/bin/
 projetEar/bin/
+
+
+.classpath
+projetEjb/.classpath
+projetEar/.classpath
+projetWeb/.classpath
