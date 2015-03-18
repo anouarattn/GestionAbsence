@@ -40,10 +40,9 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
     }
 
     public void addEntity() throws NotFoundException {
-	
 	if(!metier.exist(Departement.class, Long.parseLong(departementString)))
 		throw new DepartementNotFoundException("Can't find the specified Departement!!");
-	if ( metier.exist(TypeFiliere.class, Long.parseLong(typeFiliereString))) 
+	if (!metier.exist(TypeFiliere.class, Long.parseLong(typeFiliereString))) 
 	    	throw new TypeFiliereNotFoundException("Can't find the specified TypeFiliere");
 	
 	    metier.ajouterFiliere(entityToAdd, Long.parseLong(departementString)

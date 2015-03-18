@@ -15,17 +15,22 @@
 								rendered="#{not empty model.selectedEntity}"
 								columnClasses="value">
 
-								<h:outputText value="#{msg.column1}" />
-								<p:inputText
-									value="#{model.selectedEntity.id}" />
+								
 
-								<h:outputText value="#{msg.column2}" />
-								<p:inputText
-									value="#{model.selectedEntity.nom}" />
-
-								<h:outputText value="#{msg.column3}" />
-								<p:inputText
-									value="#{model.selectedEntity.chef}" />
+								<h:outputText for="item1" value="#{msg.column2}" />
+								<p:inputText id="item1"
+									value="#{model.selectedEntity.promotion}" />
+								
+								<h:outputText for="item2" value="#{msg.column3}" />
+								<p:inputText id="item2"
+									value="#{model.selectedEntity.beginDate}" />
+									
+								<h:outputLabel for="item3" value="#{msg.column4}" />
+								<h:selectOneMenu id="item3" value="#{controller.filiereString}">
+								<f:selectItems value="#{controller.filieres()}" var="filiere"
+								itemLabel="#{filiere.nom}" itemValue="#{filiere.id}" />
+								</h:selectOneMenu>
+								
 							</p:panelGrid>
 							<p:commandButton value="Modifier"
 								update=":formDataTable:datatable"

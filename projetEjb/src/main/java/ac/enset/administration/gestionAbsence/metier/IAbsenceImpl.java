@@ -12,7 +12,6 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
-import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
  
 @Stateless
@@ -45,14 +44,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	}
     }
 
-    @Override
-    public void ajouterNiveauFiliere(NiveauFiliere item, Long idFiliere) {
-	Filiere f = em.find(Filiere.class, idFiliere);
-	if (f != null) {
-	    item.setFiliere(f);
-	    em.persist(item);
-	}
-    }
+   
 
     @Override
     public void ajouterAnneeScolaire(AnneeScolaire item) {
@@ -62,11 +54,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
     @Override
     public void ajouterClasse(Classe item, Long idNiveauFiliere,
 	    Long idAnneeScolaire) {
-	NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
-	if (nf != null) {
-	    item.setNiveauFiliere(nf);
-	    em.persist(item);
-	}
+	
     }
 
     public List<AnneeScolaire> getAnneesScollaires() {
@@ -134,22 +122,45 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return  em.find(clazz, id) != null ? true:false;
     }
 
-	@Override
-	public List<Filiere> getFilieres() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<Classe> getClasses() {
+	Query q = em.createQuery("select cls from Classe cls");
+	List<Classe> item = q.getResultList();
+	return item;
+    }
+    
+    public List<? extends EntityBase> get(Class<? extends EntityBase> clazz)
+    {
+	Query q = em.createQuery("select type from "+ clazz.getSimpleName() +" type");
+	List<? extends EntityBase> item = q.getResultList();
+	return item;
+    }
+    
+    public void remove(Object entity)
+    {
+	em.remove(em.contains(entity) ? entity : em
+		.merge(entity));
+    }
 
-	@Override
-	public void modifierFiliere(Filiere selectedFiliere) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void modify(Object selectedEntity) {
+	em.merge(selectedEntity);
+    }
 
-	@Override
-	public void supprimerFiliere(Filiere filiere) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void add(Object entity) {
+	if (em.contains(entity))
+	    em.merge(entity);
+	else
+	    em.persist(entity);
+    }
+
+    @Override
+    public EntityBase get(Class<? extends EntityBase> clazz, Long id) {
+	return em.find(clazz, id);
+    }
+    
+    
+    
 
 }

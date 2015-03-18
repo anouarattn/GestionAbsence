@@ -11,7 +11,6 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
-import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
 
 @Local
@@ -23,7 +22,6 @@ public interface IAbsenceLocal {
     
     public void ajouterFiliere(Filiere f, Long idDepartement, Long idTypeFiliere);
     
-    public void ajouterNiveauFiliere(NiveauFiliere nf, Long idFiliere);
     
     public void ajouterAnneeScolaire(AnneeScolaire as);
     
@@ -51,6 +49,17 @@ public interface IAbsenceLocal {
 
     
     public boolean exist(Class<? extends EntityBase> clazz, Long id);
+    
+    public List<Classe> getClasses();
+
+    public void remove(Object entity);
+
+    public void modify(Object selectedEntity);
+    
+    public List<? extends EntityBase> get(Class<? extends EntityBase> clazz);
+    public EntityBase get(Class<? extends EntityBase> clazz, Long id);
+
+    public void add(Object entity);
 
 
 }

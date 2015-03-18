@@ -2,6 +2,7 @@ package ac.enset.administration.gestionAbsence.entites;
 
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -19,7 +20,8 @@ public class TypeFiliere extends EntityBase {
     
   
     private String nom;
- 
+    private int numberOfYears;
+        
     @OneToMany(fetch=FetchType.LAZY,mappedBy="typeFiliere")
     private Set<Filiere> filieres;
    

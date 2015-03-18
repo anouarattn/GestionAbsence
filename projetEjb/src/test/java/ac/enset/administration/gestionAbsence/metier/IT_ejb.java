@@ -16,7 +16,6 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
-import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
 
 @RunWith(Arquillian.class)
@@ -32,8 +31,7 @@ public class IT_ejb {
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class, "test.jar")
             .addClasses(EntityBase.class, Departement.class,IAbsenceLocal.class 
-        	    ,IAbsenceImpl.class,Classe.class,AnneeScolaire.class,Filiere.class,TypeFiliere.class,
-        	    NiveauFiliere.class)
+        	    ,IAbsenceImpl.class,Classe.class,AnneeScolaire.class,Filiere.class,TypeFiliere.class)
         	    .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
             .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }

@@ -12,14 +12,14 @@
 			<p:panelGrid columns="2" columnClasses="value">
 
 				<h:outputText for="item1" value="#{msg.column2}" />
-				<p:inputText id="item1" placeholder="#{msg.column2}" value="#{controllerBeanDepartement.entityToAdd.nom}" />
+				<p:inputText id="item1" placeholder="#{msg.column2}" value="#{controller.entityToAdd.nom}" />
 
 				<h:outputText for="item2" value="#{msg.column3}" />
-				<p:inputText id="item2" placeholder="#{msg.column3}" value="#{controllerBeanDepartement.entityToAdd.chef}" />
+				<p:inputText id="item2" placeholder="#{msg.column3}" value="#{controller.entityToAdd.chef}" />
 			</p:panelGrid>
 			<p:commandButton value="Ajout"
 				update=":formDataTable:datatable"
-				action="#{controllerBeanDepartement.addEntity()}"
+				action="#{controller.addEntity()}"
 				oncomplete="handleRequestAdd(xhr, status, args)" />
 			<p:commandButton value="Annuler"
 				oncomplete="handleRequestAdd(xhr, status, args)" />
