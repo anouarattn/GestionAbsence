@@ -13,6 +13,7 @@ import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
+import ac.enset.administration.gestionAbsence.entites.User;
 
 @Local
 public interface IAbsenceLocal {
@@ -57,4 +58,9 @@ public interface IAbsenceLocal {
     public List<Module> getModule();
 
     public List<NiveauFiliere> getNiveauFiliere();
+    
+/****/
+    
+    public boolean User(String login,String pass );
+	public User getUser(String login);
 }
