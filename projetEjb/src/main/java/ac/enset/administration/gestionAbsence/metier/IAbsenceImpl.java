@@ -12,6 +12,7 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
+import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
  
@@ -134,6 +135,29 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return  em.find(clazz, id) != null ? true:false;
     }
 
-	
+    @Override
+	public void ajouterModule(Module m, long idNiveauFiliere) {
+		
+		NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
+		if (nf != null) {
+			m.setNiveauFiliere(nf);
+			em.persist(m);
+		}
+		
+	}
+
+	@Override
+	public List<Module> getModule() {
+		Query q = em.createQuery("select m from Module m");
+		List<Module> m = q.getResultList();
+		return m;
+	}
+
+	@Override
+	public List<NiveauFiliere> getNiveauFiliere() {
+		Query q = em.createQuery("select m from NiveauFiliere m");
+		List<NiveauFiliere> m = q.getResultList();
+		return m;
+	}
 
 }

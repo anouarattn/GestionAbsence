@@ -1,7 +1,6 @@
 package ac.enset.administration.gestionAbsence.metier;
 
 
-import java.awt.Window.Type;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -11,6 +10,7 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
+import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
 
@@ -51,6 +51,10 @@ public interface IAbsenceLocal {
 
     
     public boolean exist(Class<? extends EntityBase> clazz, Long id);
+    
+    public void ajouterModule(Module m,long idNiveauFiliere);
+    
+    public List<Module> getModule();
 
-
+    public List<NiveauFiliere> getNiveauFiliere();
 }

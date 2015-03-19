@@ -21,7 +21,10 @@ public class NiveauFiliere extends EntityBase{
     
     @OneToMany(fetch=FetchType.LAZY,mappedBy="niveauFiliere")
     private Set<Classe> classes;
-
+    
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="niveauFiliere")
+    private Set<Module> module;
+    
     public String getNom() {
         return nom;
     }

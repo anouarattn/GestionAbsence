@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/main.xhtml">
+
+	<ui:define name="jquery"></ui:define>
+
+	<ui:define name="content">
+	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.module" var="msg"/>
+	
+		<div id="page-wrapper" style="min-height: 588px;">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">#{msg.pageHeader}</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<h:form id="formDataTable">
+						<p:contextMenu for="datatable">
+
+							<p:menuitem value="Afficher" update=":showDialog"
+								icon="ui-icon-search"
+								oncomplete="PF('jsShow').show()" />
+
+							<p:menuitem value="Modifier"
+								update=":modifyDialog" icon="ui-icon-close"
+								oncomplete="PF('jsModify').show()" />
+
+							<p:menuitem value="Supprimer"
+								update=":formDataTable:datatable" icon="ui-icon-close"
+								action="#{modelBeanModule.deleteEntity()}" />
+
+						</p:contextMenu>
+						<p:dataTable emptyMessage="#{msg.emptyMessage}"
+							value="#{modelBeanModule.items}" var="item"
+							paginator="true" rows="40" rowKey="#{item.id}"
+							filteredValue="#{controllerBeanModule.filtredEntities}"
+							widgetVar="jsTable" id="datatable"
+							paginatorPosition="bottom"
+							selection="#{modelBeanModule.selectedEntities}">
+
+							<f:facet name="header">
+								<p:outputPanel style="text-align: right;">
+
+									<h:commandLink style="margin-right:5px;"
+										onclick="PF('jsAdd').show();return false;">
+										<p:graphicImage name="img/add.png" width="24" />
+									</h:commandLink>
+									<h:commandLink style="margin-right:5px;">
+										<p:graphicImage name="img/excel.png" width="24" />
+										<p:dataExporter type="xls" target="tbl" fileName="cars" />
+									</h:commandLink>
+									<h:commandLink style="margin-right:5px;">
+										<p:graphicImage name="img/pdf.png" width="24" />
+										<p:dataExporter type="xls" target="tbl" fileName="cars" />
+									</h:commandLink>
+									<p:inputText id="globalModule"
+										onkeyup="PF('jsTable').filter()"
+										placeholder="Rechercher" style="width:150px" />
+								</p:outputPanel>
+
+							</f:facet>
+							<p:column selectionMode="multiple"
+								style="width:46px;text-align:center" />
+							<p:column filterBy="#{item.id}" headerText="#{msg.column1}"
+								sortBy="#{item.id}" filterMatchMode="contains"
+								filterStyle="display:none"
+								style="width:77px;text-align: center;">
+								<h:outputText value="#{item.id}" />
+							</p:column>
+
+							<p:column filterBy="#{item.codemodule}" headerText="#{msg.column2}"
+								sortBy="#{item.codemodule}" filterMatchMode="contains"
+								filterStyle="display:none">
+								<h:outputText value="#{item.codemodule}" />
+							</p:column>
+
+							<p:column filterBy="#{item.niveauFiliere.nom}"
+								headerText="#{msg.column3}" sortBy="#{item.niveauFiliere.nom}"
+								filterStyle="display:none" filterMatchMode="contains">
+								<h:outputText value="#{item.niveauFiliere.nom}" />
+							</p:column>
+
+						</p:dataTable>
+					</h:form>
+
+				
+<ui:debug hotkey="x" />					
+					
+        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/add.xhtml" />
+        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/modify.xhtml" />
+        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/show.xhtml" />
+        
+        
+
+				</div>
+			</div>
+		</div>
+	
+	</ui:define>
+		<ui:define name="js">
+		<script src="resources/js/dialogs.js"></script>
+		</ui:define>
+	
+</ui:composition>
+</html>
