@@ -17,7 +17,7 @@ public class NiveauFiliere extends EntityBase{
 
     @ManyToOne
     @JoinColumn(name="FK_Filiere")
-    private Filiere filiere;
+    private Filiere filieres;
     
     @OneToMany(fetch=FetchType.LAZY,mappedBy="niveauFiliere")
     private Set<Classe> classes;
@@ -35,12 +35,12 @@ public class NiveauFiliere extends EntityBase{
     
     
 
-    public Filiere getFiliere() {
-        return filiere;
+    public Filiere getFilieres() {
+        return filieres;
     }
 
-    public void setFiliere(Filiere filiere) {
-        this.filiere = filiere;
+    public void setFiliere(Filiere filieres) {
+        this.filieres = filieres;
     }
 
     public Set<Classe> getClasses() {

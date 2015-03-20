@@ -139,11 +139,18 @@ public class IAbsenceImpl implements IAbsenceLocal {
     @Override
 	public void ajouterModule(Module m, long idNiveauFiliere) {
 		
+    	System.out.println("idNiveauFiliere : "+idNiveauFiliere);
+    	
 		NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
-		if (nf != null) {
+		System.out.println("nf.getNom : "+nf.getNom());
+		if(nf != null) {
 			m.setNiveauFiliere(nf);
 			em.persist(m);
+		}else{
+			System.out.println("is null ");
 		}
+			
+		
 		
 	}
 

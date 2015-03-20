@@ -20,7 +20,7 @@ public class Filiere extends EntityBase {
     @JoinColumn(name = "FK_Departement")
     private Departement departement;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "filiere")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "filieres")
     private Set<NiveauFiliere> niveauFilieres;
 
     @ManyToOne

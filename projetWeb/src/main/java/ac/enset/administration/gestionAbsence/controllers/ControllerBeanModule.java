@@ -54,7 +54,10 @@ public class ControllerBeanModule extends ControllerBeanBase<Module>
     }
 
     public void addEntity() throws NotFoundException {
-	
+    	
+    	entityToAdd.getCodemodule();
+    	System.out.println(entityToAdd.getCodemodule()+idniveauFiliere);
+    	
 	    metier.ajouterModule(entityToAdd, Long.parseLong(idniveauFiliere));
 	    modelBean.update();
     }
