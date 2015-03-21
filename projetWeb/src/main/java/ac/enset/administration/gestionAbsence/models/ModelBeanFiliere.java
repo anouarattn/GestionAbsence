@@ -10,7 +10,7 @@ import ac.enset.administration.gestionAbsence.entites.Filiere;
 
 @Named
 @SessionScoped
-public class ModelBeanFiliere extends ModelBeanBase<Filiere> implements Serializable
+public class ModelBeanFiliere extends ModelBeanBase implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
@@ -20,35 +20,9 @@ public class ModelBeanFiliere extends ModelBeanBase<Filiere> implements Serializ
 
     @PostConstruct
     public void init() {
-	items = metier.getFilieres();
+	clazz = Filiere.class;
+	items = metier.get(Filiere.class);
     }
 
-    public void modifyEntity() {
-	metier.modifierFiliere(selectedEntity);
-	items = metier.getFilieres();
-	unselect();
-    }
-
-    public void deleteEntity() {
-	for (Filiere entity : selectedEntities) {
-	    metier.supprimerFiliere(entity);
-	    items.remove(entity);
-	}
-	unselect();
-    }
-
-    public void cancleModifyEntity() {
-	items = metier.getFilieres();
-	unselect();
-    }
-
-    public void update() {
-	items = metier.getFilieres();
-	unselect();
-    }
-    
-    public void unselect() {
-	setSelectedEntities(null);
-    }
-
+  
 }

@@ -6,25 +6,25 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import ac.enset.administration.gestionAbsence.entites.Departement;
+import ac.enset.administration.gestionAbsence.entites.Classe;
+import ac.enset.administration.gestionAbsence.entites.Filiere;
 
 @Named
 @SessionScoped
-public class ModelBeanDepartement extends ModelBeanBase implements Serializable
+public class ModelBeanClasse extends ModelBeanBase implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
-   
 
 
     
 
-    @PostConstruct
+   @PostConstruct
     public void init() {
-	clazz = Departement.class;
-	items = metier.getDepartements();
+       clazz = Classe.class;
+	items = metier.get(Classe.class);
     }
 
-    
+
 
 }

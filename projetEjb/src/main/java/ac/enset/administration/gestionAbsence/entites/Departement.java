@@ -2,6 +2,7 @@ package ac.enset.administration.gestionAbsence.entites;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -16,7 +17,7 @@ public class Departement extends EntityBase {
     private String nom;
     private String chef;
 
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="departement")
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="departement",cascade={CascadeType.REMOVE})
     private Set<Filiere> filieres;
     
 

@@ -3,9 +3,11 @@ package ac.enset.administration.gestionAbsence.models;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
+
 
 public abstract class ModelBeanBase<T> {
 
@@ -14,17 +16,39 @@ public abstract class ModelBeanBase<T> {
     protected T selectedEntity;
     protected List<T> items;
     protected List<T> selectedEntities;
-
+    protected Class clazz;
+    
     @PostConstruct
     public abstract void init();
 
-    public abstract void modifyEntity();
+    public void unselect() {
+	setSelectedEntities(null);
+    }
 
-    public abstract void deleteEntity();
+    public void modifyEntity() {
+	metier.modify(selectedEntity);
+	items = (List<T>) metier.get(clazz);
+	unselect();
+    }
 
-    public abstract void cancleModifyEntity();
+    public void deleteEntity() {
+	for (T entity : selectedEntities) {
+	    metier.remove(entity);
+	    items.remove(entity);
+	}
+	unselect();
+    }
 
-    public abstract void update();
+    public void cancleModifyEntity()
+    {
+	update();
+    }
+
+    public void update()
+    {
+	items = (List<T>) metier.get(clazz);
+	unselect();
+    }
 
     public T getSelectedEntity() {
 	return selectedEntity;

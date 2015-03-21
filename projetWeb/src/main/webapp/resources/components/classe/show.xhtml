@@ -15,14 +15,20 @@
 
 				<h:outputText value="#{msg.column1}" />
 				<h:outputText value="#{model.selectedEntity.id}" />
-
 				<h:outputText value="#{msg.column2}" />
-				<h:outputText
-					value="#{model.selectedEntity.nom}" />
+				<h:outputText value="#{model.selectedEntity.promotion}" />
 
 				<h:outputText value="#{msg.column3}" />
 				<h:outputText
-					value="#{model.selectedEntity.departement.nom}" />
+					value="#{model.selectedEntity.beginDate}" />
+
+				<h:outputText value="#{msg.column4}" />
+				<h:outputText
+					value="#{model.selectedEntity.filiere.nom}" />
+					
+				<h:outputText value="#{msg.column5}" />
+				<h:outputText
+					value="#{model.selectedEntity.niveau}" />
 			</p:panelGrid>
 			<p:commandButton value="Fermer"
 				update=":formDataTable:datatable"

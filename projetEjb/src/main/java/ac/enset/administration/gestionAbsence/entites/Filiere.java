@@ -1,7 +1,9 @@
 package ac.enset.administration.gestionAbsence.entites;
 
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -20,8 +22,8 @@ public class Filiere extends EntityBase {
     @JoinColumn(name = "FK_Departement")
     private Departement departement;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "filiere")
-    private Set<NiveauFiliere> niveauFilieres;
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="filiere",cascade={CascadeType.REMOVE})
+    private List<Classe> classes;
 
     @ManyToOne
     @JoinColumn(name = "FK_TypeFiliere")
@@ -43,13 +45,6 @@ public class Filiere extends EntityBase {
         this.departement = departement;
     }
 
-    public Set<NiveauFiliere> getNiveauFilieres() {
-        return niveauFilieres;
-    }
-
-    public void setNiveauFilieres(Set<NiveauFiliere> niveauFilieres) {
-        this.niveauFilieres = niveauFilieres;
-    }
 
     public TypeFiliere getTypeFiliere() {
         return typeFiliere;
@@ -67,5 +62,14 @@ public class Filiere extends EntityBase {
     public Filiere() {
 	super();
     }
+
+    public List<Classe> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Classe> classes) {
+        this.classes = classes;
+    }
+    
 
 }

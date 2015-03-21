@@ -10,10 +10,11 @@
 	<ui:define name="jquery"></ui:define>
 
 	<ui:define name="content">
-	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.filiere" var="msg"/>
-	<c:set var="model" value="#{modelBeanFiliere}" />
-	<c:set var="controller" value="#{controllerBeanFiliere}" />
-	
+		<f:loadBundle
+			basename="ac.enset.administration.gestionAbsence.properties.classe"
+			var="msg" />
+		<c:set var="model" value="#{modelBeanClasse}" />
+		<c:set var="controller" value="#{controllerBeanClasse}" />
 		<div id="page-wrapper" style="min-height: 588px;">
 			<div class="row">
 				<div class="col-lg-12">
@@ -26,24 +27,19 @@
 						<p:contextMenu for="datatable">
 
 							<p:menuitem value="Afficher" update=":showDialog"
-								icon="ui-icon-search"
-								oncomplete="PF('jsShow').show()" />
+								icon="ui-icon-search" oncomplete="PF('jsShow').show()" />
 
-							<p:menuitem value="Modifier"
-								update=":modifyDialog" icon="ui-icon-close"
-								oncomplete="PF('jsModify').show()" />
+							<p:menuitem value="Modifier" update=":modifyDialog"
+								icon="ui-icon-close" oncomplete="PF('jsModify').show()" />
 
-							<p:menuitem value="Supprimer"
-								update=":formDataTable:datatable" icon="ui-icon-close"
-								action="#{model.deleteEntity()}" />
+							<p:menuitem value="Supprimer" update=":formDataTable:datatable"
+								icon="ui-icon-close" action="#{model.deleteEntity()}" />
 
 						</p:contextMenu>
 						<p:dataTable emptyMessage="#{msg.emptyMessage}"
-							value="#{model.items}" var="item"
-							paginator="true" rows="40" rowKey="#{item.id}"
-							filteredValue="#{controller.filtredEntities}"
-							widgetVar="jsTable" id="datatable"
-							paginatorPosition="bottom"
+							value="#{model.items}" var="item" paginator="true" rows="40"
+							rowKey="#{item.id}" filteredValue="#{controller.filtredEntities}"
+							widgetVar="jsTable" id="datatable" paginatorPosition="bottom"
 							selection="#{model.selectedEntities}">
 
 							<f:facet name="header">
@@ -61,8 +57,7 @@
 										<p:graphicImage name="img/pdf.png" width="24" />
 										<p:dataExporter type="xls" target="tbl" fileName="cars" />
 									</h:commandLink>
-									<p:inputText id="globalFilter"
-										onkeyup="PF('jsTable').filter()"
+									<p:inputText id="globalFilter" onkeyup="PF('jsTable').filter()"
 										placeholder="Rechercher" style="width:150px" />
 								</p:outputPanel>
 
@@ -76,38 +71,53 @@
 								<h:outputText value="#{item.id}" />
 							</p:column>
 
-							<p:column filterBy="#{item.nom}" headerText="#{msg.column2}"
-								sortBy="#{item.nom}" filterMatchMode="contains"
+							<p:column filterBy="#{item.promotion}" headerText="#{msg.column2}"
+								sortBy="#{item.promotion}" filterMatchMode="contains"
 								filterStyle="display:none">
-								<h:outputText value="#{item.nom}" />
+								<h:outputText value="#{item.promotion}" />
 							</p:column>
-
-							<p:column filterBy="#{item.departement.nom}"
-								headerText="#{msg.column3}" sortBy="#{item.departement.nom}"
+							
+								<p:column filterBy="#{item.beginDate}"
+								headerText="#{msg.column3}" sortBy="#{item.beginDate}"
 								filterStyle="display:none" filterMatchMode="contains">
-								<h:outputText value="#{item.departement.nom}" />
+								<h:outputText value="#{item.beginDate}" />
+								</p:column>
+
+							<p:column filterBy="#{item.filiere.nom}"
+								headerText="#{msg.column4}" sortBy="#{item.filiere.nom}"
+								filterStyle="display:none" filterMatchMode="contains">
+								<h:outputText value="#{item.filiere.nom}" />
 							</p:column>
+							
+								<p:column filterBy="#{item.niveau}"
+								headerText="#{msg.column5}" sortBy="#{item.niveau}"
+								filterStyle="display:none" filterMatchMode="contains">
+								<h:outputText value="#{item.niveau}" />
+								</p:column>
 
 						</p:dataTable>
 					</h:form>
 
-				
-<ui:debug hotkey="x" />					
-					
-        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/add.xhtml" />
-        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/modify.xhtml" />
-        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/show.xhtml" />
-        
-        
+
+					<ui:debug hotkey="x" />
+
+					<ui:include
+						src="resources/components/#{msg.xhtmlComponentsPath}/add.xhtml" />
+					<ui:include
+						src="resources/components/#{msg.xhtmlComponentsPath}/modify.xhtml" />
+					<ui:include
+						src="resources/components/#{msg.xhtmlComponentsPath}/show.xhtml" />
+
+
 
 				</div>
 			</div>
 		</div>
-	
+
 	</ui:define>
-		<ui:define name="js">
+	<ui:define name="js">
 		<script src="resources/js/dialogs.js"></script>
-		</ui:define>
-	
+	</ui:define>
+
 </ui:composition>
 </html>

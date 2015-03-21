@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
+import ac.enset.administration.gestionAbsence.models.ModelBeanBase;
 
 
 public abstract class ControllerBeanBase<V>
@@ -15,6 +16,8 @@ public abstract class ControllerBeanBase<V>
     protected V entityToAdd;
 
     protected List<V> filtredEntities;
+    
+  
     
 
     public abstract void addEntity() throws NotFoundException;

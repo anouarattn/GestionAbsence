@@ -31,10 +31,8 @@ public class ControllerBeanDepartement extends ControllerBeanBase<Departement> i
     private static final long serialVersionUID = 1L;
 
    
-    
     @Inject
     private ModelBeanDepartement modelBean;
-
 
 
     @PostConstruct

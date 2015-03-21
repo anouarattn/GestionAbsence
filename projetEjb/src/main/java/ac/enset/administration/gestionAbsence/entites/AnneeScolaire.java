@@ -13,7 +13,7 @@ public class AnneeScolaire extends EntityBase {
 
     private int annee;
     
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="anneeScolaire")
+    @OneToMany(fetch=FetchType.LAZY)
     private Set<Classe> classes;
 
     public int getAnnee() {
