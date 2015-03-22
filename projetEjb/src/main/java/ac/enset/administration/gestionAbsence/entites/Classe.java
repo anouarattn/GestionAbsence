@@ -29,6 +29,10 @@ public class Classe extends EntityBase  {
     @JoinColumn(name = "FK_AnneeScolaire")
     private AnneeScolaire anneeScolaire;
     
+    @ManyToOne
+    @JoinColumn(name = "FK_NiveauFiliere")
+    private NiveauFiliere niveauFiliere;
+    
 
 
     public Classe() {
@@ -81,4 +85,16 @@ public class Classe extends EntityBase  {
     public void setBeginDate(String beginDate) {
         this.beginDate = beginDate;
     }
+
+
+    public NiveauFiliere getNiveauFiliere() {
+        return niveauFiliere;
+    }
+
+
+    public void setNiveauFiliere(NiveauFiliere niveauFiliere) {
+        this.niveauFiliere = niveauFiliere;
+    }
+    
+    
 }
