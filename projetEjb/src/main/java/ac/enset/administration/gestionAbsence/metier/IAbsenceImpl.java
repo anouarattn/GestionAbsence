@@ -12,7 +12,11 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
+
+import ac.enset.administration.gestionAbsence.entites.Module;
+import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
+import ac.enset.administration.gestionAbsence.entites.User;
  
 @Stateless
 public class IAbsenceImpl implements IAbsenceLocal {
@@ -160,6 +164,82 @@ public class IAbsenceImpl implements IAbsenceLocal {
     public EntityBase get(Class<? extends EntityBase> clazz, Long id) {
 	return em.find(clazz, id);
     }
+
+    @Override
+	public void ajouterModule(Module m, long idNiveauFiliere) {
+		
+    	System.out.println("idNiveauFiliere : "+idNiveauFiliere);
+    	
+		NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
+		System.out.println("nf.getNom : "+nf.getNom());
+		if(nf != null) {
+			m.setNiveauFiliere(nf);
+			em.persist(m);
+		}else{
+			System.out.println("is null ");
+		}
+			
+		
+		
+	}
+
+	@Override
+	public List<Module> getModule() {
+		Query q = em.createQuery("select m from Module m");
+		List<Module> m = q.getResultList();
+		return m;
+	}
+
+	@Override
+	public List<NiveauFiliere> getNiveauFiliere() {
+		Query q = em.createQuery("select m from NiveauFiliere m");
+		List<NiveauFiliere> m = q.getResultList();
+		return m;
+	}
+	
+
+	@Override
+	public boolean User(String login, String pass) {
+		try {
+			Query req = em.createQuery("select u from User u where u.login like :x and u.pass like :y");
+			req.setParameter("x", login);
+			req.setParameter("y", pass);
+			User u = new User();
+			List<User> user = req.getResultList();
+			if(!user.isEmpty())
+				for(User us:user) u =us;
+			else return false;
+			if(u.getId()>= 1)
+				return true;
+			else 
+				return false ;
+						
+		} catch (Exception e) {
+			System.err.println("Eror123"+e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public User getUser(
+			String login) {
+
+		Query req = em.createQuery("select u from User u where u.login like :x  ");
+		req.setParameter("x", login);
+		List<User> user = req.getResultList();
+		User u = new User();
+		for(User us:user){
+			u = us;
+			System.out.println(us.getId()+" "+us.getLogin());
+		}
+		
+		if(u == null){
+			return null;
+		}else {
+			return u;
+		}
+	}
 
 
 }

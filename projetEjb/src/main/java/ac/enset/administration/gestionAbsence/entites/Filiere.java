@@ -25,6 +25,7 @@ public class Filiere extends EntityBase {
     @OneToMany(fetch=FetchType.LAZY,mappedBy="filiere",cascade={CascadeType.REMOVE})
     private List<Classe> classes;
 
+
     @ManyToOne
     @JoinColumn(name = "FK_TypeFiliere")
     private TypeFiliere typeFiliere;
