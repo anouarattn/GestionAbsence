@@ -18,7 +18,7 @@ import ac.enset.administration.gestionAbsence.models.ModelBeanFiliere;
 public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
 	implements Serializable {
 
-    /**
+    /** 
      * 
      */
     private static final long serialVersionUID = 1L;
@@ -32,27 +32,28 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
     String departementString;
     String typeFiliereString;
 
-    
-
     @PostConstruct
     public void init() {
 	entityToAdd = new Filiere();
     }
 
     public void addEntity() throws NotFoundException {
-	if(!metier.exist(Departement.class, Long.parseLong(departementString)))
-		throw new DepartementNotFoundException("Can't find the specified Departement!!");
-	if (!metier.exist(TypeFiliere.class, Long.parseLong(typeFiliereString))) 
-	    	throw new TypeFiliereNotFoundException("Can't find the specified TypeFiliere");
-	
-	    metier.ajouterFiliere(entityToAdd, Long.parseLong(departementString)
-		 , Long.parseLong(typeFiliereString));
-	    modelBean.update();
+	if (!metier.exist(Departement.class, Long.parseLong(departementString)))
+	    throw new DepartementNotFoundException(
+		    "Can't find the specified Departement!!");
+	if (!metier.exist(TypeFiliere.class, Long.parseLong(typeFiliereString)))
+	    throw new TypeFiliereNotFoundException(
+		    "Can't find the specified TypeFiliere");
+
+	metier.ajouterFiliere(entityToAdd, Long.parseLong(departementString),
+		Long.parseLong(typeFiliereString));
+	modelBean.update();
     }
 
     public List<Departement> getDepartements() {
 	return this.departements = metier.getDepartements();
     }
+
     public String getDepartementString() {
 	return departementString;
     }
@@ -70,7 +71,7 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
     }
 
     public List<TypeFiliere> getTypeFilieres() {
-	return	this.typeFilieres = metier.getTypesFilieres();
+	return this.typeFilieres = metier.getTypesFilieres();
     }
 
     public void setTypeFilieres(List<TypeFiliere> typeFilieres) {

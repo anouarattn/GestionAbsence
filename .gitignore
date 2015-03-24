@@ -35,3 +35,7 @@ projetWeb/.project
 projetEjb/.settings
 projetEar/.settings
 projetWeb/.settings
+
+projetEjb/.checkstyle
+projetEar/.checkstyle
+projetWeb/.checkstyle
