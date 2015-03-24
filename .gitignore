@@ -24,3 +24,13 @@ projetEar/bin/
 projetEjb/.classpath
 projetEar/.classpath
 projetWeb/.classpath
+
+.project
+projetEjb/.project
+projetEar/.project
+projetWeb/.project
+
+.settings
+projetEjb/.settings
+projetEar/.settings
+projetWeb/.settings
