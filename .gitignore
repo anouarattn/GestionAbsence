@@ -18,3 +18,12 @@ projetWeb/bin/
 
 projetEjb/bin/
 projetEar/bin/
+
+projetWeb/.checkstyle
+projetEjb/.checkstyle
+
+projetEar/.checkstyle
+
+target
+
+
