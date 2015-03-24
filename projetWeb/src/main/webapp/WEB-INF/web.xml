@@ -38,13 +38,13 @@
 	
 	
 		
-  <filter>
+<!--   <filter>
   	<filter-name>LoginFilter</filter-name>
   	<filter-class>ac.enset.administration.gestionAbsence.models.loginFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>LoginFilter</filter-name>
   	<url-pattern>/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping> -->
   
 </web-app>  

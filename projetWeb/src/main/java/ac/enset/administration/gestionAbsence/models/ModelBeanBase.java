@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
+import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
 
 
@@ -14,7 +15,7 @@ public abstract class ModelBeanBase<T> {
     @Inject
     protected IAbsenceLocal metier;
     protected T selectedEntity;
-    protected List<T> items;
+    protected List<? extends EntityBase> items;
     protected List<T> selectedEntities;
     protected Class clazz;
     
@@ -27,7 +28,7 @@ public abstract class ModelBeanBase<T> {
 
     public void modifyEntity() {
 	metier.modify(selectedEntity);
-	items = (List<T>) metier.get(clazz);
+	items =  metier.get(clazz);
 	unselect();
     }
 
@@ -46,7 +47,7 @@ public abstract class ModelBeanBase<T> {
 
     public void update()
     {
-	items = (List<T>) metier.get(clazz);
+	items =  metier.get(clazz);
 	unselect();
     }
 
@@ -58,11 +59,11 @@ public abstract class ModelBeanBase<T> {
 	this.selectedEntity = selectedEntity;
     }
 
-    public List<T> getItems() {
+    public List<? extends EntityBase> getItems() {
 	return items;
     }
 
-    public void setItems(List<T> items) {
+    public void setItems(List<? extends EntityBase> items) {
 	this.items = items;
     }
 

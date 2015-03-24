@@ -10,7 +10,7 @@ import ac.enset.administration.gestionAbsence.entites.Filiere;
 
 @Named
 @SessionScoped
-public class ModelBeanFiliere extends ModelBeanBase implements Serializable
+public class ModelBeanFiliere extends ModelBeanBase<Filiere> implements Serializable
 {
 
     private static final long serialVersionUID = 1L;

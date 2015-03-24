@@ -10,7 +10,7 @@ import ac.enset.administration.gestionAbsence.entites.Departement;
 
 @Named
 @SessionScoped
-public class ModelBeanDepartement extends ModelBeanBase implements Serializable
+public class ModelBeanDepartement extends ModelBeanBase<Departement> implements Serializable
 {
 
     private static final long serialVersionUID = 1L;

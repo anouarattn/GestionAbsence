@@ -20,35 +20,9 @@ public class ModelBeanModule extends ModelBeanBase<Module> implements Serializab
 
     @PostConstruct
     public void init() {
-	items = metier.getModule();
+	clazz = Module.class;
+	items = metier.get(clazz);
     }
 
-    public void modifyEntity() {
-	//metier.modifierFiliere(selectedEntity);
-	items = metier.getModule();
-	unselect();
-    }
-
-    public void deleteEntity() {
-	for (Module entity : selectedEntities) {
-	    //metier.supprimerFiliere(entity);
-	    items.remove(entity);
-	}
-	unselect();
-    }
-
-    public void cancleModifyEntity() {
-	items = metier.getModule();
-	unselect();
-    }
-
-    public void update() {
-	items = metier.getModule();
-	unselect();
-    }
-    
-    public void unselect() {
-	setSelectedEntities(null);
-    }
 
 }
