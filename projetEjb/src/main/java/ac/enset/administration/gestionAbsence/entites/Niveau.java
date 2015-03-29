@@ -7,7 +7,14 @@ public enum Niveau {
     private Niveau(String niveau)
     {
 	this.niveau=niveau;
+	
     }
+    public String getNiveau() {
+        return niveau;
+    }
+    
+    
+    
   
 
 }
