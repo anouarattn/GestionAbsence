@@ -19,3 +19,7 @@ GestionAbsence
 
 - dans le dossier parent  
 ``` mvn install ```
+
+## Notes ##
+
+Dans ce projet, On utilise les règles émis par RFC 2119(https://www.ietf.org/rfc/rfc2119.txt) pour spécifier les exigences fonctionnelles et techniques(Voir la Wiki)
