@@ -31,3 +31,13 @@ projetWeb/.classpath
 projetEjb/.checkstyle
 projetEar/.checkstyle
 projetWeb/.checkstyle
+
+.project
+projetEjb/.project
+projetEar/.project
+projetWeb/.project
+
+.settings
+projetEjb/.settings
+projetEar/.settings
+projetWeb/.settings
