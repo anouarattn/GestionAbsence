@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition>
+	<f:loadBundle
+		basename="ac.enset.administration.gestionAbsence.properties.anneesScolaires"
+		var="anneesScolaires" />
+	<p:dialog header="Ajout" widgetVar="jsAddAnneeScolaire"
+		id="addAnneeScolaireDialog" modal="true" showEffect="fade"
+		hideEffect="fade" resizable="false" closable="false">
+		<c:set var="model" value="#{modelBeanAnneesScolaires}" />
+		<c:set var="controller" value="#{controllerBeanAnneesScolaires}" />
+		<h:form id="addAnneeScolaireForm">
+
+			<p:panelGrid columns="1" columnClasses="value">
+
+				<h:outputLabel for="item1" value="#{anneesScolaires.column2}" />
+			
+
+
+
+			</p:panelGrid>
+			<p:commandButton value="Confirmé"
+				action="#{controller.addEntity()}"
+				oncomplete="handleRequestAddas(xhr, status, args)" />
+			<p:commandButton value="Annuler"
+				oncomplete="handleRequestAddas(xhr, status, args)" />
+		</h:form>
+
+	</p:dialog>
+
+</ui:composition>
+
+</html>

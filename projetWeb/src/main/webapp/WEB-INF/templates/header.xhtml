@@ -1,7 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
+<f:loadBundle
+			basename="ac.enset.administration.gestionAbsence.properties.anneesScolaires"
+			var="msg" />
 	<nav class="navbar navbar-default navbar-static-top" role="navigation"
 		style="margin-bottom: 0">
 		<div class="navbar-header">
@@ -22,16 +27,7 @@
 			</a>
 				<ul class="dropdown-menu dropdown-anneeScolaire">
 					<ui:insert name="anneesListe">
-						<ui:repeat
-							value="#{anneeScolaireControlleur.getAnneesScolaires()}"
-							var="annees">
-							<li><a href="#">Année Scolaire
-									#{annees.annee}/#{annees.annee+1}</a></li>
-						</ui:repeat>
-
-						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-plus"></i> <strong>Nouvelle
-									Année Scolaire</strong></a></li>
+						
 					</ui:insert>
 				</ul></li>
 			<!-- /.dropdown -->
@@ -100,6 +96,7 @@
 		</div>
 		<!-- /.navbar-static-side -->
 	</nav>
+	<ui:include src="/resources/components/#{msg.xhtmlComponentsPath}/add.xhtml" />
 </ui:composition>
 </html>
 

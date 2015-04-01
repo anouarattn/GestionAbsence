@@ -8,7 +8,18 @@
 <ui:composition template="/WEB-INF/templates/main.xhtml">
 
 	<ui:define name="jquery"></ui:define>
+	
+	 <ui:define name="anneesListe">
+	<ui:repeat
+							value="#{anneeScolaireControlleur.getAnneesScolaires()}"
+							var="annees">
+							<li><a  href="#">Année Scolaire
+									#{annees.annee}/#{annees.annee+1}</a></li>
+						</ui:repeat>
 
+						<li class="divider"></li>
+						<li><p:link onclick="PF('jsAddAnneeScolaire').show();return false;" value="Nouvelle
+									Année Scolaire" /></li></ui:define>
 	<ui:define name="content">
 		<f:loadBundle
 			basename="ac.enset.administration.gestionAbsence.properties.classe"
