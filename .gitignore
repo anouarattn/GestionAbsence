@@ -26,6 +26,12 @@ projetEjb/.classpath
 projetEar/.classpath
 projetWeb/.classpath
 
+
+
+projetEjb/.checkstyle
+projetEar/.checkstyle
+projetWeb/.checkstyle
+
 .project
 projetEjb/.project
 projetEar/.project
@@ -35,7 +41,7 @@ projetWeb/.project
 projetEjb/.settings
 projetEar/.settings
 projetWeb/.settings
-
-projetEjb/.checkstyle
-projetEar/.checkstyle
-projetWeb/.checkstyle
+.settings/*
+projetEjb/.settings/*
+projetEar/.settings/*
+projetWeb/.settings/*
