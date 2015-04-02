@@ -41,7 +41,7 @@ projetWeb/.project
 projetEjb/.settings
 projetEar/.settings
 projetWeb/.settings
-.settings
+.settings/*
 projetEjb/.settings/*
 projetEar/.settings/*
 projetWeb/.settings/*
