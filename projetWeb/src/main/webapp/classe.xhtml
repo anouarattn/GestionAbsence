@@ -8,18 +8,27 @@
 <ui:composition template="/WEB-INF/templates/main.xhtml">
 
 	<ui:define name="jquery"></ui:define>
-	
-	 <ui:define name="anneesListe">
-	<ui:repeat
-							value="#{anneeScolaireControlleur.getAnneesScolaires()}"
-							var="annees">
-							<li><a  href="#">Année Scolaire
-									#{annees.annee}/#{annees.annee+1}</a></li>
-						</ui:repeat>
 
-						<li class="divider"></li>
-						<li><p:link onclick="PF('jsAddAnneeScolaire').show();return false;" value="Nouvelle
-									Année Scolaire" /></li></ui:define>
+	<ui:define name="anneesListe">
+					<ul id="anneeScolaireListe" class="dropdown-menu dropdown-anneeScolaire">
+						
+		<ui:repeat value="#{modelBeanAnneeScolaire.items}" var="annees">
+			<p:panelGrid>
+		<li><a href="#"><i class="fa fa-check"></i> Année Scolaire
+						#{annees.yearsFormated}"</a></li>	
+			</p:panelGrid>
+		
+		
+
+		</ui:repeat>
+	
+		<li class="divider"></li>
+		<li><p:link
+				onclick="PF('jsAddAnneeScolaire').show();return false;"
+				value="Nouvelle
+									Année Scolaire" /></li>
+									</ul>
+	</ui:define>
 	<ui:define name="content">
 		<f:loadBundle
 			basename="ac.enset.administration.gestionAbsence.properties.classe"
@@ -82,29 +91,29 @@
 								<h:outputText value="#{item.id}" />
 							</p:column>
 
-							<p:column filterBy="#{item.promotion}" headerText="#{msg.column2}"
-								sortBy="#{item.promotion}" filterMatchMode="contains"
-								filterStyle="display:none">
+							<p:column filterBy="#{item.promotion}"
+								headerText="#{msg.column2}" sortBy="#{item.promotion}"
+								filterMatchMode="contains" filterStyle="display:none">
 								<h:outputText value="#{item.promotion}" />
 							</p:column>
-							
-								<p:column filterBy="#{item.beginDate}"
+
+							<p:column filterBy="#{item.beginDate}"
 								headerText="#{msg.column3}" sortBy="#{item.beginDate}"
 								filterStyle="display:none" filterMatchMode="contains">
 								<h:outputText value="#{item.beginDate}" />
-								</p:column>
+							</p:column>
 
 							<p:column filterBy="#{item.filiere.nom}"
 								headerText="#{msg.column4}" sortBy="#{item.filiere.nom}"
 								filterStyle="display:none" filterMatchMode="contains">
 								<h:outputText value="#{item.filiere.nom}" />
 							</p:column>
-							
-								<p:column filterBy="#{item.niveau}"
-								headerText="#{msg.column5}" sortBy="#{item.niveau}"
-								filterStyle="display:none" filterMatchMode="contains">
+
+							<p:column filterBy="#{item.niveau}" headerText="#{msg.column5}"
+								sortBy="#{item.niveau}" filterStyle="display:none"
+								filterMatchMode="contains">
 								<h:outputText value="#{item.niveau.niveau}" />
-								</p:column>
+							</p:column>
 
 						</p:dataTable>
 					</h:form>

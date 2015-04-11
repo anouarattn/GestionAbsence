@@ -59,7 +59,7 @@ public interface IAbsenceLocal {
 
     public void modify(Object selectedEntity);
     
-    public List<? extends EntityBase> get(Class<? extends EntityBase> clazz);
+    public List<?  extends EntityBase> get(Class<? extends EntityBase> clazz);
     public EntityBase get(Class<? extends EntityBase> clazz, Long id);
 
     public void add(Object entity);
@@ -69,8 +69,19 @@ public interface IAbsenceLocal {
 
     public List<NiveauFiliere> getNiveauFiliere();
     
+    public void activateAcademicYear(AnneeScolaire anneeScolaire);
+    public void addAcademicYear(AnneeScolaire anneeScolaire);
+    public AnneeScolaire getActivatedAcademicYear();
+    
+
+    
 /****/
     
     public boolean User(String login,String pass );
 	public User getUser(String login);
+
+	void migrateClasses(AnneeScolaire anneeScolaire);
+	
+	public List<Classe> getClassesByActivatedYears();
+
 }

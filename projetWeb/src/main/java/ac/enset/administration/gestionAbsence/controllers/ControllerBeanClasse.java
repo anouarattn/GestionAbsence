@@ -8,11 +8,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import ac.enset.administration.gestionAbsence.entites.Classe;
-import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
-import ac.enset.administration.gestionAbsence.models.ModelBeanFiliere;
 
 @Named
 @RequestScoped
@@ -38,9 +36,10 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 	Filiere filiere = (Filiere) metier.get(Filiere.class,
 		Long.parseLong(filiereString));
 	entityToAdd.setFiliere(filiere);
+	entityToAdd.setAnneeScolaire(metier.getActivatedAcademicYear());
 	metier.add(entityToAdd);
 	modelBean.update();
-
+	
     }
 
     public String getFiliereString() {

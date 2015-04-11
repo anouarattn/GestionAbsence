@@ -11,7 +11,7 @@ import ac.enset.administration.gestionAbsence.entites.Filiere;
 
 @Named
 @SessionScoped
-public class ModelBeanClasse extends ModelBeanBase implements Serializable
+public class ModelBeanClasse extends ModelBeanBase<Classe> implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
@@ -19,10 +19,10 @@ public class ModelBeanClasse extends ModelBeanBase implements Serializable
 
     
 
-   @PostConstruct
+@PostConstruct
     public void init() {
        clazz = Classe.class;
-	items = metier.get(Classe.class);
+	items = metier.get(clazz);
     }
 
 

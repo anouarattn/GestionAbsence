@@ -1,23 +1,29 @@
 package ac.enset.administration.gestionAbsence.metier;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import org.jboss.util.Null;
 
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
-
 import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
 import ac.enset.administration.gestionAbsence.entites.User;
- 
+
 @Stateless
 public class IAbsenceImpl implements IAbsenceLocal {
     @PersistenceContext(unitName = "projetAbsenceTest")
@@ -29,7 +35,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	    em.merge(item);
 	else
 	    em.persist(item);
-	
+
     }
 
     @Override
@@ -38,7 +44,8 @@ public class IAbsenceImpl implements IAbsenceLocal {
     }
 
     @Override
-    public void ajouterFiliere(Filiere item, Long idDepartement, Long idTypeFiliere) {
+    public void ajouterFiliere(Filiere item, Long idDepartement,
+	    Long idTypeFiliere) {
 	Departement d = em.find(Departement.class, idDepartement);
 	TypeFiliere tf = em.find(TypeFiliere.class, idTypeFiliere);
 	if (d != null && tf != null) {
@@ -48,8 +55,6 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	}
     }
 
-   
-
     @Override
     public void ajouterAnneeScolaire(AnneeScolaire item) {
 	em.persist(item);
@@ -58,7 +63,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
     @Override
     public void ajouterClasse(Classe item, Long idNiveauFiliere,
 	    Long idAnneeScolaire) {
-	
+
     }
 
     public List<AnneeScolaire> getAnneesScollaires() {
@@ -75,8 +80,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 
     @Override
     public void supprimerDepartement(Departement item) {
-	em.remove(em.contains(item) ? item : em
-		.merge(item));
+	em.remove(em.contains(item) ? item : em.merge(item));
     }
 
     @Override
@@ -84,7 +88,6 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	em.merge(item);
     }
 
-    
     @Override
     public List<Filiere> getFilieres() {
 	Query q = em.createQuery("select fl from Filiere fl");
@@ -99,8 +102,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 
     @Override
     public void supprimerFiliere(Filiere item) {
-	em.remove(em.contains(item) ? item : em
-		.merge(item));
+	em.remove(em.contains(item) ? item : em.merge(item));
     }
 
     @Override
@@ -117,15 +119,13 @@ public class IAbsenceImpl implements IAbsenceLocal {
 
     @Override
     public void supprimerTypeFiliere(TypeFiliere item) {
-	em.remove(em.contains(item) ? item : em
-		.merge(item));
+	em.remove(em.contains(item) ? item : em.merge(item));
     }
 
     @Override
     public boolean exist(Class<? extends EntityBase> clazz, Long id) {
-	return  em.find(clazz, id) != null ? true:false;
+	return em.find(clazz, id) != null ? true : false;
     }
-
 
     @Override
     public List<Classe> getClasses() {
@@ -133,18 +133,16 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	List<Classe> item = q.getResultList();
 	return item;
     }
-    
-    public List<? extends EntityBase> get(Class<? extends EntityBase> clazz)
-    {
-	Query q = em.createQuery("select type from "+ clazz.getSimpleName() +" type");
+
+    public List<? extends EntityBase> get(Class<? extends EntityBase> clazz) {
+	Query q = em.createQuery("select type from " + clazz.getSimpleName()
+		+ " type");
 	List<? extends EntityBase> item = q.getResultList();
 	return item;
     }
-    
-    public void remove(Object entity)
-    {
-	em.remove(em.contains(entity) ? entity : em
-		.merge(entity));
+
+    public void remove(Object entity) {
+	em.remove(em.contains(entity) ? entity : em.merge(entity));
     }
 
     @Override
@@ -166,80 +164,144 @@ public class IAbsenceImpl implements IAbsenceLocal {
     }
 
     @Override
-	public void ajouterModule(Module m, long idNiveauFiliere) {
-		
-    	System.out.println("idNiveauFiliere : "+idNiveauFiliere);
-    	
-		NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
-		System.out.println("nf.getNom : "+nf.getNom());
-		if(nf != null) {
-			m.setNiveauFiliere(nf);
-			em.persist(m);
-		}else{
-			System.out.println("is null ");
-		}
-			
-		
-		
+    public void ajouterModule(Module m, long idNiveauFiliere) {
+
+	System.out.println("idNiveauFiliere : " + idNiveauFiliere);
+
+	NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
+	System.out.println("nf.getNom : " + nf.getNom());
+	if (nf != null) {
+	    m.setNiveauFiliere(nf);
+	    em.persist(m);
+	} else {
+	    System.out.println("is null ");
 	}
 
-	@Override
-	public List<Module> getModule() {
-		Query q = em.createQuery("select m from Module m");
-		List<Module> m = q.getResultList();
-		return m;
+    }
+
+    @Override
+    public List<Module> getModule() {
+	Query q = em.createQuery("select m from Module m");
+	List<Module> m = q.getResultList();
+	return m;
+    }
+
+    @Override
+    public List<NiveauFiliere> getNiveauFiliere() {
+	Query q = em.createQuery("select m from NiveauFiliere m");
+	List<NiveauFiliere> m = q.getResultList();
+	return m;
+    }
+
+    @Override
+    public boolean User(String login, String pass) {
+	try {
+	    Query req = em
+		    .createQuery("select u from User u where u.login like :x and u.pass like :y");
+	    req.setParameter("x", login);
+	    req.setParameter("y", pass);
+	    User u = new User();
+	    List<User> user = req.getResultList();
+	    if (!user.isEmpty())
+		for (User us : user)
+		    u = us;
+	    else
+		return false;
+	    if (u.getId() >= 1)
+		return true;
+	    else
+		return false;
+
+	} catch (Exception e) {
+	    System.err.println("Eror123" + e.getMessage());
+	    e.printStackTrace();
+	    return false;
+	}
+    }
+
+    @Override
+    public User getUser(String login) {
+
+	Query req = em
+		.createQuery("select u from User u where u.login like :x  ");
+	req.setParameter("x", login);
+	List<User> user = req.getResultList();
+	User u = new User();
+	for (User us : user) {
+	    u = us;
+	    System.out.println(us.getId() + " " + us.getLogin());
 	}
 
-	@Override
-	public List<NiveauFiliere> getNiveauFiliere() {
-		Query q = em.createQuery("select m from NiveauFiliere m");
-		List<NiveauFiliere> m = q.getResultList();
-		return m;
+	if (u == null) {
+	    return null;
+	} else {
+	    return u;
 	}
-	
+    }
 
-	@Override
-	public boolean User(String login, String pass) {
-		try {
-			Query req = em.createQuery("select u from User u where u.login like :x and u.pass like :y");
-			req.setParameter("x", login);
-			req.setParameter("y", pass);
-			User u = new User();
-			List<User> user = req.getResultList();
-			if(!user.isEmpty())
-				for(User us:user) u =us;
-			else return false;
-			if(u.getId()>= 1)
-				return true;
-			else 
-				return false ;
-						
-		} catch (Exception e) {
-			System.err.println("Eror123"+e.getMessage());
-			e.printStackTrace();
-			return false;
-		}
+    @Override
+    public void activateAcademicYear(AnneeScolaire anneeScolaire) {
+
+	AnneeScolaire as = getActivatedAcademicYear();
+	if (as != null)
+	    as.setActivated(false);
+	anneeScolaire.setActivated(true);
+    }
+
+    @Override
+    public void addAcademicYear(AnneeScolaire anneeScolaire) {
+	String[] years = anneeScolaire.getYearsFormated().split("/");
+	anneeScolaire.setBeginYear(Integer.parseInt(years[0]));
+	anneeScolaire.setEndYear(Integer.parseInt(years[1]));
+	activateAcademicYear(anneeScolaire);
+	setLastAcademicYear(anneeScolaire);
+	migrateClasses(anneeScolaire);
+	em.persist(anneeScolaire);
+    }
+
+    private void setLastAcademicYear(AnneeScolaire anneeScolaire) {
+	    Query myQuery = em.createQuery("SELECT annee FROM AnneeScolaire annee WHERE annee.isLast = true");
+	    AnneeScolaire anneeScolaire2 = null;
+	    try{
+		 anneeScolaire2 = (AnneeScolaire)myQuery.getSingleResult();
+	    }catch(NoResultException e){
+		 
+	     }
+	    if(anneeScolaire2 != null)
+	    anneeScolaire2.setLast(false);
+	    anneeScolaire.setLast(true);
+    }
+
+    @Override
+	public AnneeScolaire getActivatedAcademicYear()
+	{
+	    Query myQuery = em.createQuery("SELECT annee FROM AnneeScolaire annee WHERE annee.activated = true");
+	    AnneeScolaire anneeScolaire = null;
+	    try{
+		 anneeScolaire = (AnneeScolaire)myQuery.getSingleResult();
+	    }catch(NoResultException e){
+		 
+	     }
+	    return anneeScolaire;
 	}
 
-	@Override
-	public User getUser(
-			String login) {
+    @Override
+    public void migrateClasses(AnneeScolaire anneeScolaire) {
+	List<Classe> classes = (List<Classe>) get(Classe.class);
+	Set<Classe> classesAfter = new HashSet<>();
+	for (Classe classe : classes)
+	    if (Integer.parseInt(classe.getPromotion()) >= anneeScolaire
+		    .getBeginYear())
+		classesAfter.add(classe);
+	anneeScolaire.setClasses(classesAfter);
+    }
 
-		Query req = em.createQuery("select u from User u where u.login like :x  ");
-		req.setParameter("x", login);
-		List<User> user = req.getResultList();
-		User u = new User();
-		for(User us:user){
-			u = us;
-			System.out.println(us.getId()+" "+us.getLogin());
-		}
-		
-		if(u == null){
-			return null;
-		}else {
-			return u;
-		}
-	}
+    @Override
+    public List<Classe> getClassesByActivatedYears() {
+	Query myQuery = em
+		.createQuery("SELECT classe FROM Classe classe WHERE class.anneeScolaire.activated = true");
+	return myQuery.getResultList();
 
+    }
 
 }

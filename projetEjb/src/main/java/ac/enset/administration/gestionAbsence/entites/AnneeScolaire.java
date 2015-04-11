@@ -11,18 +11,24 @@ import javax.persistence.*;
 public class AnneeScolaire extends EntityBase {
 
 
-    private int annee;
+    private int beginYear;
+    private boolean activated;
+    private int endYear;
+    private String yearsFormated;
+    private boolean isLast;
     
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
     @OneToMany(fetch=FetchType.LAZY)
     private Set<Classe> classes;
 
-    public int getAnnee() {
-        return annee;
-    }
-
-    public void setAnnee(int annee) {
-        this.annee = annee;
-    }
+  
 
     public Set<Classe> getClasses() {
         return classes;
@@ -32,14 +38,46 @@ public class AnneeScolaire extends EntityBase {
         this.classes = classes;
     }
 
-    public AnneeScolaire(int annee) {
-	super();
-	this.annee = annee;
-    }
+   
 
     public AnneeScolaire() {
 	super();
     }
+
+    public int getBeginYear() {
+        return beginYear;
+    }
+
+    public void setBeginYear(int beginYear) {
+        this.beginYear = beginYear;
+    }
+
+    public int getEndYear() {
+        return endYear;
+    }
+
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
+    }
+
+    public String getYearsFormated() {
+        return yearsFormated;
+    }
+
+    public void setYearsFormated(String yearsFormated) {
+        this.yearsFormated = yearsFormated;
+    }
+
+    public boolean isLast() {
+        return isLast;
+    }
+
+    public void setLast(boolean isLast) {
+        this.isLast = isLast;
+    }
+    
+    
+   
     
     
 }
