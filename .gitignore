@@ -45,3 +45,6 @@ projetWeb/.settings
 projetEjb/.settings/*
 projetEar/.settings/*
 projetWeb/.settings/*
+
+
+rebel.xml
