@@ -22,7 +22,7 @@ public class ModelBeanClasse extends ModelBeanBase<Classe> implements Serializab
 @PostConstruct
     public void init() {
        clazz = Classe.class;
-	items = metier.get(clazz);
+	items = metier.getClassesByActivatedYears();
     }
 
 

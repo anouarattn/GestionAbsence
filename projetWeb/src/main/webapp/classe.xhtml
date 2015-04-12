@@ -8,26 +8,8 @@
 <ui:composition template="/WEB-INF/templates/main.xhtml">
 
 	<ui:define name="jquery"></ui:define>
-
-	<ui:define name="anneesListe">
-					<ul id="anneeScolaireListe" class="dropdown-menu dropdown-anneeScolaire">
-						
-		<ui:repeat value="#{modelBeanAnneeScolaire.items}" var="annees">
-			<p:panelGrid>
-		<li><a href="#"><i class="fa fa-check"></i> Année Scolaire
-						#{annees.yearsFormated}"</a></li>	
-			</p:panelGrid>
-		
-		
-
-		</ui:repeat>
-	
-		<li class="divider"></li>
-		<li><p:link
-				onclick="PF('jsAddAnneeScolaire').show();return false;"
-				value="Nouvelle
-									Année Scolaire" /></li>
-									</ul>
+    <ui:define name="anneesListe">
+	<ui:include src="anneesScolaires.xhtml"></ui:include>
 	</ui:define>
 	<ui:define name="content">
 		<f:loadBundle
@@ -137,6 +119,9 @@
 	</ui:define>
 	<ui:define name="js">
 		<script src="resources/js/dialogs.js"></script>
+	</ui:define>
+	<ui:define name="dialog">
+	<ui:include src="/resources/components/anneesScolaires/add.xhtml" />
 	</ui:define>
 
 </ui:composition>

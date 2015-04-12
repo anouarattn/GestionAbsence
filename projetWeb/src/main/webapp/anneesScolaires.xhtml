@@ -1,7 +1,27 @@
 <ui:composition 
   xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-  <ui:define name="anneesListe"><li>sdfdsfsd</li></ui:define>
-  
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+		<ul id="anneeScolaireListe" class="dropdown-menu dropdown-anneeScolaire">
+						
+		<ui:repeat value="#{modelBeanAnneeScolaire.items}" var="annee">
+			
+		<li><p:commandLink  styleClass="fa fa-check" rendered="#{annee.activated eq true}">
+        <h:outputText value="Année Scolaire #{annee.yearsFormated}" />
+   		 </p:commandLink>
+
+		<p:commandLink   styleClass="fa" rendered="#{annee.activated eq false}"
+		actionListener="#{controllerBeanAnneesScolaires.activateAcademicYear(annee)}" update=":wrapper">
+        <h:outputText value="Année Scolaire #{annee.yearsFormated}" />
+   		 </p:commandLink>
+   		 </li>
+		</ui:repeat>
+	
+		<li class="divider"></li>
+		<li><p:link onclick="PF('jsAddAnneeScolaire').show();return false;" value="Nouvelle Année Scolaire" /></li>
+									
+									</ul>
+									
 </ui:composition>
 

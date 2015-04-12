@@ -1,7 +1,5 @@
 package ac.enset.administration.gestionAbsence.metier;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,8 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.jboss.util.Null;
 
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.entites.Classe;
@@ -246,11 +242,23 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	if (as != null)
 	    as.setActivated(false);
 	anneeScolaire.setActivated(true);
+	em.merge(anneeScolaire);
+
     }
 
     @Override
     public void addAcademicYear(AnneeScolaire anneeScolaire) {
-	String[] years = anneeScolaire.getYearsFormated().split("/");
+	String[] years=new String[2];
+	if(anneeScolaire.getYearsFormated() != null){
+	 years = anneeScolaire.getYearsFormated().split("/");
+	}
+	else{
+	    
+	    AnneeScolaire anneeScolaire2 = getLastAcademicYear();
+	    years[0] = String.valueOf((anneeScolaire2.getBeginYear()+1));
+	    years[1] = String.valueOf((anneeScolaire2.getEndYear()+1));
+	    anneeScolaire.setYearsFormated(years[0]+"/"+years[1]);
+	}
 	anneeScolaire.setBeginYear(Integer.parseInt(years[0]));
 	anneeScolaire.setEndYear(Integer.parseInt(years[1]));
 	activateAcademicYear(anneeScolaire);
@@ -260,16 +268,21 @@ public class IAbsenceImpl implements IAbsenceLocal {
     }
 
     private void setLastAcademicYear(AnneeScolaire anneeScolaire) {
-	    Query myQuery = em.createQuery("SELECT annee FROM AnneeScolaire annee WHERE annee.isLast = true");
-	    AnneeScolaire anneeScolaire2 = null;
-	    try{
-		 anneeScolaire2 = (AnneeScolaire)myQuery.getSingleResult();
-	    }catch(NoResultException e){
-		 
-	     }
+	    AnneeScolaire anneeScolaire2 = getLastAcademicYear();
+	
 	    if(anneeScolaire2 != null)
 	    anneeScolaire2.setLast(false);
 	    anneeScolaire.setLast(true);
+    }
+    private AnneeScolaire getLastAcademicYear(){
+	  Query myQuery = em.createQuery("SELECT annee FROM AnneeScolaire annee WHERE annee.isLast = true");
+	    AnneeScolaire anneeScolaire = null;
+	    try{
+		 anneeScolaire = (AnneeScolaire)myQuery.getSingleResult();
+	    }catch(NoResultException e){
+		 
+	     }
+	    return anneeScolaire;
     }
 
     @Override
@@ -291,7 +304,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	Set<Classe> classesAfter = new HashSet<>();
 	for (Classe classe : classes)
 	    if (Integer.parseInt(classe.getPromotion()) >= anneeScolaire
-		    .getBeginYear())
+		    .getEndYear())
 		classesAfter.add(classe);
 	anneeScolaire.setClasses(classesAfter);
     }
@@ -299,9 +312,11 @@ public class IAbsenceImpl implements IAbsenceLocal {
     @Override
     public List<Classe> getClassesByActivatedYears() {
 	Query myQuery = em
-		.createQuery("SELECT classe FROM Classe classe WHERE class.anneeScolaire.activated = true");
+		.createQuery("SELECT classe FROM Classe classe WHERE classe.anneeScolaire.activated = true");
 	return myQuery.getResultList();
 
     }
+    
+   
 
 }

@@ -21,12 +21,12 @@
 </h:head>
 
 <h:body>
-	<div class="wrapper">
-
+	<h:panelGroup id="wrapper" class="wrapper" layout="block">
 		<ui:include src="/WEB-INF/templates/header.xhtml" />
 		<ui:include src="/WEB-INF/templates/content.xhtml" />
-		
-	</div>
+		<ui:insert name="dialog">
+		</ui:insert>
+		 </h:panelGroup>
 
 
 		<!-- Placed at the end of the document so the pages load faster -->
@@ -40,7 +40,7 @@
 		<script src="resources/bower_components/metisMenu/dist/metisMenu.js"></script>
 		<ui:insert name="js"/>
 		<script src="resources/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
-	
+		
     <ui:debug hotkey="e" rendered="true"/>
 
 </h:body>

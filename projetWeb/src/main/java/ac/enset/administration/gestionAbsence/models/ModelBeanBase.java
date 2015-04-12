@@ -48,8 +48,6 @@ public abstract class ModelBeanBase<T> {
     public void update()
     {
 	items =  metier.get(clazz);
-	System.out.println(this.clazz);
-	System.out.println(items);
 	unselect();
     }
 

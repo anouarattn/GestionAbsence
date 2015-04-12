@@ -7,7 +7,9 @@
 <ui:composition template="/WEB-INF/templates/main.xhtml">
 
 	<ui:define name="jquery"></ui:define>
-
+ <ui:define name="anneesListe">
+	<ui:include src="anneesScolaires.xhtml"></ui:include>
+	</ui:define>
 	<ui:define name="content">
 	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.module" var="msg"/>
 	
@@ -105,6 +107,8 @@
 		<ui:define name="js">
 		<script src="resources/js/dialogs.js"></script>
 		</ui:define>
-	
+	<ui:define name="dialog">
+	<ui:include src="/resources/components/anneesScolaires/add.xhtml" />
+	</ui:define>
 </ui:composition>
 </html>

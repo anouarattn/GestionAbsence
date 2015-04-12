@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.models.ModelBeanAnneeScolaire;
+import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
 
 
 @Named
@@ -15,6 +16,9 @@ public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScola
 {
     @Inject
     private ModelBeanAnneeScolaire modelBean;
+    
+    @Inject
+    private ModelBeanClasse modelBeanClasse;
 
     @PostConstruct
     public void init()
@@ -28,6 +32,13 @@ public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScola
     @Override
     public void addEntity() throws NotFoundException {
 	metier.addAcademicYear(entityToAdd);
+	modelBean.update();
+    }
+    
+    public void activateAcademicYear(AnneeScolaire anneeScolaire)
+    {
+	metier.activateAcademicYear(anneeScolaire);
+	modelBeanClasse.setItems(metier.getClassesByActivatedYears());
 	modelBean.update();
     }
 
