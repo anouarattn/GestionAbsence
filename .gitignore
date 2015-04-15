@@ -36,15 +36,4 @@ projetWeb/.checkstyle
 projetEjb/.project
 projetEar/.project
 projetWeb/.project
-
-.settings
-projetEjb/.settings
-projetEar/.settings
-projetWeb/.settings
-.settings/*
-projetEjb/.settings/*
-projetEar/.settings/*
-projetWeb/.settings/*
-
-
 rebel.xml
