@@ -29,8 +29,10 @@
 		<!-- EJB spec version -->
 		<ejb-spec-version>3.1</ejb-spec-version>
 		<arquillian-version>1.1.6.Final</arquillian-version>
-		<primefaces-version>5.0</primefaces-version>
+		<primefaces-version>5.2</primefaces-version>
 		<primefaces-theme-version>1.0.10</primefaces-theme-version>
+		<joda-time-version>1.6.2</joda-time-version>
+
 
 	</properties>
 	<developers>
@@ -89,6 +91,13 @@
 				<version>1.1.5.Final</version>
 			</dependency>
 
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time-version}</version>
+			</dependency>
+
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -113,6 +122,11 @@
 					<version>${ejb-plugin-version}</version>
 					<configuration>
 						<ejbVersion>${ejb-spec-version}</ejbVersion>
+						<archive>
+							<manifestEntries>
+								<Dependencies>org.joda.time</Dependencies>
+							</manifestEntries>
+						</archive>
 					</configuration>
 				</plugin>
 				<!-- ear plugin -->
@@ -132,6 +146,9 @@
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 						<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->
 						<archive>
+							<manifestEntries>
+								<Dependencies>org.joda.time</Dependencies>
+							</manifestEntries>
 							<manifest>
 								<addClasspath>true</addClasspath>
 								<!-- <classpathPrefix>lib/</classpathPrefix> -->

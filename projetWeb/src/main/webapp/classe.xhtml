@@ -76,13 +76,13 @@
 							<p:column filterBy="#{item.promotion}"
 								headerText="#{msg.column2}" sortBy="#{item.promotion}"
 								filterMatchMode="contains" filterStyle="display:none">
-								<h:outputText value="#{item.promotion}" />
+								<h:outputText value="#{item.promotionAcademicYear.getAcademicYearAsString()}" />
 							</p:column>
 
 							<p:column filterBy="#{item.beginDate}"
 								headerText="#{msg.column3}" sortBy="#{item.beginDate}"
 								filterStyle="display:none" filterMatchMode="contains">
-								<h:outputText value="#{item.beginDate}" />
+								<h:outputText value="#{item.beginAcademicYear.getAcademicYearAsString()}" />
 							</p:column>
 
 							<p:column filterBy="#{item.filiere.nom}"

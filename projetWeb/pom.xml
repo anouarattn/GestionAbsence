@@ -18,7 +18,7 @@
 					<packagingExcludes>WEB-INF/lib/projetEjb-${project.version}.jar</packagingExcludes>
 					<archive>
 						<manifestEntries>
-							<!-- <Class-Path>project-ejb-${project.version}.jar</Class-Path> -->
+							<!-- <Dependencies>org.joda.time</Dependencies> -->							<!-- <Class-Path>project-ejb-${project.version}.jar</Class-Path> -->
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -51,5 +51,11 @@
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>bootstrap</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 </project>

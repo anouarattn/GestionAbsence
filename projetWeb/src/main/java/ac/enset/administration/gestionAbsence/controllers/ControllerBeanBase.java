@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
-import ac.enset.administration.gestionAbsence.models.ModelBeanBase;
 
 
 public abstract class ControllerBeanBase<V>
@@ -20,7 +19,7 @@ public abstract class ControllerBeanBase<V>
   
     
 
-    public abstract void addEntity() throws NotFoundException;
+    public abstract void addEntity() throws Exception;
 
     public V getEntityToAdd() {
         return entityToAdd;
@@ -28,6 +27,7 @@ public abstract class ControllerBeanBase<V>
 
 
     public void setEntityToAdd(V entityToAdd) {
+	System.out.println(entityToAdd);
         this.entityToAdd = entityToAdd;
     }
 

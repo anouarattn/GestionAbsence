@@ -11,24 +11,24 @@
 	<p:dialog header="Ajout" widgetVar="jsAddAnneeScolaire"
 		id="addAnneeScolaireDialog" modal="true" showEffect="fade"
 		hideEffect="fade" resizable="false" closable="false">
-		<c:set var="model" value="#{modelBeanAnneeScolaire}" />
-		<c:set var="controller" value="#{controllerBeanAnneesScolaires}" />
+		<c:set var="modelas" value="#{modelBeanAnneeScolaire}" />
+		<c:set var="controlleras" value="#{controllerBeanAnneesScolaires}" />
 		<h:form id="addAnneeScolaireForm">
 
 			<p:panelGrid columns="2" columnClasses="value" rendered="#{empty model.items}">
 
 				<h:outputLabel for="item1"  value="#{anneesScolaires.column3}"  />
-				<p:inputText id="item1" placeholder="#{anneesScolaires.column3}" value="#{controller.entityToAdd.yearsFormated}" />
+				<p:inputText id="item1" placeholder="#{anneesScolaires.column3}" value="#{controlleras.academicYear}"/>
 				
 			</p:panelGrid>
 			<p:panelGrid columns="1" columnClasses="value">				
 				<h:outputLabel for="item1" value="#{anneesScolaires.column2}" />
 			</p:panelGrid>
 			<p:commandButton value="Confirmé" update=":wrapper"
-				action="#{controller.addEntity()}" 
-				oncomplete="handleRequestAddas(xhr, status, args)" />
+				action="#{controlleras.addEntity()}" 
+				oncomplete="PF('jsAddAnneeScolaire').hide()" />
 			<p:commandButton value="Annuler"
-				oncomplete="handleRequestAddas(xhr, status, args)" />
+				oncomplete="PF('jsAddAnneeScolaire').hide()" />
 		</h:form>
 
 	</p:dialog>

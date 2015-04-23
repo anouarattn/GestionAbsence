@@ -38,6 +38,24 @@ public class TypeFiliere extends EntityBase {
 	super();
 	// TODO Auto-generated constructor stub
     }
+
+    public int getNumberOfYears() {
+        return numberOfYears;
+    }
+
+    public void setNumberOfYears(int numberOfYears) {
+        this.numberOfYears = numberOfYears;
+    }
+
+    @Override
+    public String toString() {
+	return "TypeFiliere [nom=" + nom + ", numberOfYears=" + numberOfYears
+		+ "]";
+    }
+    
+    
+ 
+    
     
     
 }
