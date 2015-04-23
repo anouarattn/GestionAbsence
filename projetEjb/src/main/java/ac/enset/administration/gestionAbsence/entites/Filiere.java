@@ -71,6 +71,12 @@ public class Filiere extends EntityBase {
     public void setClasses(List<Classe> classes) {
         this.classes = classes;
     }
+
+    @Override
+    public String toString() {
+	return "Filiere [nom=" + nom + ", typeFiliere=" + typeFiliere + "]";
+    }
+    
     
 
 }

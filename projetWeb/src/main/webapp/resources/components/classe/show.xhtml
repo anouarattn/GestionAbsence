@@ -16,11 +16,11 @@
 				<h:outputText value="#{msg.column1}" />
 				<h:outputText value="#{model.selectedEntity.id}" />
 				<h:outputText value="#{msg.column2}" />
-				<h:outputText value="#{model.selectedEntity.promotion}" />
+				<h:outputText value="#{model.selectedEntity.promotionAcademicYear.getAcademicYearAsString()}" />
 
 				<h:outputText value="#{msg.column3}" />
 				<h:outputText
-					value="#{model.selectedEntity.beginDate}" />
+					value="#{model.selectedEntity.beginAcademicYear.getAcademicYearAsString()}" />
 
 				<h:outputText value="#{msg.column4}" />
 				<h:outputText

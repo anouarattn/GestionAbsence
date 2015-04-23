@@ -8,13 +8,3 @@ function handleRequestModify(xhr, status, args) {
 function handleRequestshow(xhr, status, args) {
     PF('jsShow').hide();      
 }
-function handleRequestAddas(xhr, status, args) {
-	PF('jsAddAnneeScolaire').hide();
-}
-
-function handleRequestModifyas(xhr, status, args) {
-	PF('jsAddAnneeScolaire').hide();
-}
-function handleRequestshowas(xhr, status, args) {
-    PF('jsAddAnneeScolaire').hide();      
-}

@@ -3,7 +3,6 @@ package ac.enset.administration.gestionAbsence.models;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
@@ -47,6 +46,7 @@ public abstract class ModelBeanBase<T> {
 
     public void update()
     {
+
 	items =  metier.get(clazz);
 	unselect();
     }

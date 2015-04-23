@@ -7,9 +7,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ac.enset.administration.gestionAbsence.converters.StringToAcademicYear;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
+import ac.enset.administration.gestionAbsence.models.ModelBeanAnneeScolaire;
 import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
 
 @Named
@@ -21,13 +23,19 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
     @Inject
     private ModelBeanClasse modelBean;
     
+    @Inject
+    private ModelBeanAnneeScolaire academicYearBean;
+    
+    private String promotionAcademicYear;
+    private String startAcademicYear;
+    
     @PostConstruct
     public void init() {
 	 entityToAdd = new Classe();
     }
 
     @Override
-    public void addEntity() throws NotFoundException {
+    public void addEntity() throws Exception {
 
 	if (!metier.exist(Filiere.class, Long.parseLong(filiereString)))
 	    throw new DepartementNotFoundException(
@@ -36,9 +44,12 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 	Filiere filiere = (Filiere) metier.get(Filiere.class,
 		Long.parseLong(filiereString));
 	entityToAdd.setFiliere(filiere);
-	entityToAdd.setAnneeScolaire(metier.getActivatedAcademicYear());
-	metier.add(entityToAdd);
+	entityToAdd.setPromotionAcademicYear(StringToAcademicYear.convert(promotionAcademicYear));
+	entityToAdd.setBeginAcademicYear(StringToAcademicYear.convert(startAcademicYear));
+	System.out.println(entityToAdd);
+	metier.addClasse(entityToAdd);
 	modelBean.update();
+	academicYearBean.update();
 	
     }
 
@@ -54,4 +65,23 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
     {
 	return metier.get(Filiere.class);
     }
+
+    public String getPromotionAcademicYear() {
+        return promotionAcademicYear;
+    }
+
+    public void setPromotionAcademicYear(String promotionAcademicYear) {
+        this.promotionAcademicYear = promotionAcademicYear;
+    }
+
+    public String getStartAcademicYear() {
+        return startAcademicYear;
+    }
+
+    public void setStartAcademicYear(String startAcademicYear) {
+        this.startAcademicYear = startAcademicYear;
+    }
+    
+    
+    
 }

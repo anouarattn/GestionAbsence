@@ -8,12 +8,12 @@
 		<ui:repeat value="#{modelBeanAnneeScolaire.items}" var="annee">
 			
 		<li><p:commandLink  styleClass="fa fa-check" rendered="#{annee.activated eq true}">
-        <h:outputText value="Année Scolaire #{annee.yearsFormated}" />
+        <h:outputText value="Année Scolaire #{annee.getAcademicYearAsString()}" />
    		 </p:commandLink>
 
 		<p:commandLink   styleClass="fa" rendered="#{annee.activated eq false}"
 		actionListener="#{controllerBeanAnneesScolaires.activateAcademicYear(annee)}" update=":wrapper">
-        <h:outputText value="Année Scolaire #{annee.yearsFormated}" />
+        <h:outputText value="Année Scolaire #{annee.getAcademicYearAsString()}" />
    		 </p:commandLink>
    		 </li>
 		</ui:repeat>

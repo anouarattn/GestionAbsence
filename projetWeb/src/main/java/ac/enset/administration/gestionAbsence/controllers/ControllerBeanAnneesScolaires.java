@@ -5,6 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ac.enset.administration.gestionAbsence.converters.StringToAcademicYear;
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.models.ModelBeanAnneeScolaire;
 import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
@@ -19,18 +20,22 @@ public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScola
     
     @Inject
     private ModelBeanClasse modelBeanClasse;
-
+    
+    private String academicYear;
+    
     @PostConstruct
     public void init()
     {
 	entityToAdd = new AnneeScolaire();
+	academicYear = "";
     }
     
  
 
-
+    
     @Override
-    public void addEntity() throws NotFoundException {
+    public void addEntity() throws Exception {
+	entityToAdd = StringToAcademicYear.convert(academicYear);
 	metier.addAcademicYear(entityToAdd);
 	modelBean.update();
     }
@@ -42,8 +47,20 @@ public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScola
 	modelBean.update();
     }
 
+
+
+
+    public String getAcademicYear() {
+        return academicYear;
+    }
+
+
+
+
+    public void setAcademicYear(String academicYear) {
+        this.academicYear = academicYear;
+    }
     
-    
- 
+
     
 }

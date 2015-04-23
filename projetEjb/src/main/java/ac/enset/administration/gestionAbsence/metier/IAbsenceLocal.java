@@ -10,11 +10,11 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
-
 import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
 import ac.enset.administration.gestionAbsence.entites.User;
+import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademicYearException;
 
 @Local
 public interface IAbsenceLocal {
@@ -34,21 +34,17 @@ public interface IAbsenceLocal {
 
     public List<Departement> getDepartements();
     
-    public void supprimerDepartement(Departement departement);
     
     public void modifierDepartement(Departement departement);
 
-    public List<Filiere> getFilieres();
 
     public void modifierFiliere(Filiere selectedFiliere);
 
-    public void supprimerFiliere(Filiere filiere);
     
     public List<TypeFiliere> getTypesFilieres();
         
     public void modifierTypeFiliere(TypeFiliere tf);
     
-    public void supprimerTypeFiliere(TypeFiliere tf);
 
     
     public boolean exist(Class<? extends EntityBase> clazz, Long id);
@@ -70,18 +66,19 @@ public interface IAbsenceLocal {
     public List<NiveauFiliere> getNiveauFiliere();
     
     public void activateAcademicYear(AnneeScolaire anneeScolaire);
-    public void addAcademicYear(AnneeScolaire anneeScolaire);
+    public void addAcademicYear(AnneeScolaire anneeScolaire) throws IncorrectAcademicYearException;
     public AnneeScolaire getActivatedAcademicYear();
     
 
     
-/****/
     
     public boolean User(String login,String pass );
-	public User getUser(String login);
+    public User getUser(String login);
 
-	void migrateClasses(AnneeScolaire anneeScolaire);
+    public void migrateClasses(AnneeScolaire anneeScolaire);
 	
-	public List<Classe> getClassesByActivatedYears();
+    public List<Classe> getClassesByActivatedYears();
+
+    public void addClasse(Classe classe) throws IncorrectAcademicYearException;
 
 }
