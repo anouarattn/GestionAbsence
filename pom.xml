@@ -32,7 +32,8 @@
 		<primefaces-version>5.2</primefaces-version>
 		<primefaces-theme-version>1.0.10</primefaces-theme-version>
 		<joda-time-version>1.6.2</joda-time-version>
-
+		<arquillian-protocol-servlet-version>1.1.5.Final</arquillian-protocol-servlet-version>
+		<jboss-as-arquillian-container-remote-version>7.1.1.Final</jboss-as-arquillian-container-remote-version>
 
 	</properties>
 	<developers>
@@ -83,18 +84,28 @@
 			<dependency>
 				<groupId>org.jboss.as</groupId>
 				<artifactId>jboss-as-arquillian-container-remote</artifactId>
-				<version>7.1.1.Final</version>
+				<version>${jboss-as-arquillian-container-remote-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.arquillian.protocol</groupId>
 				<artifactId>arquillian-protocol-servlet</artifactId>
-				<version>1.1.5.Final</version>
+				<version>${arquillian-protocol-servlet-version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>${joda-time-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>2.45.0</version>
+			</dependency>
+			<dependency>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<version>1.4.01</version>
 			</dependency>
 
 
@@ -147,6 +158,7 @@
 						<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->
 						<archive>
 							<manifestEntries>
+								<!-- tell jboss container to add jdoa internal module to our project -->
 								<Dependencies>org.joda.time</Dependencies>
 							</manifestEntries>
 							<manifest>
