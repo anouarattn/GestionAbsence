@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import ac.enset.administration.gestionAbsence.controllers.FiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
 
@@ -25,7 +26,7 @@ public abstract class ModelBeanBase<T> {
 	setSelectedEntities(null);
     }
 
-    public void modifyEntity() {
+    public void modifyEntity() throws FiliereNotFoundException {
 	metier.modify(selectedEntity);
 	items =  metier.get(clazz);
 	unselect();

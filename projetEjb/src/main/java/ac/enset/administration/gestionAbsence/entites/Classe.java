@@ -1,7 +1,6 @@
 package ac.enset.administration.gestionAbsence.entites;
 
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "classe")
 public class Classe extends EntityBase  {
@@ -34,9 +34,7 @@ public class Classe extends EntityBase  {
     @JoinColumn(name = "FK_beginAcademicYear")
     private AnneeScolaire beginAcademicYear;
     
-    @ManyToOne
-    @JoinColumn(name = "FK_NiveauFiliere")
-    private NiveauFiliere niveauFiliere;
+  
     
     
     
@@ -70,15 +68,6 @@ public class Classe extends EntityBase  {
 
    
 
-
-    public NiveauFiliere getNiveauFiliere() {
-        return niveauFiliere;
-    }
-
-
-    public void setNiveauFiliere(NiveauFiliere niveauFiliere) {
-        this.niveauFiliere = niveauFiliere;
-    }
 
 
 

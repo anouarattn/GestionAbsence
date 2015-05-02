@@ -11,30 +11,25 @@
 
 			<p:panelGrid columns="2" columnClasses="value">
 
-				<h:outputLabel for="item1" value="#{msg.column2}" />
-				<p:inputText id="item1" placeholder="#{msg.column2}"
-					value="#{controllerBeanModule.entityToAdd.codemodule}" />
 				
-				<h:outputLabel for="item2" value="#{msg.column3}" />
-				<p:inputText id="item2" placeholder="#{msg.column3}"
-					value="#{controllerBeanModule.entityToAdd.dateCreation}" />
+				<h:outputLabel for="item2" value="#{msg.column2}" />
+				<p:inputText id="item2" placeholder="#{msg.column2}"
+					value="#{controllerBeanModule.entityToAdd.name}" />
 				
-				<h:outputLabel for="item3" value="#{msg.column4}" />
-				<p:inputText id="item3" placeholder="#{msg.column4}"
-					value="#{controllerBeanModule.entityToAdd.libmodule}" />
 				
-				<h:outputLabel for="item4" value="#{msg.column5}" />
-				<p:inputText id="item4" placeholder="#{msg.column5}"
-					value="#{controllerBeanModule.entityToAdd.semestre}" />
 				
-				<h:outputLabel for="item6" value="#{msg.column6}" />				
-				<h:selectOneMenu id="item6" value="#{controllerBeanModule.idniveauFiliere}">
-					<f:selectItems value="#{controllerBeanModule.niveauFiliere}"  var="niveauFiliere"
-					 itemLabel="#{niveauFiliere.nom}" itemValue="#{niveauFiliere.id}"/>
+				<h:outputLabel for="item3" value="#{msg.column3}" />
+					<h:selectOneMenu id="item3" value="#{controller.filiereString}">
+					<f:selectItems value="#{controller.filieres()}" var="filiere"
+						itemLabel="#{filiere.nom}" itemValue="#{filiere.id}" />
 				</h:selectOneMenu>
 				
-				
-				
+				<h:outputLabel for="item4" value="#{msg.column4}" />
+					<h:selectOneMenu id="item4" value="#{controller.semestre}">
+					<f:selectItems value="#{controller.getSemestres()}" var="semestre"
+						itemLabel="#{semestre.getSemestre()}" itemValue="#{semestre}" />
+				</h:selectOneMenu>
+								
 			</p:panelGrid>
 			<p:commandButton value="Ajout" update=":formDataTable:datatable"
 				action="#{controllerBeanModule.addEntity()}"

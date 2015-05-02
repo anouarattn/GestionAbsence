@@ -15,9 +15,8 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
-import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.Niveau;
-import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
+import ac.enset.administration.gestionAbsence.entites.Semestre;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
 import ac.enset.administration.gestionAbsence.entites.User;
 import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademicYearException;
@@ -58,11 +57,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	em.persist(item);
     }
 
-    @Override
-    public void ajouterClasse(Classe item, Long idNiveauFiliere,
-	    Long idAnneeScolaire) {
-
-    }
+  
 
     public List<AnneeScolaire> getAnneesScollaires() {
 	Query q = em.createQuery("select annees from AnneeScolaire annees");
@@ -145,35 +140,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return em.find(clazz, id);
     }
 
-    @Override
-    public void ajouterModule(Module m, long idNiveauFiliere) {
 
-	System.out.println("idNiveauFiliere : " + idNiveauFiliere);
-
-	NiveauFiliere nf = em.find(NiveauFiliere.class, idNiveauFiliere);
-	System.out.println("nf.getNom : " + nf.getNom());
-	if (nf != null) {
-	    m.setNiveauFiliere(nf);
-	    em.persist(m);
-	} else {
-	    System.out.println("is null ");
-	}
-
-    }
-
-    @Override
-    public List<Module> getModule() {
-	Query q = em.createQuery("select m from Module m");
-	List<Module> m = q.getResultList();
-	return m;
-    }
-
-    @Override
-    public List<NiveauFiliere> getNiveauFiliere() {
-	Query q = em.createQuery("select m from NiveauFiliere m");
-	List<NiveauFiliere> m = q.getResultList();
-	return m;
-    }
 
     @Override
     public boolean User(String login, String pass) {
@@ -378,6 +345,9 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return true;
     }
     
-    
+    public Semestre[] getSemestres(){
+	return new Semestre[]{Semestre.SEMESTRE1,Semestre.SEMESTRE2};
+    }
+
 
 }

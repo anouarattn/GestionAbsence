@@ -2,7 +2,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:cc="http://java.sun.com/jsf/composite/components/compositeComponent">
 
 <ui:composition template="/WEB-INF/templates/main.xhtml">
 
@@ -12,7 +14,8 @@
 	</ui:define>
 	<ui:define name="content">
 	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.module" var="msg"/>
-	
+		<c:set var="model" value="#{modelBeanModule}" />
+		<c:set var="controller" value="#{controllerBeanModule}" />
 		<div id="page-wrapper" style="min-height: 588px;">
 			<div class="row">
 				<div class="col-lg-12">
@@ -34,16 +37,16 @@
 
 							<p:menuitem value="Supprimer"
 								update=":formDataTable:datatable" icon="ui-icon-close"
-								action="#{modelBeanModule.deleteEntity()}" />
+								action="#{model.deleteEntity()}" />
 
 						</p:contextMenu>
 						<p:dataTable emptyMessage="#{msg.emptyMessage}"
-							value="#{modelBeanModule.items}" var="item"
+							value="#{model.items}" var="item"
 							paginator="true" rows="40" rowKey="#{item.id}"
-							filteredValue="#{controllerBeanModule.filtredEntities}"
+							filteredValue="#{controller.filtredEntities}"
 							widgetVar="jsTable" id="datatable"
 							paginatorPosition="bottom"
-							selection="#{modelBeanModule.selectedEntities}">
+							selection="#{model.selectedEntities}">
 
 							<f:facet name="header">
 								<p:outputPanel style="text-align: right;">
@@ -75,16 +78,22 @@
 								<h:outputText value="#{item.id}" />
 							</p:column>
 
-							<p:column filterBy="#{item.codemodule}" headerText="#{msg.column2}"
-								sortBy="#{item.codemodule}" filterMatchMode="contains"
+							<p:column filterBy="#{item.name}" headerText="#{msg.column2}"
+								sortBy="#{item.name}" filterMatchMode="contains"
 								filterStyle="display:none">
-								<h:outputText value="#{item.codemodule}" />
+								<h:outputText value="#{item.name}" />
 							</p:column>
 
-							<p:column filterBy="#{item.niveauFiliere.nom}"
-								headerText="#{msg.column6}" sortBy="#{item.niveauFiliere.nom}"
+							<p:column filterBy="#{item.filiere.nom}"
+								headerText="#{msg.column3}" sortBy="#{item.filiere.nom}"
 								filterStyle="display:none" filterMatchMode="contains">
-								<h:outputText value="#{item.niveauFiliere.id}" />
+								<h:outputText value="#{item.filiere.nom}" />
+							</p:column>
+							
+							<p:column filterBy="#{item.semestre.semestre}"
+								headerText="#{msg.column4}" sortBy="#{item.semestre.semestre}"
+								filterStyle="display:none" filterMatchMode="contains">
+								<h:outputText value="#{item.semestre.semestre}" />
 							</p:column>
 
 						</p:dataTable>

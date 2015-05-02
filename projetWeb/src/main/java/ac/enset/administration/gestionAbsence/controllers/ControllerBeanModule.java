@@ -8,60 +8,78 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ac.enset.administration.gestionAbsence.entites.EntityBase;
+import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
-import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
+import ac.enset.administration.gestionAbsence.entites.Semestre;
 import ac.enset.administration.gestionAbsence.models.ModelBeanModule;
 
+@SuppressWarnings("serial")
 @Named
 @RequestScoped
 public class ControllerBeanModule extends ControllerBeanBase<Module>
 	implements Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-
+    private Semestre semestre;
+    private String filiereString;
+    
     @Inject
-    private ModelBeanModule modelBean;
-
-    List<NiveauFiliere> niveauFiliere;
-
-    String idniveauFiliere;
-
+    private ModelBeanModule model;
     
-    
-    public List<NiveauFiliere> getNiveauFiliere() {
-		
-		return this.niveauFiliere = metier.getNiveauFiliere();
-	}
-
-	public void setNiveauFiliere(List<NiveauFiliere> niveauFiliere) {
-		this.niveauFiliere = niveauFiliere;
-	}
-
-	public String getIdniveauFiliere() {
-		return idniveauFiliere;
-	}
-
-	public void setIdniveauFiliere(String idniveauFiliere) {
-		this.idniveauFiliere = idniveauFiliere;
-	}
-
-	@PostConstruct
+    @PostConstruct
     public void init() {
-	entityToAdd = new Module();
-    }
-
-    public void addEntity() throws NotFoundException {
-    	
-    	entityToAdd.getCodemodule();
-    	System.out.println(entityToAdd.getCodemodule()+idniveauFiliere);
-    	
-	    metier.ajouterModule(entityToAdd, Long.parseLong(idniveauFiliere));
-	    modelBean.update();
+	 entityToAdd = new Module();
     }
     
+    @Override
+    public void addEntity() throws Exception {
+	
+	if (!metier.exist(Filiere.class, Long.parseLong(filiereString)))
+	    throw new FiliereNotFoundException(
+		    "Can't find the specified Filiere!!");
+	Filiere filiere = (Filiere) metier.get(Filiere.class,
+		Long.parseLong(filiereString));
+	entityToAdd.setFiliere(filiere);
+	entityToAdd.setSemestre(semestre);
+	metier.add(entityToAdd);
+	model.update();
+    }
+    
+    
+    public Semestre getSemestre() {
+        return semestre;
+    }
+    
+    
+    public void setSemestre(Semestre semestre)
+    {
+	this.semestre = semestre;
+    }
+
+
+    public String getFiliereString() {
+        return filiereString;
+    }
+
+
+    public void setFiliereString(String filiereString) {
+        this.filiereString = filiereString;
+    }
+    
+    public List<? extends EntityBase> filieres()
+    {
+	return metier.get(Filiere.class);
+    }
+
+    
+    public Semestre[] getSemestres()
+    {
+	return metier.getSemestres();
+    }
+    
+    
+
+
     
     
 }

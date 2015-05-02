@@ -10,8 +10,7 @@ import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
-import ac.enset.administration.gestionAbsence.entites.Module;
-import ac.enset.administration.gestionAbsence.entites.NiveauFiliere;
+import ac.enset.administration.gestionAbsence.entites.Semestre;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
 import ac.enset.administration.gestionAbsence.entites.User;
 import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademicYearException;
@@ -28,7 +27,6 @@ public interface IAbsenceLocal {
     
     public void ajouterAnneeScolaire(AnneeScolaire as);
     
-    public void ajouterClasse(Classe c, Long idNiveauFiliere, Long idAnneeScolaire);    
     
     public List<AnneeScolaire> getAnneesScollaires();
 
@@ -59,11 +57,8 @@ public interface IAbsenceLocal {
     public EntityBase get(Class<? extends EntityBase> clazz, Long id);
 
     public void add(Object entity);
-    public void ajouterModule(Module m,long idNiveauFiliere);
     
-    public List<Module> getModule();
 
-    public List<NiveauFiliere> getNiveauFiliere();
     
     public void activateAcademicYear(AnneeScolaire anneeScolaire);
     public void addAcademicYear(AnneeScolaire anneeScolaire) throws IncorrectAcademicYearException;
@@ -80,5 +75,7 @@ public interface IAbsenceLocal {
     public List<Classe> getClassesByActivatedYears();
 
     public void addClasse(Classe classe) throws IncorrectAcademicYearException;
+
+    public Semestre[] getSemestres();
 
 }

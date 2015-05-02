@@ -10,23 +10,28 @@
 		closable="false">
 		<h:form id="show">
 			<p:panelGrid columns="2"
-				rendered="#{not empty modelBeanFiliere.selectedEntity}"
+				rendered="#{not empty model.selectedEntity}"
 				columnClasses="value">
 
 				<h:outputText value="#{msg.column1}" />
-				<h:outputText value="#{modelBeanFiliere.selectedEntity.id}" />
+				<h:outputText value="#{model.selectedEntity.id}" />
 
 				<h:outputText value="#{msg.column2}" />
 				<h:outputText
-					value="#{modelBeanFiliere.selectedEntity.nom}" />
+					value="#{model.selectedEntity.name}" />
 
 				<h:outputText value="#{msg.column3}" />
 				<h:outputText
-					value="#{modelBeanFiliere.selectedEntity.departement.nom}" />
+					value="#{model.selectedEntity.filiere.nom}" />
+					
+					
+				<h:outputText value="#{msg.column4}" />
+				<h:outputText
+					value="#{model.selectedEntity.semestre.semestre}" />
 			</p:panelGrid>
 			<p:commandButton value="Fermer"
 				update=":formDataTable:datatable"
-				actionListener="#{modelBeanFiliere.unselect()}"
+				actionListener="#{model.unselect()}"
 				oncomplete="handleRequestshow(xhr, status, args)" />
 		</h:form>
 	</p:dialog>

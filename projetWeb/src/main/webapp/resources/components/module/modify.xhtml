@@ -12,24 +12,35 @@
 						<h:form id="modifyForm">
 
 							<p:panelGrid columns="2"
-								rendered="#{not empty modelBeanFiliere.selectedEntity}"
+								rendered="#{not empty model.selectedEntity}"
 								columnClasses="value">
 
 								
 
-								<h:outputText value="#{msg.column2}" />
-								<p:inputText
-									value="#{modelBeanFiliere.selectedEntity.nom}" />
+								<h:outputText for="item2" value="#{msg.column2}" />
+								<p:inputText id="item2"
+									value="#{model.selectedEntity.name}" />
 
+								<h:outputLabel for="item3" value="#{msg.column3}" />
+								<h:selectOneMenu id="item3" value="#{model.filiereString}">
+								<f:selectItems value="#{controller.filieres()}" var="filiere"
+								itemLabel="#{filiere.nom}" itemValue="#{filiere.id}" />
+								</h:selectOneMenu>
+								
+								<h:outputLabel for="item4" value="#{msg.column4}" />
+								<h:selectOneMenu id="item4" value="#{model.selectedEntity.semestre}">
+								<f:selectItems value="#{controller.getSemestres()}" var="semestre"
+								itemLabel="#{semestre.semestre}" itemValue="#{semestre}" />
+								</h:selectOneMenu>
 								
 							</p:panelGrid>
 							<p:commandButton value="Modifier"
 								update=":formDataTable:datatable"
-								actionListener="#{modelBeanFiliere.modifyEntity()}"
+								actionListener="#{modelBeanModule.modifyEntity()}"
 								oncomplete="handleRequestModify(xhr, status, args)" />
 							<p:commandButton value="Annuler"
 								update=":formDataTable:datatable"
-								actionListener="#{modelBeanFiliere.cancleModifyEntity()}"
+								actionListener="#{modelBeanModule.cancleModifyEntity()}"
 								oncomplete="handleRequestModify(xhr, status, args)" />
 						</h:form>
 
