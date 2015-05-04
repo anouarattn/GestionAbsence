@@ -1,61 +1,21 @@
 package ac.enset.administration.gestionAbsence.entites;
 
-
-
-import java.util.Set;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="typeFiliere")
-public class TypeFiliere extends EntityBase {
-    
-  
-    private String nom;
+public enum TypeFiliere {
+    MASTER("Master",2),INGENIEUR("Cycle d'ingénieur",3),DUT("Diplôme universitaire de technologie",2),
+    BTS("Brevet de technicien supérieur",2),LICENCEP("Licence Professionnelle",1),LICENCE("Licence",3);
     private int numberOfYears;
-        
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="typeFiliere")
-    private Set<Filiere> filieres;
-   
-
-    public String getNom() {
-        return nom;
+    private String name;
+    private TypeFiliere(String name , int numberOfYears)
+    {
+	this.numberOfYears = numberOfYears;
+	this.name = name;
     }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public TypeFiliere(String nom) {
-	super();
-	this.nom = nom;
-    }
-
-    public TypeFiliere() {
-	super();
-	// TODO Auto-generated constructor stub
-    }
-
     public int getNumberOfYears() {
         return numberOfYears;
     }
-
-    public void setNumberOfYears(int numberOfYears) {
-        this.numberOfYears = numberOfYears;
+    public String getName() {
+        return name;
     }
-
-    @Override
-    public String toString() {
-	return "TypeFiliere [nom=" + nom + ", numberOfYears=" + numberOfYears
-		+ "]";
-    }
-    
-    
- 
-    
     
     
 }

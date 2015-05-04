@@ -20,9 +20,8 @@ public interface IAbsenceLocal {
 
     public void ajouterDepartement(Departement d);
 
-    public void ajouterTypeFiliere(TypeFiliere tf);
     
-    public void ajouterFiliere(Filiere f, Long idDepartement, Long idTypeFiliere);
+    public void ajouterFiliere(Filiere f, Long idDepartement);
     
     
     public void ajouterAnneeScolaire(AnneeScolaire as);
@@ -39,9 +38,7 @@ public interface IAbsenceLocal {
     public void modifierFiliere(Filiere selectedFiliere);
 
     
-    public List<TypeFiliere> getTypesFilieres();
         
-    public void modifierTypeFiliere(TypeFiliere tf);
     
 
     
@@ -77,5 +74,8 @@ public interface IAbsenceLocal {
     public void addClasse(Classe classe) throws IncorrectAcademicYearException;
 
     public Semestre[] getSemestres();
+
+
+    public List<TypeFiliere> getTypesFilieres();
 
 }

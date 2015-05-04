@@ -41,12 +41,11 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
 	if (!metier.exist(Departement.class, Long.parseLong(departementString)))
 	    throw new DepartementNotFoundException(
 		    "Can't find the specified Departement!!");
-	if (!metier.exist(TypeFiliere.class, Long.parseLong(typeFiliereString)))
+	if (! typeFilieres.contains(TypeFiliere.valueOf(typeFiliereString)))
 	    throw new TypeFiliereNotFoundException(
 		    "Can't find the specified TypeFiliere");
-
-	metier.ajouterFiliere(entityToAdd, Long.parseLong(departementString),
-		Long.parseLong(typeFiliereString));
+	entityToAdd.setTypeFiliere(TypeFiliere.valueOf(typeFiliereString));
+	metier.ajouterFiliere(entityToAdd, Long.parseLong(departementString));
 	modelBean.update();
     }
 

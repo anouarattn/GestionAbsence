@@ -1,10 +1,11 @@
 package ac.enset.administration.gestionAbsence.entites;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,8 +27,7 @@ public class Filiere extends EntityBase {
     private List<Classe> classes;
 
 
-    @ManyToOne
-    @JoinColumn(name = "FK_TypeFiliere")
+    @Enumerated(EnumType.STRING)
     private TypeFiliere typeFiliere;
 
     public String getNom() {

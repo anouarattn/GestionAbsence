@@ -1,5 +1,7 @@
 package ac.enset.administration.gestionAbsence.metier;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,19 +37,12 @@ public class IAbsenceImpl implements IAbsenceLocal {
 
     }
 
-    @Override
-    public void ajouterTypeFiliere(TypeFiliere item) {
-	em.persist(item);
-    }
 
     @Override
-    public void ajouterFiliere(Filiere item, Long idDepartement,
-	    Long idTypeFiliere) {
+    public void ajouterFiliere(Filiere item, Long idDepartement) {
 	Departement d = em.find(Departement.class, idDepartement);
-	TypeFiliere tf = em.find(TypeFiliere.class, idTypeFiliere);
-	if (d != null && tf != null) {
+	if (d != null ) {
 	    item.setDepartement(d);
-	    item.setTypeFiliere(tf);
 	    em.persist(item);
 	}
     }
@@ -87,15 +82,17 @@ public class IAbsenceImpl implements IAbsenceLocal {
 
     @Override
     public List<TypeFiliere> getTypesFilieres() {
-	Query q = em.createQuery("select tf from TypeFiliere tf");
-	List<TypeFiliere> item = q.getResultList();
-	return item;
+	ArrayList<TypeFiliere> types = new ArrayList<>();
+	types.add(TypeFiliere.MASTER);
+	types.add(TypeFiliere.DUT);
+	types.add(TypeFiliere.INGENIEUR);
+	types.add(TypeFiliere.BTS);
+	types.add(TypeFiliere.LICENCEP);
+	types.add(TypeFiliere.LICENCE);
+	return types;
     }
 
-    @Override
-    public void modifierTypeFiliere(TypeFiliere item) {
-	em.merge(item);
-    }
+
 
  
 
@@ -299,8 +296,6 @@ public class IAbsenceImpl implements IAbsenceLocal {
     public boolean verifyFiliereTypeWithAcademicYears(TypeFiliere typeFiliere, AnneeScolaire debut,AnneeScolaire promotion)
     {
 	int numberOfYear = promotion.getJodaEndYear().getYear() - debut.getJodaBeginYear().getYear();
-	System.out.println(numberOfYear);
-	System.out.println(typeFiliere.getNumberOfYears() );
 	if(typeFiliere.getNumberOfYears() != numberOfYear)
 	    return false;
 	return true;
@@ -354,6 +349,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return new Semestre[]{Semestre.SEMESTRE1,Semestre.SEMESTRE2,Semestre.SEMESTRE3,
 		Semestre.SEMESTRE4,Semestre.SEMESTRE5,Semestre.SEMESTRE6};
     }
+ 
 
 
 }
