@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import org.joda.time.LocalDate;
 
 /**
- * All academic years must have the endYear = beginYear+1
+ * All academic years must have the endYear equal to beginYear+1
  * @author anouarattn
  *
  */
@@ -23,6 +23,7 @@ public class AnneeScolaire extends EntityBase implements Comparable<AnneeScolair
 
     private boolean activated;
     private boolean isLast;
+    private boolean Showable=true;
     
     private Date beginYear;
     private Date endYear;
@@ -140,4 +141,16 @@ public class AnneeScolaire extends EntityBase implements Comparable<AnneeScolair
     {
 	return getJodaBeginYear().getYear()+"/"+getJodaEndYear().getYear();
     }
+
+    public boolean isShowable() {
+        return Showable;
+    }
+
+    public void setShowable(boolean showable) {
+        Showable = showable;
+    }
+
+    
+
+  
 }

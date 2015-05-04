@@ -204,12 +204,15 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	
 	if(!isValidAcademicYear(anneeScolaire))
 	    throw new IncorrectAcademicYearException("Incorrect AcademicYear format");
-	if (!doesNonManagedAcademicYearExist(anneeScolaire)) {
+	AnneeScolaire anneeScolaire2;
+	if ((anneeScolaire2=getManagedVersionOfAcademicYear(anneeScolaire)) == null) {
 	    em.persist(anneeScolaire);
 	    activateAcademicYear(anneeScolaire);
 	    setLastAcademicYear(anneeScolaire);
 	    migrateClasses(anneeScolaire);
 	}
+	else if(anneeScolaire2.isShowable() == false)
+	    anneeScolaire2.setShowable(true);
     }
 
     private void setLastAcademicYear(AnneeScolaire anneeScolaire) throws IncorrectAcademicYearException {
@@ -272,16 +275,18 @@ public class IAbsenceImpl implements IAbsenceLocal {
     @Override
     public void addClasse(Classe classe) throws IncorrectAcademicYearException {
 	AnneeScolaire anneeScolaire;
-	if ((anneeScolaire = getMergedVersionOfAcademicYear(classe
+	if ((anneeScolaire = getManagedVersionOfAcademicYear(classe
 		.getBeginAcademicYear())) == null && isValidAcademicYear(classe.getBeginAcademicYear()) )
-	    em.persist(classe.getBeginAcademicYear());
+	    em.persist(classe.getBeginAcademicYear()); // if no academic year exist add one
 	else
-	    classe.setBeginAcademicYear(anneeScolaire);
-	if ((anneeScolaire = getMergedVersionOfAcademicYear(classe
-		.getPromotionAcademicYear())) == null && isValidAcademicYear(classe.getBeginAcademicYear()))
-	    em.persist(classe.getPromotionAcademicYear());
+	    classe.setBeginAcademicYear(anneeScolaire); // else set it in the classe
+	if ((anneeScolaire = getManagedVersionOfAcademicYear(classe
+		.getPromotionAcademicYear())) == null && isValidAcademicYear(classe.getBeginAcademicYear())){
+	    classe.getPromotionAcademicYear().setShowable(false);
+	    em.persist(classe.getPromotionAcademicYear()); // if no academic year exist add one
+	}
 	else
-	    classe.setPromotionAcademicYear(anneeScolaire);
+	    classe.setPromotionAcademicYear(anneeScolaire);  // else set it in the classe
 	
 	if( !verifyFiliereTypeWithAcademicYears(classe.getFiliere().getTypeFiliere(), classe.getBeginAcademicYear(), classe.getPromotionAcademicYear()))
 	    throw new IncorrectAcademicYearException("FiliereType is not consistent with the specified Academic Years");
@@ -308,7 +313,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
      * @param anneeScolaire
      * @return
      */
-    public AnneeScolaire getMergedVersionOfAcademicYear(
+    public AnneeScolaire getManagedVersionOfAcademicYear(
 	    AnneeScolaire anneeScolaire) {
 	for (EntityBase annee : get(AnneeScolaire.class))
 	    if (anneeScolaire.equals(annee))
@@ -346,7 +351,8 @@ public class IAbsenceImpl implements IAbsenceLocal {
     }
     
     public Semestre[] getSemestres(){
-	return new Semestre[]{Semestre.SEMESTRE1,Semestre.SEMESTRE2};
+	return new Semestre[]{Semestre.SEMESTRE1,Semestre.SEMESTRE2,Semestre.SEMESTRE3,
+		Semestre.SEMESTRE4,Semestre.SEMESTRE5,Semestre.SEMESTRE6};
     }
 
 

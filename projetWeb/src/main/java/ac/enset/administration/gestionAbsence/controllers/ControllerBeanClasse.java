@@ -46,7 +46,6 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 	entityToAdd.setFiliere(filiere);
 	entityToAdd.setPromotionAcademicYear(StringToAcademicYear.convert(promotionAcademicYear));
 	entityToAdd.setBeginAcademicYear(StringToAcademicYear.convert(startAcademicYear));
-	System.out.println(entityToAdd);
 	metier.addClasse(entityToAdd);
 	modelBean.update();
 	academicYearBean.update();
