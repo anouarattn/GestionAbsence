@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Ajout" widgetVar="jsAdd" id="addDialog" modal="true"
+		showEffect="fade" hideEffect="fade" resizable="false" closable="false">
+		<h:form id="addForm">
+
+			<p:panelGrid columns="2" columnClasses="value">
+
+				
+				<h:outputLabel for="item2" value="#{msg.column2}" />
+				<p:inputText id="item2" placeholder="#{msg.column2}"
+					value="#{controller.entityToAdd.name}" />
+				
+				
+								
+			</p:panelGrid>
+			<p:commandButton value="Ajout" update=":formDataTable:datatable"
+				action="#{controllerBeanModule.addEntity()}"
+				oncomplete="handleRequestAdd(xhr, status, args)" />
+			<p:commandButton value="Annuler"
+				oncomplete="handleRequestAdd(xhr, status, args)" />
+		</h:form>
+
+	</p:dialog>
+
+</ui:composition>
+
+</html>

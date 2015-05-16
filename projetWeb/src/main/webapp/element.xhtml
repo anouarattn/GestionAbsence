@@ -12,9 +12,9 @@
 	<ui:include src="anneesScolaires.xhtml"></ui:include>
 	</ui:define>
 	<ui:define name="content">
-	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.module" var="msg"/>
-		<c:set var="model" value="#{modelBeanModule}" />
-		<c:set var="controller" value="#{controllerBeanModule}" />
+	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.element" var="msg"/>
+		<c:set var="model" value="#{modelBeanElement}" />
+		<c:set var="controller" value="#{controllerBeanElement}" />
 		<div id="page-wrapper" style="min-height: 588px;">
 			<div class="row">
 				<div class="col-lg-12">
@@ -84,15 +84,15 @@
 							</p:column>
 
 							<p:column filterBy="#{item.filiere.nom}"
-								headerText="#{msg.column3}" sortBy="#{item.filiere.nom}"
+								headerText="#{msg.column3}" sortBy="#{item.module}"
 								filterStyle="display:none" filterMatchMode="contains">
-								<h:outputText value="#{item.filiere.nom}" />
+								<h:outputText value="#{item.module}" />
 							</p:column>
 							
-							<p:column filterBy="#{item.semestre.semestre}"
-								headerText="#{msg.column4}" sortBy="#{item.semestre.semestre}"
+							<p:column filterBy="#{item.module.semestre}"
+								headerText="#{msg.column4}" sortBy="#{item.module.semestre}"
 								filterStyle="display:none" filterMatchMode="contains">
-								<h:outputText value="#{item.semestre.semestre}" />
+								<h:outputText value="#{item.module.semestre}" />
 							</p:column>
 
 						</p:dataTable>
