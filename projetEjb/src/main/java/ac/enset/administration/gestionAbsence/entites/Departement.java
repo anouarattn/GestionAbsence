@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "departement")
 public class Departement extends EntityBase {
@@ -56,8 +57,7 @@ public class Departement extends EntityBase {
 
     @Override
     public String toString() {
-	return "Departement [id=" + id + ", nom=" + nom + ", chef=" + chef
-		+ "]";
+	return  id+":"+nom;
     }
     
 

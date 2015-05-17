@@ -24,9 +24,8 @@
 
 
 				<p:outputLabel for="item3" value="#{msg.column4}" />
-				<h:selectOneMenu id="item3" value="#{controller.filiereString}">
-					<f:selectItems value="#{controller.filieres()}" var="filiere"
-						itemLabel="#{filiere.nom}" itemValue="#{filiere.id}" />
+				<h:selectOneMenu id="item3" value="#{controller.filiere}"  converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{controller.filieres()}" />
 				</h:selectOneMenu>
 
 			</p:panelGrid>

@@ -18,9 +18,8 @@
 
 				<h:outputLabel for="item2" value="#{msg.column3}" />
 				
-				<h:selectOneMenu id="item2" value="#{controller.departementString}">
-					<f:selectItems value="#{controller.departements}"  var="departement"
-					 itemLabel="#{departement.nom}" itemValue="#{departement.id}"/>
+				<h:selectOneMenu id="item2" value="#{controller.departement}" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{controller.departements}"  />
 				</h:selectOneMenu>
 				
 				<p:outputLabel for="item3" value="#{msg.column4}" />
@@ -28,7 +27,6 @@
 					<f:selectItems value="#{controller.typeFilieres}" var="typeFiliere"
 					 itemLabel="#{typeFiliere}" itemValue="#{typeFiliere}" />
 				</h:selectOneMenu>
-				
 			</p:panelGrid>
 			<p:commandButton value="Ajout" update=":formDataTable:datatable"
 				action="#{controller.addEntity()}"

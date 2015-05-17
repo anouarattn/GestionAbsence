@@ -21,7 +21,7 @@ public class ControllerBeanModule extends ControllerBeanBase<Module>
 	implements Serializable {
 
     private Semestre semestre;
-    private String filiereString;
+    private Filiere filiere;
     
     @Inject
     private ModelBeanModule model;
@@ -34,11 +34,9 @@ public class ControllerBeanModule extends ControllerBeanBase<Module>
     @Override
     public void addEntity() throws Exception {
 	
-	if (!metier.exist(Filiere.class, Long.parseLong(filiereString)))
+	if (!metier.exist(Filiere.class, filiere.getId()))
 	    throw new FiliereNotFoundException(
 		    "Can't find the specified Filiere!!");
-	Filiere filiere = (Filiere) metier.get(Filiere.class,
-		Long.parseLong(filiereString));
 	entityToAdd.setFiliere(filiere);
 	entityToAdd.setSemestre(semestre);
 	metier.add(entityToAdd);
@@ -57,14 +55,7 @@ public class ControllerBeanModule extends ControllerBeanBase<Module>
     }
 
 
-    public String getFiliereString() {
-        return filiereString;
-    }
-
-
-    public void setFiliereString(String filiereString) {
-        this.filiereString = filiereString;
-    }
+ 
     
     public List<? extends EntityBase> filieres()
     {
@@ -75,6 +66,14 @@ public class ControllerBeanModule extends ControllerBeanBase<Module>
     public Semestre[] getSemestres()
     {
 	return metier.getSemestres();
+    }
+
+    public Filiere getFiliere() {
+        return filiere;
+    }
+
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
     }
     
     

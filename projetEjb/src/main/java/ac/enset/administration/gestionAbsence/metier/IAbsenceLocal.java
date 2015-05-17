@@ -77,5 +77,6 @@ public interface IAbsenceLocal {
 
 
     public List<TypeFiliere> getTypesFilieres();
+    
 
 }

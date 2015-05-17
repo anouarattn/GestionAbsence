@@ -74,7 +74,7 @@ public class Filiere extends EntityBase {
 
     @Override
     public String toString() {
-	return "Filiere [nom=" + nom + ", typeFiliere=" + typeFiliere + "]";
+	return  nom +" ("+ typeFiliere + ")";
     }
     
     

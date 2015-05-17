@@ -16,6 +16,4 @@ public enum TypeFiliere {
     public String getName() {
         return name;
     }
-    
-    
 }

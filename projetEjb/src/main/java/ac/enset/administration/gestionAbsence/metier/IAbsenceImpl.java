@@ -349,6 +349,9 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return new Semestre[]{Semestre.SEMESTRE1,Semestre.SEMESTRE2,Semestre.SEMESTRE3,
 		Semestre.SEMESTRE4,Semestre.SEMESTRE5,Semestre.SEMESTRE6};
     }
+
+
+ 
  
 
 

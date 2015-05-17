@@ -18,7 +18,6 @@ import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
 @RequestScoped
 public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 
-    private String filiereString;
     
     @Inject
     private ModelBeanClasse modelBean;
@@ -29,6 +28,8 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
     private String promotionAcademicYear;
     private String startAcademicYear;
     
+    private Filiere filiere;
+    
     @PostConstruct
     public void init() {
 	 entityToAdd = new Classe();
@@ -37,12 +38,9 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
     @Override
     public void addEntity() throws Exception {
 
-	if (!metier.exist(Filiere.class, Long.parseLong(filiereString)))
+	if (!metier.exist(Filiere.class, filiere.getId()))
 	    throw new DepartementNotFoundException(
 		    "Can't find the specified Filiere!!");
-
-	Filiere filiere = (Filiere) metier.get(Filiere.class,
-		Long.parseLong(filiereString));
 	entityToAdd.setFiliere(filiere);
 	entityToAdd.setPromotionAcademicYear(StringToAcademicYear.convert(promotionAcademicYear));
 	entityToAdd.setBeginAcademicYear(StringToAcademicYear.convert(startAcademicYear));
@@ -52,13 +50,7 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 	
     }
 
-    public String getFiliereString() {
-	return filiereString;
-    }
 
-    public void setFiliereString(String filiereString) {
-	this.filiereString = filiereString;
-    }
     
     public List<? extends EntityBase> filieres()
     {
@@ -79,6 +71,14 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 
     public void setStartAcademicYear(String startAcademicYear) {
         this.startAcademicYear = startAcademicYear;
+    }
+
+    public Filiere getFiliere() {
+        return filiere;
+    }
+
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
     }
     
     
