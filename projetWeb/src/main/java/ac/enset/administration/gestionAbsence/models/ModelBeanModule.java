@@ -9,7 +9,6 @@ import javax.inject.Named;
 import ac.enset.administration.gestionAbsence.controllers.FiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
-import ac.enset.administration.gestionAbsence.entites.Semestre;
 
 @Named
 @SessionScoped

@@ -1,9 +1,9 @@
 package ac.enset.administration.gestionAbsence.metier;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.ejb.Stateless;
@@ -25,6 +25,9 @@ import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademic
 
 @Stateless
 public class IAbsenceImpl implements IAbsenceLocal {
+    
+    protected ResourceBundle bundle = ResourceBundle.getBundle("ac.enset.administration.gestionAbsence.properties.IncorrectAcademicYearException");
+
     @PersistenceContext(unitName = "projetAbsenceTest")
     private EntityManager em;
 
@@ -199,14 +202,16 @@ public class IAbsenceImpl implements IAbsenceLocal {
     @Override
     public void addAcademicYear(AnneeScolaire anneeScolaire) throws IncorrectAcademicYearException {
 	
+	if(doesNonManagedAcademicYearExist(anneeScolaire))
+	    throw new IncorrectAcademicYearException(bundle.getString("AcademicYearformatAlreadyExists"));
 	if(!isValidAcademicYear(anneeScolaire))
-	    throw new IncorrectAcademicYearException("Incorrect AcademicYear format");
+	    throw new IncorrectAcademicYearException(bundle.getString("IncorrectAcademicYearformat"));
 	AnneeScolaire anneeScolaire2;
 	if ((anneeScolaire2=getManagedVersionOfAcademicYear(anneeScolaire)) == null) {
 	    em.persist(anneeScolaire);
 	    activateAcademicYear(anneeScolaire);
 	    setLastAcademicYear(anneeScolaire);
-	    migrateClasses(anneeScolaire);
+	    //migrateClasses(anneeScolaire);
 	}
 	else if(anneeScolaire2.isShowable() == false)
 	    anneeScolaire2.setShowable(true);
@@ -222,7 +227,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	else if( anneeScolaire2 == null)
 	    anneeScolaire.setLast(true);
 	else 
-	    throw new IncorrectAcademicYearException("Can't add this Academic year because it is greater than the last academic year by more than one year");
+	    throw new IncorrectAcademicYearException(bundle.getString("GreaterThanTheLastAcademicYearByMoreThanOneYear"));
 	em.merge(anneeScolaire);
     }
 
@@ -286,7 +291,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	    classe.setPromotionAcademicYear(anneeScolaire);  // else set it in the classe
 	
 	if( !verifyFiliereTypeWithAcademicYears(classe.getFiliere().getTypeFiliere(), classe.getBeginAcademicYear(), classe.getPromotionAcademicYear()))
-	    throw new IncorrectAcademicYearException("FiliereType is not consistent with the specified Academic Years");
+	    throw new IncorrectAcademicYearException(bundle.getString("FiliereTypeIsNotConsistentWithTheSpecifiedAcademicYears"));
 	classe.setCurrentAcademicYear(classe.getBeginAcademicYear());
 	classe.setNiveau(Niveau.PremiereAnnee);
 	em.persist(classe);
@@ -317,7 +322,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
     }
 
     /**
-     * this method check wheather a non managed AcademicYear exist or not
+     * this method check wheather a non managed AcademicYear exist in db or not
      * 
      * @return
      */
@@ -336,6 +341,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
      */
     public boolean isValidAcademicYear(AnneeScolaire anneeScolaire)
     {
+	
 	if(anneeScolaire == null)
 	    return false;
 	if(anneeScolaire.getBeginYear() == null || anneeScolaire.getEndYear() == null)
