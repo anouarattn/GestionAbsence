@@ -15,8 +15,9 @@ public abstract class ControllerBeanBase<V>
     @Inject
     protected IAbsenceLocal metier; 
     
-    protected ResourceBundle bundle = ResourceBundle.getBundle("ac.enset.administration.gestionAbsence.properties.successFrench");
+    protected final static ResourceBundle bundle = ResourceBundle.getBundle("ac.enset.administration.gestionAbsence.properties.successFrench");
     
+
     protected V entityToAdd;
 
     protected List<V> filtredEntities;

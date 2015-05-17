@@ -26,7 +26,7 @@ import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademic
 @Stateless
 public class IAbsenceImpl implements IAbsenceLocal {
     
-    protected ResourceBundle bundle = ResourceBundle.getBundle("ac.enset.administration.gestionAbsence.properties.IncorrectAcademicYearException");
+    protected ResourceBundle bundle = ResourceBundle.getBundle("ac.enset.administration.gestionAbsence.properties.IncorrectDataException");
 
     @PersistenceContext(unitName = "projetAbsenceTest")
     private EntityManager em;
@@ -354,6 +354,12 @@ public class IAbsenceImpl implements IAbsenceLocal {
     public Semestre[] getSemestres(){
 	return new Semestre[]{Semestre.SEMESTRE1,Semestre.SEMESTRE2,Semestre.SEMESTRE3,
 		Semestre.SEMESTRE4,Semestre.SEMESTRE5,Semestre.SEMESTRE6};
+    }
+
+
+    @Override
+    public ResourceBundle getBundle() {
+	return bundle;
     }
 
 

@@ -1,4 +1,4 @@
-package ac.enset.administration.gestionAbsence.controllers;
+package ac.enset.administration.gestionAbsence.metier.exception;
 
 public class NotFoundException extends Exception {
 

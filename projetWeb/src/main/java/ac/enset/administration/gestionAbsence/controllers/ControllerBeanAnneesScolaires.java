@@ -48,6 +48,7 @@ public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScola
 	modelBean.update();
 	RequestContext.getCurrentInstance().update("wrapper");
 	addSuccessMessage(bundle.getString("addedAcademicYear"),"");
+	academicYear = "";
         }catch(Exception e)
         {
             addErrorMessage(e, "","");

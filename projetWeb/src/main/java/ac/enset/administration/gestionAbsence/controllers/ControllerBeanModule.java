@@ -12,6 +12,7 @@ import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.Semestre;
+import ac.enset.administration.gestionAbsence.metier.exception.FiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.models.ModelBeanModule;
 
 @SuppressWarnings("serial")

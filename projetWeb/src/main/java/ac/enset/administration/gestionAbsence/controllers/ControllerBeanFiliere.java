@@ -11,6 +11,9 @@ import javax.inject.Named;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
+import ac.enset.administration.gestionAbsence.metier.exception.DepartementNotFoundException;
+import ac.enset.administration.gestionAbsence.metier.exception.NotFoundException;
+import ac.enset.administration.gestionAbsence.metier.exception.TypeFiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.models.ModelBeanFiliere;
 
 @Named
@@ -41,10 +44,10 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
     public void addEntity() throws NotFoundException {
 	if (!metier.exist(Departement.class, departement.getId()))
 	    throw new DepartementNotFoundException(
-		    "Can't find the specified Departement!!");
+		    metier.getBundle().getString("DepartementNotFound"));
 	if (! typeFilieres.contains(TypeFiliere.valueOf(typeFiliereString)))
 	    throw new TypeFiliereNotFoundException(
-		    "Can't find the specified TypeFiliere");
+		    metier.getBundle().getString("TypeFiliereNotFound"));
 	entityToAdd.setTypeFiliere(TypeFiliere.valueOf(typeFiliereString));
 	entityToAdd.setDepartement(departement);
 	metier.add(entityToAdd);

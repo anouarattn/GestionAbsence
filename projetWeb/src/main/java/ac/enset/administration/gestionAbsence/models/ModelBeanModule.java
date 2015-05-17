@@ -6,9 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import ac.enset.administration.gestionAbsence.controllers.FiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
+import ac.enset.administration.gestionAbsence.metier.exception.FiliereNotFoundException;
 
 @Named
 @SessionScoped
@@ -33,7 +33,7 @@ public class ModelBeanModule extends ModelBeanBase<Module> implements Serializab
     public void modifyEntity() throws FiliereNotFoundException {
 	if (!metier.exist(Filiere.class, Long.parseLong(filiereString)))
 	    throw new FiliereNotFoundException(
-		    "Can't find the specified Filiere!!");
+		    metier.getBundle().getString("FiliereNotFound"));
 	Filiere filiere = (Filiere) metier.get(Filiere.class,
 		Long.parseLong(filiereString));
 	selectedEntity.setFiliere(filiere);

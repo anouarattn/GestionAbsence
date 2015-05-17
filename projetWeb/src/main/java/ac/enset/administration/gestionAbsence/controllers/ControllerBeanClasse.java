@@ -11,6 +11,7 @@ import ac.enset.administration.gestionAbsence.converters.StringToAcademicYear;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
+import ac.enset.administration.gestionAbsence.metier.exception.FiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.models.ModelBeanAnneeScolaire;
 import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
 
@@ -38,15 +39,19 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
     @Override
     public void addEntity() throws Exception {
 
+	try{
 	if (!metier.exist(Filiere.class, filiere.getId()))
-	    throw new DepartementNotFoundException(
-		    "Can't find the specified Filiere!!");
+	    throw new FiliereNotFoundException(metier.getBundle().getString("FiliereNotFound"));
 	entityToAdd.setFiliere(filiere);
 	entityToAdd.setPromotionAcademicYear(StringToAcademicYear.convert(promotionAcademicYear));
 	entityToAdd.setBeginAcademicYear(StringToAcademicYear.convert(startAcademicYear));
 	metier.addClasse(entityToAdd);
 	modelBean.update();
 	academicYearBean.update();
+	}catch(Exception e)
+	{
+	    addErrorMessage(e, "", "");
+	}
 	
     }
 
