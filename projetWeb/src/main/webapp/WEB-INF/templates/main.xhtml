@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 
 	<f:facet name="general">
@@ -23,6 +24,7 @@
 <h:body>
 	<h:panelGroup id="wrapper" class="wrapper" layout="block">
 		<ui:include src="/WEB-INF/templates/header.xhtml" />
+		<p:growl id="growl" showDetail="true"  life="10000" />  
 		<ui:include src="/WEB-INF/templates/content.xhtml" />
 		<ui:insert name="dialog">
 		</ui:insert>

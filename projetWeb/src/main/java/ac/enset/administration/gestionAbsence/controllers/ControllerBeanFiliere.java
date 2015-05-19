@@ -11,6 +11,9 @@ import javax.inject.Named;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
+import ac.enset.administration.gestionAbsence.metier.exception.DepartementNotFoundException;
+import ac.enset.administration.gestionAbsence.metier.exception.NotFoundException;
+import ac.enset.administration.gestionAbsence.metier.exception.TypeFiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.models.ModelBeanFiliere;
 
 @Named
@@ -29,8 +32,9 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
     List<TypeFiliere> typeFilieres;
     List<Departement> departements;
 
-    String departementString;
     String typeFiliereString;
+    
+    Departement departement;
 
     @PostConstruct
     public void init() {
@@ -38,29 +42,21 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
     }
 
     public void addEntity() throws NotFoundException {
-	if (!metier.exist(Departement.class, Long.parseLong(departementString)))
+	if (!metier.exist(Departement.class, departement.getId()))
 	    throw new DepartementNotFoundException(
-		    "Can't find the specified Departement!!");
+		    metier.getBundle().getString("DepartementNotFound"));
 	if (! typeFilieres.contains(TypeFiliere.valueOf(typeFiliereString)))
 	    throw new TypeFiliereNotFoundException(
-		    "Can't find the specified TypeFiliere");
+		    metier.getBundle().getString("TypeFiliereNotFound"));
 	entityToAdd.setTypeFiliere(TypeFiliere.valueOf(typeFiliereString));
-	metier.ajouterFiliere(entityToAdd, Long.parseLong(departementString));
+	entityToAdd.setDepartement(departement);
+	metier.add(entityToAdd);
 	modelBean.update();
     }
 
     public List<Departement> getDepartements() {
 	return this.departements = metier.getDepartements();
     }
-
-    public String getDepartementString() {
-	return departementString;
-    }
-
-    public void setDepartementString(String departementString) {
-	this.departementString = departementString;
-    }
-
     public String getTypeFiliereString() {
 	return typeFiliereString;
     }
@@ -80,4 +76,14 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
     public void setDepartements(List<Departement> departements) {
 	this.departements = departements;
     }
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+    
+    
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import ac.enset.administration.gestionAbsence.controllers.FiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
+import ac.enset.administration.gestionAbsence.metier.exception.FiliereNotFoundException;
 
 
 public abstract class ModelBeanBase<T> {

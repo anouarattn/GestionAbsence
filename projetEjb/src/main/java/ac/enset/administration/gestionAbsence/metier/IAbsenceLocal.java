@@ -2,6 +2,7 @@ package ac.enset.administration.gestionAbsence.metier;
 
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.ejb.Local;
 
@@ -77,5 +78,9 @@ public interface IAbsenceLocal {
 
 
     public List<TypeFiliere> getTypesFilieres();
+    
+    
+    public ResourceBundle getBundle();
+    
 
 }

@@ -11,6 +11,7 @@ import ac.enset.administration.gestionAbsence.converters.StringToAcademicYear;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
+import ac.enset.administration.gestionAbsence.metier.exception.FiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.models.ModelBeanAnneeScolaire;
 import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
 
@@ -18,7 +19,6 @@ import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
 @RequestScoped
 public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 
-    private String filiereString;
     
     @Inject
     private ModelBeanClasse modelBean;
@@ -29,6 +29,8 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
     private String promotionAcademicYear;
     private String startAcademicYear;
     
+    private Filiere filiere;
+    
     @PostConstruct
     public void init() {
 	 entityToAdd = new Classe();
@@ -37,28 +39,23 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
     @Override
     public void addEntity() throws Exception {
 
-	if (!metier.exist(Filiere.class, Long.parseLong(filiereString)))
-	    throw new DepartementNotFoundException(
-		    "Can't find the specified Filiere!!");
-
-	Filiere filiere = (Filiere) metier.get(Filiere.class,
-		Long.parseLong(filiereString));
+	try{
+	if (!metier.exist(Filiere.class, filiere.getId()))
+	    throw new FiliereNotFoundException(metier.getBundle().getString("FiliereNotFound"));
 	entityToAdd.setFiliere(filiere);
 	entityToAdd.setPromotionAcademicYear(StringToAcademicYear.convert(promotionAcademicYear));
 	entityToAdd.setBeginAcademicYear(StringToAcademicYear.convert(startAcademicYear));
 	metier.addClasse(entityToAdd);
 	modelBean.update();
 	academicYearBean.update();
+	}catch(Exception e)
+	{
+	    addErrorMessage(e, "", "");
+	}
 	
     }
 
-    public String getFiliereString() {
-	return filiereString;
-    }
 
-    public void setFiliereString(String filiereString) {
-	this.filiereString = filiereString;
-    }
     
     public List<? extends EntityBase> filieres()
     {
@@ -79,6 +76,14 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 
     public void setStartAcademicYear(String startAcademicYear) {
         this.startAcademicYear = startAcademicYear;
+    }
+
+    public Filiere getFiliere() {
+        return filiere;
+    }
+
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
     }
     
     
