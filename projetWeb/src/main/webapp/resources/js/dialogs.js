@@ -3,14 +3,14 @@
 function handleRequestAdd(xhr, status, args, isAcademicYear,isCancel) {
 	isAcademicYear = isAcademicYear || false;
 	isCancel = isCancel || false;
-	console.log(isAcademicYear);
-	console.log(args.validationFailed);
+	
 	if(isCancel )
 		{
 		if (isAcademicYear == true)
 			PF('jsAddAnneeScolaire').hide();
-		else
+		else{
 			PF('jsAdd').hide();
+		}
 		}
 	if (args && !args.validationFailed) {
 		if (isAcademicYear == true)

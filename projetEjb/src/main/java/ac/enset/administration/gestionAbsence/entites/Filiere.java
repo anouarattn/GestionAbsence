@@ -1,6 +1,6 @@
 package ac.enset.administration.gestionAbsence.entites;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "filiere")
 public class Filiere extends EntityBase {
@@ -24,8 +25,11 @@ public class Filiere extends EntityBase {
     private Departement departement;
 
     @OneToMany(fetch=FetchType.LAZY,mappedBy="filiere",cascade={CascadeType.REMOVE})
-    private List<Classe> classes;
-
+    private Set<Classe> classes;
+    
+    
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="filiere",cascade={CascadeType.REMOVE})
+    private Set<Module> modules;
 
     @Enumerated(EnumType.STRING)
     private TypeFiliere typeFiliere;
@@ -64,11 +68,11 @@ public class Filiere extends EntityBase {
 	super();
     }
 
-    public List<Classe> getClasses() {
+    public Set<Classe> getClasses() {
         return classes;
     }
 
-    public void setClasses(List<Classe> classes) {
+    public void setClasses(Set<Classe> classes) {
         this.classes = classes;
     }
 
@@ -76,7 +80,15 @@ public class Filiere extends EntityBase {
     public String toString() {
 	return  nom +" ("+ typeFiliere + ")";
     }
-    
+
+    public Set<Module> getModules() {
+        return modules;
+    }
+
+    public void setModules(Set<Module> modules) {
+        this.modules = modules;
+    }
+
     
 
 }

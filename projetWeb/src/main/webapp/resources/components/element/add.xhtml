@@ -2,28 +2,47 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <ui:composition>
 
 	<p:dialog header="Ajout" widgetVar="jsAdd" id="addDialog" modal="true"
 		showEffect="fade" hideEffect="fade" resizable="false" closable="false">
 		<h:form id="addForm">
-
-			<p:panelGrid columns="2" columnClasses="value">
+	<c:set var="model" value="#{modelBeanElement}" />
+		<c:set var="controller" value="#{controllerBeanElement}" />
+			<p:panelGrid columns="3" columnClasses="value">
 
 				
 				<h:outputLabel for="item2" value="#{msg.column2}" />
 				<p:inputText id="item2" placeholder="#{msg.column2}"
-					value="#{controller.entityToAdd.name}" />
+					value="#{addElementViewBean.entityToAdd.name}" />
+				<p:message for="item2" closable="true" display="text"/>
 				
+				
+				<h:outputLabel for="item3" value="#{msg.column4}" />
+					<p:selectOneMenu id="item3" value="#{addElementViewBean.filiere}" converter="omnifaces.SelectItemsConverter">
+					<f:ajax  listener="#{addElementViewBean.filiereChanged}" render="modulesMenu"  />
+					<f:selectItem itemLabel="Selectionner" itemValue="" />	
+					<f:selectItems value="#{addElementViewBean.filieres}"/>
+				</p:selectOneMenu>
+				<p:message for="item3" closable="true" display="text"/>
+				
+				<h:outputLabel for="modulesMenu" value="#{msg.column3}" />
+					<p:selectOneMenu id="modulesMenu" value="#{addElementViewBean.entityToAdd.module}" converter="omnifaces.SelectItemsConverter" >
+					<f:selectItem itemLabel="Selectionner" itemValue="" />	
+					<f:selectItems value="#{addElementViewBean.modules}"   />
+				</p:selectOneMenu>
+				<p:message for="modulesMenu" closable="true" display="text" />
 				
 								
 			</p:panelGrid>
-			<p:commandButton value="Ajout" update=":formDataTable:datatable"
-				action="#{controllerBeanModule.addEntity()}"
+			<p:commandButton value="Ajout" update=":formDataTable:datatable :addForm"
+				action="#{addElementViewBean.addEntity()}"
 				oncomplete="handleRequestAdd(xhr, status, args)" />
 			<p:commandButton value="Annuler"
-				oncomplete="handleRequestAdd(xhr, status, args)" />
+				oncomplete="handleRequestAdd(xhr, status, args,false,true)" update=":addForm"   action="#{addElementViewBean.reset()}">
+				</p:commandButton>
 		</h:form>
 
 	</p:dialog>

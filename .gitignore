@@ -36,4 +36,6 @@ projetWeb/.checkstyle
 projetEjb/.project
 projetEar/.project
 projetWeb/.project
-rebel.xml
+rebel.xml/projetEar/
+/projetEjb/
+/projetWeb/
