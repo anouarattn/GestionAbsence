@@ -17,7 +17,7 @@ public class AbsenceEtud  extends EntityBase  {
 	
 	@ManyToOne
     @JoinColumn(name="FK_elementModule")
-	private ElementModule elementModule;
+	private Element elementModule;
 	
 	private Date dateAbsence;
 
@@ -29,11 +29,11 @@ public class AbsenceEtud  extends EntityBase  {
 		this.etudiant = etudiant;
 	}
 
-	public ElementModule getElementModule() {
+	public Element getElementModule() {
 		return elementModule;
 	}
 
-	public void setElementModule(ElementModule elementModule) {
+	public void setElementModule(Element elementModule) {
 		this.elementModule = elementModule;
 	}
 

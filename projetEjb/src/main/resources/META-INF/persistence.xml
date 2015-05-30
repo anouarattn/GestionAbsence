@@ -13,7 +13,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 		<!-- glassfish -->
 		<!-- <jta-data-source>jdbc/mysql_projetabsencetest</jta-data-source> -->	
 		<properties>
-<!--  			 <property name="hibernate.hbm2ddl.auto" value="create-drop" /> 		 -->
- 		</properties>
+<!-- 			 <property name="hibernate.hbm2ddl.auto" value="create-drop" /> 		
+ -->	</properties>
 	</persistence-unit>
-</persistence> 
+</persistence>

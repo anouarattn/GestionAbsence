@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "module")
 public class Module extends EntityBase {
@@ -25,7 +24,7 @@ public class Module extends EntityBase {
     private Filiere filiere;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "module")
-    private Set<ElementModule> elementModule;
+    private Set<Element> elements;
     
     private String name;
     public Filiere getFiliere() {
@@ -34,11 +33,12 @@ public class Module extends EntityBase {
     public void setFiliere(Filiere filiere) {
         this.filiere = filiere;
     }
-    public Set<ElementModule> getElementModule() {
-        return elementModule;
+    
+    public Set<Element> getElements() {
+        return elements;
     }
-    public void setElementModule(Set<ElementModule> elementModule) {
-        this.elementModule = elementModule;
+    public void setElements(Set<Element> elements) {
+        this.elements = elements;
     }
     public String getName() {
         return name;
@@ -52,5 +52,16 @@ public class Module extends EntityBase {
     public void setSemestre(Semestre semestre) {
         this.semestre = semestre;
     }
+
+    @Override
+    public String toString() {
+        return id+":"+name;
+    }
+    
+    
+    
+    
+    
+ 
     
 }

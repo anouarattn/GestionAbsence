@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/WEB-INF/templates/main.xhtml">
+
+	<ui:define name="jquery"></ui:define>
+ <ui:define name="anneesListe">
+	<ui:include src="anneesScolaires.xhtml"></ui:include>
+	</ui:define>
+	<ui:define name="content">
+	<f:loadBundle basename="ac.enset.administration.gestionAbsence.properties.element" var="msg"/>
+		<c:set var="model" value="#{modelBeanElement}" />
+		<c:set var="controller" value="#{controllerBeanElement}" />
+		<div id="page-wrapper" style="min-height: 588px;">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">#{msg.pageHeader}</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<h:form id="formDataTable">
+						<p:contextMenu for="datatable">
+
+							<p:menuitem value="Afficher" update=":showDialog"
+								icon="ui-icon-search"
+								oncomplete="PF('jsShow').show()" />
+
+							<p:menuitem value="Modifier"
+								update=":modifyDialog" icon="ui-icon-close"
+								oncomplete="PF('jsModify').show()" />
+
+							<p:menuitem value="Supprimer"
+								update=":formDataTable:datatable" icon="ui-icon-close"
+								action="#{model.deleteEntity()}" />
+
+						</p:contextMenu>
+						<p:dataTable emptyMessage="#{msg.emptyMessage}"
+							value="#{model.items}" var="item"
+							paginator="true" rows="40" rowKey="#{item.id}"
+							filteredValue="#{controller.filtredEntities}"
+							widgetVar="jsTable" id="datatable"
+							paginatorPosition="bottom"
+							selection="#{model.selectedEntities}">
+
+							<f:facet name="header">
+								<p:outputPanel style="text-align: right;">
+
+									<h:commandLink style="margin-right:5px;"
+										onclick="PF('jsAdd').show();return false;">
+										<p:graphicImage name="img/add.png" width="24" />
+									</h:commandLink>
+									<h:commandLink style="margin-right:5px;">
+										<p:graphicImage name="img/excel.png" width="24" />
+										<p:dataExporter type="xls" target="tbl" fileName="cars" />
+									</h:commandLink>
+									<h:commandLink style="margin-right:5px;">
+										<p:graphicImage name="img/pdf.png" width="24" />
+										<p:dataExporter type="xls" target="tbl" fileName="cars" />
+									</h:commandLink>
+									<p:inputText id="globalModule"
+										onkeyup="PF('jsTable').filter()"
+										placeholder="Rechercher" style="width:150px" />
+								</p:outputPanel>
+
+							</f:facet>
+							<p:column selectionMode="multiple"
+								style="width:46px;text-align:center" />
+							<p:column filterBy="#{item.id}" headerText="#{msg.column1}"
+								sortBy="#{item.id}" filterMatchMode="contains"
+								filterStyle="display:none"
+								style="width:77px;text-align: center;">
+								<h:outputText value="#{item.id}" />
+							</p:column>
+
+							<p:column filterBy="#{item.name}" headerText="#{msg.column2}"
+								sortBy="#{item.name}" filterMatchMode="contains"
+								filterStyle="display:none">
+								<h:outputText value="#{item.name}" />
+							</p:column>
+
+							<p:column filterBy="#{item.module.name}"
+								headerText="#{msg.column3}" sortBy="#{item.module.name}"
+								filterStyle="display:none" filterMatchMode="contains">
+								<h:outputText value="#{item.module.name}" />
+							</p:column>
+							
+							<p:column filterBy="#{item.module.filiere}"
+								headerText="#{msg.column4}" sortBy="#{item.module.filiere}"
+								filterStyle="display:none" filterMatchMode="contains">
+								<h:outputText value="#{item.module.filiere}" />
+							</p:column>
+							
+							<p:column filterBy="#{item.module.semestre}"
+								headerText="#{msg.column5}" sortBy="#{item.module.semestre}"
+								filterStyle="display:none" filterMatchMode="contains">
+								<h:outputText value="#{item.module.semestre}" />
+							</p:column>
+
+						</p:dataTable>
+					</h:form>
+
+				
+<ui:debug hotkey="x" />					
+					
+        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/add.xhtml" />
+        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/modify.xhtml" />
+        <ui:include src="resources/components/#{msg.xhtmlComponentsPath}/show.xhtml" />
+        
+        
+
+				</div>
+			</div>
+		</div>
+	
+	</ui:define>
+		<ui:define name="js">
+		<script src="resources/js/dialogs.js"></script>
+		</ui:define>
+	<ui:define name="dialog">
+	<ui:include src="/resources/components/anneesScolaires/add.xhtml" />
+	</ui:define>
+</ui:composition>
+</html>

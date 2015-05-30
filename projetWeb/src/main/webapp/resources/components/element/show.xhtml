@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Détail" widgetVar="jsShow"
+		modal="true" showEffect="fade" id="showDialog" hideEffect="fade" resizable="false"
+		closable="false">
+		<h:form id="show">
+			<p:panelGrid columns="2"
+				rendered="#{not empty model.selectedEntity}"
+				columnClasses="value">
+
+				<h:outputText value="#{msg.column1}" />
+				<h:outputText value="#{model.selectedEntity.id}" />
+
+				<h:outputText value="#{msg.column2}" />
+				<h:outputText
+					value="#{model.selectedEntity.name}" />
+
+				<h:outputText value="#{msg.column3}" />
+				<h:outputText
+					value="#{model.selectedEntity.module}" />
+					
+					
+				<h:outputText value="#{msg.column4}" />
+				<h:outputText
+					value="#{model.selectedEntity.module.filiere}" />
+					
+					<h:outputText value="#{msg.column5}" />
+				<h:outputText
+					value="#{model.selectedEntity.module.semestre}" />
+			</p:panelGrid>
+			<p:commandButton value="Fermer"
+				update=":formDataTable:datatable"
+				actionListener="#{model.unselect()}"
+				oncomplete="handleRequestshow(xhr, status, args)" />
+		</h:form>
+	</p:dialog>
+</ui:composition>
+
+</html>

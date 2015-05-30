@@ -61,6 +61,7 @@ public abstract class ModelBeanBase<T> {
     }
 
     public List<? extends EntityBase> getItems() {
+    	
 	return items;
     }
 
