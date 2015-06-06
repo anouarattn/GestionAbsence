@@ -35,7 +35,28 @@
 	<welcome-file-list>
 		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
-	
+	<context-param>
+   <param-name>primefaces.UPLOADER</param-name>
+   <param-value>commons</param-value>
+</context-param>
+	<filter>
+<filter-name>PrimeFaces FileUpload Filter</filter-name>
+<filter-class>
+org.primefaces.webapp.filter.FileUploadFilter
+</filter-class>
+<init-param>
+    <param-name>thresholdSize</param-name>
+    <param-value>51200</param-value>
+  </init-param>
+<init-param>
+    <param-name>uploadDirectory</param-name>
+    <param-value>C:\</param-value>
+   </init-param>
+</filter>
+<filter-mapping>
+<filter-name>PrimeFaces FileUpload Filter</filter-name>
+<servlet-name>Faces Servlet</servlet-name>
+</filter-mapping>
 	
 		
 <!--   <filter>

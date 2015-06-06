@@ -127,7 +127,7 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
-	<dependency>
+		<dependency>
 				<groupId>com.github.javafaker</groupId>
 				<artifactId>javafaker</artifactId>
 			</dependency>
