@@ -54,8 +54,6 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 	}
 	
     }
-
-
     
     public List<? extends EntityBase> filieres()
     {
@@ -84,8 +82,6 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 
     public void setFiliere(Filiere filiere) {
         this.filiere = filiere;
-    }
-    
-    
+    }    
     
 }

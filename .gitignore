@@ -37,3 +37,12 @@ projetEjb/.project
 projetEar/.project
 projetWeb/.project
 rebel.xml
+
+
+.settings
+projetEjb/.settings
+projetEar/.settings
+projetWeb/.settings
+/projetEar/
+/projetEjb/
+/projetWeb/

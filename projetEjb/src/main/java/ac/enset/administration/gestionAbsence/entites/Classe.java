@@ -105,7 +105,9 @@ public class Classe extends EntityBase  {
         this.beginAcademicYear = beginAcademicYear;
     }
     
-    
+    public String toString() {
+        return String.format("%s",  getNiveau() );
+    }
     
     
 }

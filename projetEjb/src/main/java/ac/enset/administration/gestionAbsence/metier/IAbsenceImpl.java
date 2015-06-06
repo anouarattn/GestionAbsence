@@ -111,6 +111,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return item;
     }
 
+    @Override
     public List<? extends EntityBase> get(Class<? extends EntityBase> clazz) {
 	Query q = em.createQuery("select type from " + clazz.getSimpleName()
 		+ " type");
@@ -363,8 +364,23 @@ public class IAbsenceImpl implements IAbsenceLocal {
     }
 
 
- 
- 
+	@Override
+	public void removeAll(Class<?> clazz) {
+		Query q = em.createQuery("delete  from " + clazz.getSimpleName() );
+			 q.getResultList();
+	}
 
 
 }
+
+    
+   
+    
+ 
+
+
+ 
+ 
+
+
+

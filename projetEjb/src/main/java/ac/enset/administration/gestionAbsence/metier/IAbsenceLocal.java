@@ -56,8 +56,6 @@ public interface IAbsenceLocal {
 
     public void add(Object entity);
     
-
-    
     public void activateAcademicYear(AnneeScolaire anneeScolaire);
     public void addAcademicYear(AnneeScolaire anneeScolaire) throws IncorrectAcademicYearException;
     public AnneeScolaire getActivatedAcademicYear();
@@ -81,6 +79,8 @@ public interface IAbsenceLocal {
     
     
     public ResourceBundle getBundle();
+
+    public void removeAll(Class<?> clazz);
     
 
 }

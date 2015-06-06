@@ -1,5 +1,3 @@
-
-
 function handleRequestAdd(xhr, status, args, isAcademicYear,isCancel) {
 	isAcademicYear = isAcademicYear || false;
 	isCancel = isCancel || false;
@@ -27,4 +25,8 @@ function handleRequestModify(xhr, status, args) {
 }
 function handleRequestshow(xhr, status, args) {
 	PF('jsShow').hide();
+}
+
+function handleRequestAbsence(xhr, status, args) {
+	PF('jsAbsence').hide();
 }

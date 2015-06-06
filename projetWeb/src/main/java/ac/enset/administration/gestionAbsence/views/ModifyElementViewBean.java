@@ -14,7 +14,6 @@ import ac.enset.administration.gestionAbsence.entites.Element;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
-import ac.enset.administration.gestionAbsence.metier.exception.FiliereNotFoundException;
 import ac.enset.administration.gestionAbsence.models.ModelBeanElement;
 
 @SuppressWarnings("serial")
