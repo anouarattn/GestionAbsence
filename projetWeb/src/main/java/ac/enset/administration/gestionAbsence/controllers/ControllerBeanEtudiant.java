@@ -39,8 +39,10 @@ public class ControllerBeanEtudiant extends ControllerBeanBase<Etudiant>
 	@PostConstruct
 	public void init() throws IOException {
 		entityToAdd = new Etudiant();
-		defaultImage = Base64.encodeBase64String(IOUtils.toByteArray(this.getClass()
-				.getResourceAsStream("/image-not-found.jpg")));
+//		System.out.println(this.getClass()
+//				);
+//		defaultImage = Base64.encodeBase64String(IOUtils.toByteArray(this.getClass()
+//				.getResourceAsStream("/image-not-found.jpg")));
 	}
 
 	@Override
