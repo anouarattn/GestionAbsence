@@ -7,6 +7,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
 
 
@@ -53,7 +55,7 @@ public abstract class ControllerBeanBase<V>
 	  }
 
 	  protected void addErrorMessage(Throwable e, String msg, String msg2,String formID) {
-	      FacesContext.getCurrentInstance().addMessage(formID, new FacesMessage(FacesMessage.SEVERITY_ERROR,  e.getMessage(), e.getMessage()));
+	      FacesContext.getCurrentInstance().addMessage(formID, new FacesMessage(FacesMessage.SEVERITY_ERROR,  StringEscapeUtils.unescapeJava(e.getMessage()), StringEscapeUtils.unescapeJava(e.getMessage())));
 	  }
     
 }

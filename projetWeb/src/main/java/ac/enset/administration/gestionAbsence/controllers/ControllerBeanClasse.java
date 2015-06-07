@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.primefaces.context.RequestContext;
 
 import ac.enset.administration.gestionAbsence.converters.StringToAcademicYear;
 import ac.enset.administration.gestionAbsence.entites.Classe;
@@ -54,10 +56,13 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 	metier.addClasse(entityToAdd);
 	modelBean.update();
 	academicYearBean.update();
+	RequestContext.getCurrentInstance().update("wrapper");
+	addSuccessMessage("growl",bundle.getString("addedClasse"),"");
 	}catch(Exception e)
 	{
-		
-	    addErrorMessage(e, "", "","");
+    	FacesContext.getCurrentInstance().validationFailed();
+    	addErrorMessage(e, "","","addForm:panelGrid");
+    	RequestContext.getCurrentInstance().update("addForm");
 	}
 	
     }

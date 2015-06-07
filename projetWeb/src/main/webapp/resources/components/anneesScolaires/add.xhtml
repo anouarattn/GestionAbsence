@@ -11,7 +11,7 @@
 		
 	<p:dialog header="Ajout" widgetVar="jsAddAnneeScolaire"
 		id="addAnneeScolaireDialog" modal="true" showEffect="fade"
-		hideEffect="fade" resizable="false" closable="false">
+		hideEffect="fade" resizable="true" closable="false">
 		<c:set var="modelas" value="#{modelBeanAnneeScolaire}" />
 		<c:set var="controlleras" value="#{controllerBeanAnneesScolaires}" />
 		<h:form id="addAnneeScolaireForm">
@@ -20,7 +20,7 @@
 
 				<p:outputLabel for="item1"  value="#{anneesScolaires.column3}"  />
 				<p:inputText id="item1" placeholder="#{anneesScolaires.column3}" value="#{controlleras.academicYear}"/>
-						<p:message  id="item1Msg" closable="true"  display="text"/>
+						<p:message   for="item1" closable="true"  display="text"/>
 				
 			</p:panelGrid>
 			<p:panelGrid columns="1" columnClasses="value">				
