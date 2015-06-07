@@ -13,6 +13,7 @@ import org.apache.commons.codec.binary.Base64;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Etudiant;
+import ac.enset.administration.gestionAbsence.metier.PasswordEncryptionService;
 import ac.enset.administration.gestionAbsence.models.ModelBeanEtudiant;
 
 @SuppressWarnings("serial")
@@ -25,7 +26,9 @@ public class ControllerBeanEtudiant extends ControllerBeanBase<Etudiant>
 	@Inject
 	private ModelBeanEtudiant model;
 	
- 
+	@Inject
+	private PasswordEncryptionService encryptionService;
+	
 	@PostConstruct
 	public void init() {
 		entityToAdd = new Etudiant();
@@ -37,8 +40,13 @@ public class ControllerBeanEtudiant extends ControllerBeanBase<Etudiant>
 		if (model.getPhotoFile() != null)
 			imageDataString = Base64
 					.encodeBase64String(model.getPhotoFile().getContents());
-		System.out.println(imageDataString);
 		entityToAdd.setPhoto(imageDataString);
+		System.out.println(imageDataString);
+//		String generateStorablePassword = encryptionService.generateStorablePassword();
+//		System.out.println(generateStorablePassword);
+//		
+//		System.out.println(encryptionService.authenticate(generateStorablePassword, encryptionService.getEncryptedPasswordFromStorablePassword(generateStorablePassword), encryptionService.getSaltFromStorablePassword(generateStorablePassword)));
+//		entityToAdd.setAuthentication(generateStorablePassword);
 		metier.add(entityToAdd);
 		model.update(); 
 		System.out.println("dd");

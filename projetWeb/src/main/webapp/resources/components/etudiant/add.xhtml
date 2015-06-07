@@ -65,7 +65,7 @@
 				<h:outputLabel for="item10" value="#{msg.column10}" />
 					<p:fileUpload id="item10"
 						value="#{modelBeanEtudiant.photoFile}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
-						auto="true" fileLimit="1" />
+						auto="true" fileLimit="1" immediate="true" ajax="true" fileUploadListener="#{modelBeanEtudiant.photoAdded}" />
 				<p:message for="item10" id="messageItem10" closable="true" display="text" />
 
 			</p:panelGrid>

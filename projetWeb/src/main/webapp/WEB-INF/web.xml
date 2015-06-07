@@ -48,10 +48,7 @@ org.primefaces.webapp.filter.FileUploadFilter
     <param-name>thresholdSize</param-name>
     <param-value>51200</param-value>
   </init-param>
-<init-param>
-    <param-name>uploadDirectory</param-name>
-    <param-value>C:\</param-value>
-   </init-param>
+
 </filter>
 <filter-mapping>
 <filter-name>PrimeFaces FileUpload Filter</filter-name>

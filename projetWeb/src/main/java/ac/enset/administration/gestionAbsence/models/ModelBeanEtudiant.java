@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import ac.enset.administration.gestionAbsence.entites.Etudiant;
@@ -27,9 +28,14 @@ public class ModelBeanEtudiant extends ModelBeanBase<Etudiant> implements Serial
 	}
 
 	public void setPhotoFile(UploadedFile photoFile) {
+		System.out.println(photoFile);
 		this.photoFile = photoFile;
 	}
 
-	
+	public void photoAdded(FileUploadEvent event)
+	{
+		System.out.println(event.getFile());
+		this.photoFile = event.getFile();
+	}
 
 }

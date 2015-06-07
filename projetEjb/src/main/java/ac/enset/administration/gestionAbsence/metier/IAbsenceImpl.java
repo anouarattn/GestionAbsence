@@ -367,10 +367,8 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	@Override
 	public void removeAll(Class<?> clazz) {
 		Query q = em.createQuery("delete  from " + clazz.getSimpleName() );
-			 q.getResultList();
+			 q.executeUpdate();
 	}
-
-
 }
 
     

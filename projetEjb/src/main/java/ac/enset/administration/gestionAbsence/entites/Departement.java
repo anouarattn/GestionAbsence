@@ -18,7 +18,7 @@ public class Departement extends EntityBase {
     private String nom;
     private String chef;
 
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="departement",cascade={CascadeType.REMOVE})
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="departement",cascade={CascadeType.REMOVE},orphanRemoval=true)
     private Set<Filiere> filieres;
     
 

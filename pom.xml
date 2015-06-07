@@ -129,10 +129,15 @@
 				<version>2.4</version>
 			</dependency>
 			<dependency>
-    <groupId>com.github.javafaker</groupId>
-    <artifactId>javafaker</artifactId>
-    <version>0.5</version>
-</dependency>
+				<groupId>com.github.javafaker</groupId>
+				<artifactId>javafaker</artifactId>
+				<version>0.5</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.shrinkwrap.resolver</groupId>
+				<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+					<version>2.1.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

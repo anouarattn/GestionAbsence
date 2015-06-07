@@ -8,13 +8,10 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
-import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +23,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import ac.enset.administration.gestionAbsence.entites.Departement;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
 import ac.enset.administration.gestionAbsence.models.ModelBeanDepartement;
+
 
 @RunWith(Arquillian.class)
 public class ITtest {
@@ -49,17 +47,22 @@ public class ITtest {
 	
 	 @Deployment
 	    public static EnterpriseArchive createDeployment() {
-		   EnterpriseArchive ear = ShrinkWrap.create(EnterpriseArchive.class, "application-ear.ear")
-
-                   .addAsDirectory("C:/Users/anouarattn/Documents/jbossGA/standalone/deployments/projetEar.ear")
-                   .as(EnterpriseArchive.class);
-		   
-		   JavaArchive testLibraryHelper = ShrinkWrap.create(JavaArchive.class)
-                   .addClass(ITtest.class);
-		   	ear.addAsLibrary(testLibraryHelper)
-		   	.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");;
-		   return ear;
+		 System.out.println(new File(".").getAbsolutePath());
+		 WebArchive war = ShrinkWrap.create(ZipImporter.class, "projetWeb.war").
+				 importFrom(new File("./target/projetWeb.war"))
+         .as(WebArchive.class).addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addClass(ITtest.class);
+		 
+		 JavaArchive jar = ShrinkWrap.create(ZipImporter.class, "projetEjb.jar").
+				 importFrom(new File("./../projetEjb/target/projetEjb.jar")).as(JavaArchive.class)
+				 		.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
+		 
+		 
+		 EnterpriseArchive ear = ShrinkWrap.create(EnterpriseArchive.class, "projetEar.ear")
+				 .addAsModule(war).addAsModule(jar);
+		 return ear;
+		 
 	    }
+	 
 	 
 	@Before
 	public void init()
