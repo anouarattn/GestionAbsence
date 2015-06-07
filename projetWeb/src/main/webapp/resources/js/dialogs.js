@@ -1,7 +1,6 @@
 function handleRequestAdd(xhr, status, args, isAcademicYear,isCancel) {
 	isAcademicYear = isAcademicYear || false;
 	isCancel = isCancel || false;
-	
 	if(isCancel )
 		{
 		if (isAcademicYear == true)
@@ -10,7 +9,7 @@ function handleRequestAdd(xhr, status, args, isAcademicYear,isCancel) {
 			PF('jsAdd').hide();
 		}
 		}
-	if (args && !args.validationFailed) {
+	else if (args && !args.validationFailed) {
 		if (isAcademicYear == true)
 			PF('jsAddAnneeScolaire').hide();
 		else
@@ -20,8 +19,13 @@ function handleRequestAdd(xhr, status, args, isAcademicYear,isCancel) {
 	
 }
 
-function handleRequestModify(xhr, status, args) {
+function handleRequestModify(xhr, status, args ,isCancel) {
+	
+	if(isCancel )
+		PF('jsModify').hide();
+	else if (args && !args.validationFailed) {
 	PF('jsModify').hide();
+	}
 }
 function handleRequestshow(xhr, status, args) {
 	PF('jsShow').hide();

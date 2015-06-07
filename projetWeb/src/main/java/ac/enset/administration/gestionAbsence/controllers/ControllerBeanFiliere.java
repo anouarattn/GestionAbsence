@@ -34,7 +34,6 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
 
     String typeFiliereString;
     
-    Departement departement;
 
     @PostConstruct
     public void init() {
@@ -42,14 +41,13 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
     }
 
     public void addEntity() throws NotFoundException {
-	if (!metier.exist(Departement.class, departement.getId()))
+	if (!metier.exist(Departement.class, entityToAdd.getDepartement().getId()))
 	    throw new DepartementNotFoundException(
 		    metier.getBundle().getString("DepartementNotFound"));
 	if (! typeFilieres.contains(TypeFiliere.valueOf(typeFiliereString)))
 	    throw new TypeFiliereNotFoundException(
 		    metier.getBundle().getString("TypeFiliereNotFound"));
 	entityToAdd.setTypeFiliere(TypeFiliere.valueOf(typeFiliereString));
-	entityToAdd.setDepartement(departement);
 	metier.add(entityToAdd);
 	modelBean.update();
     }
@@ -77,13 +75,7 @@ public class ControllerBeanFiliere extends ControllerBeanBase<Filiere>
 	this.departements = departements;
     }
 
-    public Departement getDepartement() {
-        return departement;
-    }
 
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
-    }
-    
+
     
 }

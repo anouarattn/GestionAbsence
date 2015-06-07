@@ -18,9 +18,9 @@
 
 			<p:panelGrid columns="3" columnClasses="value" rendered="#{empty model.items}">
 
-				<h:outputLabel for="item1"  value="#{anneesScolaires.column3}"  />
+				<p:outputLabel for="item1"  value="#{anneesScolaires.column3}"  />
 				<p:inputText id="item1" placeholder="#{anneesScolaires.column3}" value="#{controlleras.academicYear}"/>
-						<p:message for="item1" closable="true" display="text"/>
+						<p:message id="item1Msg" for="item1" closable="true" display="text"/>
 				
 			</p:panelGrid>
 			<p:panelGrid columns="1" columnClasses="value">				

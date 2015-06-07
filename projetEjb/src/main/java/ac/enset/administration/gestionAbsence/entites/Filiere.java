@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
@@ -18,8 +21,11 @@ import javax.persistence.Table;
 public class Filiere extends EntityBase {
 
    
+	@NotEmpty
     private String nom;
 
+    
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "FK_Departement")
     private Departement departement;
@@ -31,6 +37,7 @@ public class Filiere extends EntityBase {
     @OneToMany(fetch=FetchType.EAGER,mappedBy="filiere",cascade={CascadeType.REMOVE})
     private Set<Module> modules;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private TypeFiliere typeFiliere;
 

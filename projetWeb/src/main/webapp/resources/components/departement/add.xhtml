@@ -9,20 +9,23 @@
 		hideEffect="fade" resizable="false" closable="false">
 		<h:form id="addForm">
 
-			<p:panelGrid columns="2" columnClasses="value">
+			<p:panelGrid columns="3" columnClasses="value">
 
-				<h:outputText for="item1" value="#{msg.column2}" />
+				<p:outputLabel for="item1" value="#{msg.column2}" />
 				<p:inputText id="item1" placeholder="#{msg.column2}" value="#{controller.entityToAdd.nom}" />
-
-				<h:outputText for="item2" value="#{msg.column3}" />
+										<p:message for="item1" closable="true" display="text"/>
+				
+				<p:outputLabel for="item2" value="#{msg.column3}" />
 				<p:inputText id="item2" placeholder="#{msg.column3}" value="#{controller.entityToAdd.chef}" />
+										<p:message for="item2" closable="true" display="text"/>
+				
 			</p:panelGrid>
 			<p:commandButton value="Ajout"
-				update=":formDataTable:datatable"
+				update=":formDataTable:datatable :addForm"
 				action="#{controller.addEntity()}"
 				oncomplete="handleRequestAdd(xhr, status, args)" />
 			<p:commandButton value="Annuler"
-				oncomplete="handleRequestAdd(xhr, status, args)" />
+				oncomplete="handleRequestAdd(xhr, status, args, false,true)" update=":addForm"  immediate="true" />
 		</h:form>
 
 	</p:dialog>

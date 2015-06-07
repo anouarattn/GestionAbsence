@@ -20,6 +20,8 @@ import ac.enset.administration.gestionAbsence.metier.exception.PasswordException
 public class PasswordEncryptionService {
 	
 	
+
+
 	public boolean authenticate(String attemptedPassword,
 			byte[] encryptedPassword, byte[] salt)
 
@@ -92,32 +94,37 @@ public class PasswordEncryptionService {
 
 	}
 	
+
 	
-	public String getStorablePassword(byte[] encryptedPassword,byte[] salt) throws PasswordException, IOException
+	public byte[] getStorablePassword(byte[] encryptedPassword,byte[] salt) throws PasswordException, IOException
 	{
-		if(salt.length != 8 || encryptedPassword.length!= 160)
+		
+
+		if(salt.length != 8 || encryptedPassword.length!= 20)
 			throw new PasswordException("salt or encryptedPassword error data(length)");
 		byte[] salt1 = new byte[]{salt[0],salt[2],salt[4],salt[6]};
 		byte[] salt2 = new byte[]{salt[1],salt[3],salt[5],salt[7]};
-		
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
 		outputStream.write( salt1 );
 		outputStream.write(encryptedPassword);
 		outputStream.write( salt2);
+		String tt = Arrays.toString(outputStream.toByteArray());
+		
+		return outputStream.toByteArray();
+	}
+	
+	
+	public byte[] getEncryptedPasswordFromStorablePassword(byte[] storablePassword)
+	{
 
-		return outputStream.toByteArray().toString();
+		byte[] data = storablePassword;
+		
+		return Arrays.copyOfRange(data, 4, 24);
 	}
 	
-	
-	public byte[] getEncryptedPasswordFromStorablePassword(String storablePassword)
+	public byte[] getSaltFromStorablePassword(byte[] storablePassword)
 	{
-		byte[] data = storablePassword.getBytes();
-		return Arrays.copyOfRange(data, 4, 164);
-	}
-	
-	public byte[] getSaltFromStorablePassword(String storablePassword)
-	{
-		byte[] data = storablePassword.getBytes();
+		byte[] data = storablePassword;
 		byte[] salt1 = new byte[]{data[0],data[1],data[2],data[3]};
 		byte[] salt2 = new byte[]{data[data.length -4],data[data.length -3],data[data.length -2],data[data.length -1]};
 		
@@ -125,13 +132,19 @@ public class PasswordEncryptionService {
 	}
 	
 	
-	public String generateStorablePassword() throws NoSuchAlgorithmException, InvalidKeySpecException, PasswordException, IOException
+	public byte[] generateStorablePassword() throws NoSuchAlgorithmException, InvalidKeySpecException, PasswordException, IOException
 	{
+
 		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-	    String password = new BigInteger(130, random).toString(32);
-	    System.out.println(password);
+	    String password = new BigInteger(40, random).toString(15);
 	    byte[] salt = generateSalt();
 	    byte[] encryptedPassword = getEncryptedPassword(password, salt);
+	    
+	    
+	    
 	    return getStorablePassword(encryptedPassword, salt);
+
 	}
+	
+	
 }

@@ -48,12 +48,12 @@ public abstract class ControllerBeanBase<V>
     }
     
   
-    protected void addSuccessMessage(String msg,String msg2) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg2));
+    protected void addSuccessMessage(String formID, String msg,String msg2) {
+	    FacesContext.getCurrentInstance().addMessage(formID, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg2));
 	  }
 
-	  protected void addErrorMessage(Throwable e, String msg, String msg2) {
-	      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,  e.getMessage(), e.getMessage()));
+	  protected void addErrorMessage(Throwable e, String msg, String msg2,String formID) {
+	      FacesContext.getCurrentInstance().addMessage(formID, new FacesMessage(FacesMessage.SEVERITY_ERROR,  e.getMessage(), e.getMessage()));
 	  }
     
 }

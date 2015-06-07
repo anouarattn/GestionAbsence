@@ -13,14 +13,14 @@
 				rendered="#{not empty model.selectedEntity}"
 				columnClasses="value">
 
-				<h:outputText value="#{msg.column1}" />
+				<p:outputLabel value="#{msg.column1}" />
 				<h:outputText value="#{model.selectedEntity.id}" />
 
-				<h:outputText value="#{msg.column2}" />
+				<p:outputLabel value="#{msg.column2}" />
 				<h:outputText
 					value="#{model.selectedEntity.nom}" />
 
-				<h:outputText value="#{msg.column3}" />
+				<p:outputLabel value="#{msg.column3}" />
 				<h:outputText
 					value="#{model.selectedEntity.chef}" />
 			</p:panelGrid>

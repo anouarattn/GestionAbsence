@@ -47,4 +47,9 @@ public class ControllerBeanDepartement extends ControllerBeanBase<Departement> i
 	modelBean.update();
 	}
     }    
+    
+    public void reset()
+    {
+    	entityToAdd = new Departement();
+    }
 }

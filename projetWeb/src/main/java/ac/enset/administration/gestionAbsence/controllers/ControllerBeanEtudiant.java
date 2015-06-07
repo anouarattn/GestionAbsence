@@ -1,5 +1,8 @@
 package ac.enset.administration.gestionAbsence.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
@@ -28,28 +32,32 @@ public class ControllerBeanEtudiant extends ControllerBeanBase<Etudiant>
 	
 	@Inject
 	private PasswordEncryptionService encryptionService;
+
+	private String defaultImage;
+	
 	
 	@PostConstruct
-	public void init() {
+	public void init() throws IOException {
 		entityToAdd = new Etudiant();
+		defaultImage = Base64.encodeBase64String(IOUtils.toByteArray(this.getClass()
+				.getResourceAsStream("/image-not-found.jpg")));
 	}
 
 	@Override
 	public void addEntity() throws Exception {
+
 		String imageDataString = null;
 		if (model.getPhotoFile() != null)
 			imageDataString = Base64
 					.encodeBase64String(model.getPhotoFile().getContents());
+		else 
+			imageDataString = defaultImage;
 		entityToAdd.setPhoto(imageDataString);
-		System.out.println(imageDataString);
-//		String generateStorablePassword = encryptionService.generateStorablePassword();
-//		System.out.println(generateStorablePassword);
-//		
-//		System.out.println(encryptionService.authenticate(generateStorablePassword, encryptionService.getEncryptedPasswordFromStorablePassword(generateStorablePassword), encryptionService.getSaltFromStorablePassword(generateStorablePassword)));
-//		entityToAdd.setAuthentication(generateStorablePassword);
+		entityToAdd.setAuthentication(encryptionService.generateStorablePassword());
 		metier.add(entityToAdd);
+		model.setPhotoFile(null);
+		reset();
 		model.update(); 
-		System.out.println("dd");
 	}
 
 

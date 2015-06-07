@@ -28,13 +28,11 @@ public class ModelBeanEtudiant extends ModelBeanBase<Etudiant> implements Serial
 	}
 
 	public void setPhotoFile(UploadedFile photoFile) {
-		System.out.println(photoFile);
 		this.photoFile = photoFile;
 	}
 
 	public void photoAdded(FileUploadEvent event)
 	{
-		System.out.println(event.getFile());
 		this.photoFile = event.getFile();
 	}
 

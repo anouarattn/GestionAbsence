@@ -6,6 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import ac.enset.administration.gestionAbsence.converters.StringToAcademicYear;
 import ac.enset.administration.gestionAbsence.entites.Classe;
@@ -26,10 +29,14 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
     @Inject
     private ModelBeanAnneeScolaire academicYearBean;
     
+    @NotEmpty
+    @Pattern(regexp="2[0-9]{3}/2[0-9]{3}",message="L'année Scolaire doit être de la forme ex:2014/2015")
     private String promotionAcademicYear;
+    
+    @NotEmpty
+    @Pattern(regexp="2[0-9]{3}/2[0-9]{3}",message="L'année Scolaire doit être de la forme ex:2014/2015")
     private String startAcademicYear;
     
-    private Filiere filiere;
     
     @PostConstruct
     public void init() {
@@ -38,11 +45,11 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 
     @Override
     public void addEntity() throws Exception {
-
 	try{
-	if (!metier.exist(Filiere.class, filiere.getId()))
+	if (!metier.exist(Filiere.class,entityToAdd.getFiliere().getId())){
 	    throw new FiliereNotFoundException(metier.getBundle().getString("FiliereNotFound"));
-	entityToAdd.setFiliere(filiere);
+	}
+	System.out.println("sldkfjsdlkf");
 	entityToAdd.setPromotionAcademicYear(StringToAcademicYear.convert(promotionAcademicYear));
 	entityToAdd.setBeginAcademicYear(StringToAcademicYear.convert(startAcademicYear));
 	metier.addClasse(entityToAdd);
@@ -50,7 +57,8 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 	academicYearBean.update();
 	}catch(Exception e)
 	{
-	    addErrorMessage(e, "", "");
+		
+	    addErrorMessage(e, "", "","");
 	}
 	
     }
@@ -76,12 +84,5 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
         this.startAcademicYear = startAcademicYear;
     }
 
-    public Filiere getFiliere() {
-        return filiere;
-    }
-
-    public void setFiliere(Filiere filiere) {
-        this.filiere = filiere;
-    }    
     
 }

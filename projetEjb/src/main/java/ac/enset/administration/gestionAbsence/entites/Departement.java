@@ -8,13 +8,15 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "departement")
 public class Departement extends EntityBase {
 
     
-
+	@NotEmpty
     private String nom;
     private String chef;
 

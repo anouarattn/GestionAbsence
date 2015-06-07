@@ -278,13 +278,17 @@ public class IAbsenceImpl implements IAbsenceLocal {
     @Override
     public void addClasse(Classe classe) throws IncorrectAcademicYearException {
 	AnneeScolaire anneeScolaire;
+
+	if(!isValidAcademicYear(classe.getBeginAcademicYear()) || !isValidAcademicYear(classe.getBeginAcademicYear()))
+		throw new IncorrectAcademicYearException(bundle.getString("IncorrectAcademicYearformat"));
+	
 	if ((anneeScolaire = getManagedVersionOfAcademicYear(classe
-		.getBeginAcademicYear())) == null && isValidAcademicYear(classe.getBeginAcademicYear()) )
+		.getBeginAcademicYear())) == null)
 	    em.persist(classe.getBeginAcademicYear()); // if no academic year exist add one
 	else
 	    classe.setBeginAcademicYear(anneeScolaire); // else set it in the classe
 	if ((anneeScolaire = getManagedVersionOfAcademicYear(classe
-		.getPromotionAcademicYear())) == null && isValidAcademicYear(classe.getBeginAcademicYear())){
+		.getPromotionAcademicYear())) == null ){
 	    classe.getPromotionAcademicYear().setShowable(false);
 	    em.persist(classe.getPromotionAcademicYear()); // if no academic year exist add one
 	}

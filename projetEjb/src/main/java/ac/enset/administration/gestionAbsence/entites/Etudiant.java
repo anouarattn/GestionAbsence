@@ -31,7 +31,7 @@ public class Etudiant  extends EntityBase {
 	@Lob
 	private String photo;
 	
-	private String authentication;
+	private byte[] authentication;
 	
 	@ManyToOne
     @JoinColumn(name="FK_Classe")
@@ -117,13 +117,11 @@ public class Etudiant  extends EntityBase {
 		this.classe = classe;
 	}
 
-	
-	
-	public String getAuthentication() {
+	public byte[] getAuthentication() {
 		return authentication;
 	}
 
-	public void setAuthentication(String authentication) {
+	public void setAuthentication(byte[] authentication) {
 		this.authentication = authentication;
 	}
 
