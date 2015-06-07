@@ -49,7 +49,6 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 	if (!metier.exist(Filiere.class,entityToAdd.getFiliere().getId())){
 	    throw new FiliereNotFoundException(metier.getBundle().getString("FiliereNotFound"));
 	}
-	System.out.println("sldkfjsdlkf");
 	entityToAdd.setPromotionAcademicYear(StringToAcademicYear.convert(promotionAcademicYear));
 	entityToAdd.setBeginAcademicYear(StringToAcademicYear.convert(startAcademicYear));
 	metier.addClasse(entityToAdd);

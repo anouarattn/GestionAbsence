@@ -10,6 +10,7 @@ function handleRequestAdd(xhr, status, args, isAcademicYear,isCancel) {
 		}
 		}
 	else if (args && !args.validationFailed) {
+		console.log("dddlmsdsldkf")
 		if (isAcademicYear == true)
 			PF('jsAddAnneeScolaire').hide();
 		else

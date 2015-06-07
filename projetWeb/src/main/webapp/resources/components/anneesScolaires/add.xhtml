@@ -20,7 +20,7 @@
 
 				<p:outputLabel for="item1"  value="#{anneesScolaires.column3}"  />
 				<p:inputText id="item1" placeholder="#{anneesScolaires.column3}" value="#{controlleras.academicYear}"/>
-						<p:message id="item1Msg" for="item1" closable="true" display="text"/>
+						<p:message  id="item1Msg" closable="true"  display="text"/>
 				
 			</p:panelGrid>
 			<p:panelGrid columns="1" columnClasses="value">				
@@ -28,7 +28,7 @@
 			</p:panelGrid>
 			<p:commandButton value="Confirmé" update=":addAnneeScolaireForm"
 				action="#{controlleras.addEntity()}" 
-				oncomplete="handleRequestAdd(xhr, status, args, true)" />
+				oncomplete="handleRequestAdd(xhr, status, args, true,false)" />
 			<p:commandButton value="Annuler"
 				oncomplete="handleRequestAdd(xhr, status, args, true,true)" update=":addAnneeScolaireForm"  immediate="true"/>
 		</h:form>

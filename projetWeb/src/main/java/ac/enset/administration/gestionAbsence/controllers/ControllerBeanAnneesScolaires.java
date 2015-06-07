@@ -2,6 +2,7 @@ package ac.enset.administration.gestionAbsence.controllers;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
@@ -51,12 +52,18 @@ public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScola
 	metier.addAcademicYear(entityToAdd);
 	modelBean.update();
 	RequestContext.getCurrentInstance().update("wrapper");
-	addSuccessMessage(":growl",bundle.getString("addedAcademicYear"),"");
-	academicYear = "";
+	addSuccessMessage("growl",bundle.getString("addedAcademicYear"),"");
+
         }catch(Exception e)
         {
-        	System.out.println("sdflksd");
+        	FacesContext.getCurrentInstance().validationFailed();
+        	e.printStackTrace();
             addErrorMessage(e, "","","addAnneeScolaireForm:item1Msg");
+        	RequestContext.getCurrentInstance().update("wrapper");
+
+        	//RequestContext.getCurrentInstance().update("addAnneeScolaireForm");
+        }finally{
+        	academicYear = "";
         }
     }
     
