@@ -3,11 +3,16 @@ package ac.enset.administration.gestionAbsence.controllers;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -69,6 +74,44 @@ public class ControllerBeanEtudiant extends ControllerBeanBase<Etudiant>
 	}
 
 
+	private Etudiant etudiant ;
+	
+	 public Etudiant getEtudiant() {
+		return etudiant;
+	}
+
+	public void setEtudiant(Etudiant etudiant) {
+		this.etudiant = etudiant;
+	}
+
+	@ManagedProperty(value="#{param.idetu}")
+	    private String idetu;
+	 
+	    
+	    public String getIdetu() {
+			return idetu;
+		}
+
+		public void setIdetu(String idetu) {
+			this.idetu = idetu;
+		}
+		
+		private String getidetuFromJSF(FacesContext context) {
+			Map<String, String> parameters = context.getExternalContext().getRequestParameterMap();
+			
+			return parameters.get("idetu");
+		}
+		
+		public String outcome() {
+			FacesContext context = FacesContext.getCurrentInstance();
+			this.idetu = getidetuFromJSF(context);
+					
+			HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
+			HttpSession httpSession = request.getSession(false);
+			httpSession.setAttribute("idetu", idetu);
+			
+			return "absenceetu?facses-redirect=true";
+		}
 	
 
 }

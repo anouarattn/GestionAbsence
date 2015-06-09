@@ -55,7 +55,7 @@ public class Module extends EntityBase {
 
     @Override
     public String toString() {
-        return id+":"+name;
+        return id+" "+filiere.getNom()+" :"+name;
     }
     
     

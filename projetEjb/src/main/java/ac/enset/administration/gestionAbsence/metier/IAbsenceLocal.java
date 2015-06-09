@@ -6,10 +6,13 @@ import java.util.ResourceBundle;
 
 import javax.ejb.Local;
 
+import ac.enset.administration.gestionAbsence.entites.AbsenceEtud;
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
+import ac.enset.administration.gestionAbsence.entites.Element;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
+import ac.enset.administration.gestionAbsence.entites.Etudiant;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Semestre;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
@@ -82,5 +85,7 @@ public interface IAbsenceLocal {
 
     public void removeAll(Class<?> clazz);
     
-
+    public List<Etudiant> getEtudiantByActivatedYears();
+    public List<Element> getElemnentmoduleEtudiant(Long id);
+    public List<AbsenceEtud> getElemnentmoduleEtudiantAbsence(Long id);
 }

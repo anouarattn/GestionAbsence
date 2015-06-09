@@ -65,13 +65,19 @@
 								</p:outputPanel>
 
 							</f:facet>
+							
 							<p:column selectionMode="multiple"
 								style="width:46px;text-align:center" />
 							<p:column filterBy="#{item.id}" headerText="#{msg.column1}"
 								sortBy="#{item.id}" filterMatchMode="contains"
 								filterStyle="display:none"
-								style="width:77px;text-align: center;">
-								<h:outputText value="#{item.id}" />
+								style="width:120px;text-align: center;">
+								
+								<h:commandButton id="submit" 
+									value="Absence #{item.id}" action="#{controllerBeanEtudiant.outcome()}">
+								 	<f:param name="idetu" value="#{item.id}" />
+								</h:commandButton>
+								
 							</p:column>
 							<p:column filterBy="#{item.fName}" headerText="#{msg.column2}"
 								sortBy="#{item.fName}" filterMatchMode="contains"

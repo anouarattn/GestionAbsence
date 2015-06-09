@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Modification"
+						widgetVar="jsModify"
+						id="modifyDialog" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="false" closable="false">
+						<h:form id="modifyForm">
+
+							<p:panelGrid columns="2"
+								rendered="#{not empty model.selectedEntity}"
+								columnClasses="value">
+
+							
+
+								<h:outputText value="#{msg.column2}" />
+								<p:inputText
+									value="#{model.selectedEntity.nom}" />
+
+								<h:outputText value="#{msg.column3}" />
+								<p:inputText
+									value="#{model.selectedEntity.prenom}" />
+								<h:outputText value="#{msg.column4}" />
+								<p:inputText
+									value="#{model.selectedEntity.specialite}" />
+							</p:panelGrid>
+							<p:commandButton value="Modifier"
+								update=":formDataTable:datatable"
+								actionListener="#{model.modifyEntity()}"
+								oncomplete="handleRequestModify(xhr, status, args)" />
+							<p:commandButton value="Annuler"
+								update=":formDataTable:datatable"
+								actionListener="#{model.cancleModifyEntity()}"
+								oncomplete="handleRequestModify(xhr, status, args)" />
+						</h:form>
+
+					</p:dialog>
+
+</ui:composition>
+
+</html>
