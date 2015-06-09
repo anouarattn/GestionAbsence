@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:shiro="http://shiro.apache.org/tags">
+
+<ui:composition>
+
+
+		
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<i class="fa fa-user fa-fw logged-out"></i>
+			<i class="fa fa-caret-down logged-out"></i>
+		</a>
+		<ul class="dropdown-menu dropdown-user">
+			<li>
+				<a href="login.xhtml">
+				<i class="fa fa-sign-in"></i>
+					Vous n'êtes pas authentifié
+				</a>
+			</li>
+		</ul>
+	</li>
+	
+</ui:composition>
+</html>

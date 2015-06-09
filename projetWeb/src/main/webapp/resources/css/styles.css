@@ -13,3 +13,14 @@
         margin-left: auto;
     }
 }
+
+
+.logged-out
+{
+	color: #f43340;
+}
+
+.logged-in
+{
+	color: #47bc14;
+}

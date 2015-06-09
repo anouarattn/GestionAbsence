@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Modification" widgetVar="jsModify" id="modifyDialog"
+		modal="true" showEffect="fade" hideEffect="fade" resizable="true"
+		closable="false">
+		<h:form id="modifyForm">
+
+			<p:panelGrid columns="3" columnClasses="value">
+			
+				<h:outputLabel for="item1" value="#{msg.column2}" />
+				<p:inputText id="item1" placeholder="#{msg.column2}"
+					value="#{modifyElementViewBean.selectedEntity.name}" />
+				<p:message for="item1" closable="true" display="text" />
+
+				<h:outputLabel for="item2" value="#{msg.column4}" />
+				<p:selectOneMenu id="item2" value="#{modifyElementViewBean.filiere}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:ajax listener="#{modifyElementViewBean.filiereChanged()}" render="item3" />
+					<f:selectItem itemLabel="Selectionner" itemValue="" />	
+					<f:selectItems value="#{modifyElementViewBean.filieres}" />
+				</p:selectOneMenu>
+				<p:message for="item2" closable="true" display="text" />
+				
+				
+				<h:outputLabel for="item3" value="#{msg.column3}" />
+				<p:selectOneMenu id="item3" value="#{modifyElementViewBean.selectedEntity.module}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem itemLabel="Selectionner" itemValue="" />	
+					<f:selectItems value="#{modifyElementViewBean.modules}" />
+				</p:selectOneMenu>
+				<p:message for="item3" closable="true" display="text" />
+
+			</p:panelGrid>
+				<p:commandButton value="Ajout" update=":formDataTable:datatable :modifyForm"
+				action="#{modifyElementViewBean.modifyEntity()}"
+				oncomplete="handleRequestModify(xhr, status, args)" />
+			<p:commandButton value="Annuler"
+				oncomplete="handleRequestModify(xhr, status, args)"  update=":formDataTable:datatable :modifyForm"  action="#{modelBeanElement.cancleModifyEntity()}">
+				</p:commandButton>
+		</h:form>
+
+	</p:dialog>
+
+</ui:composition>
+
+</html>

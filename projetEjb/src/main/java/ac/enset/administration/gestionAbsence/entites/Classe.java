@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
 @Entity
@@ -18,18 +19,22 @@ public class Classe extends EntityBase  {
     @Enumerated(EnumType.STRING)
     private Niveau niveau;
      
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "FK_Filiere")
     private Filiere filiere;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "FK_currentAcademicYear")
     private AnneeScolaire currentAcademicYear;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "FK_promotionAcademicYear")
     private AnneeScolaire promotionAcademicYear;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "FK_beginAcademicYear")
     private AnneeScolaire beginAcademicYear;
@@ -105,7 +110,9 @@ public class Classe extends EntityBase  {
         this.beginAcademicYear = beginAcademicYear;
     }
     
-    
+    public String toString() {
+        return String.format("%s",  getNiveau() );
+    }
     
     
 }

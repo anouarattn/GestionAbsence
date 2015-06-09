@@ -1,0 +1,85 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Ajout" widgetVar="jsAdd" id="addDialog" modal="true"
+		showEffect="fade" hideEffect="fade" resizable="true" closable="false">
+		<h:form id="addForm" enctype="multipart/form-data">
+
+			<p:panelGrid></p:panelGrid>
+			<p:panelGrid columns="3" columnClasses="value">
+			
+
+				<h:outputLabel for="item2" value="#{msg.column2}" />
+				<p:inputText id="item2" placeholder="#{msg.column2}"
+					value="#{controller.entityToAdd.fName}" />
+				<p:message for="item2" closable="true" display="text" />
+
+
+
+				<h:outputLabel for="item3" value="#{msg.column3}" />
+				<p:inputText id="item3" placeholder="#{msg.column3}"
+					value="#{controller.entityToAdd.lName}" />
+				<p:message for="item3" closable="true" display="text" />
+				
+				<h:outputLabel for="item4" value="#{msg.column4}" />
+				<p:inputText id="item4" placeholder="#{msg.column4}"
+					value="#{controller.entityToAdd.cin}" />
+				<p:message for="item4" closable="true" display="text" />
+				
+				<h:outputLabel for="item5" value="#{msg.column5}" />
+				<p:inputText id="item5" placeholder="#{msg.column5}"
+					value="#{controller.entityToAdd.adresse}" />
+				<p:message for="item5" closable="true" display="text" />
+
+				<h:outputLabel for="item6" value="#{msg.column6}" />
+				<p:inputText id="item6" placeholder="#{msg.column6}"
+					value="#{controller.entityToAdd.email}" />
+				<p:message for="item6" closable="true" display="text" />
+
+
+
+
+				<h:outputLabel for="item8" value="#{msg.column8}" />
+				<p:inputText id="item8" placeholder="#{msg.column8}"
+					value="#{controller.entityToAdd.tel}" />
+				<p:message for="item8" closable="true" display="text" />
+
+
+
+				
+				
+
+				<h:outputLabel for="item9" value="#{msg.column9}" />
+				<h:selectOneMenu id="item9" value="#{controller.entityToAdd.departement}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{controller.departements()}" />
+				</h:selectOneMenu>
+				<p:message for="item9" closable="true" display="text" />
+
+				<h:outputLabel for="item10" value="#{msg.column7}" />
+					<p:fileUpload id="item10"
+						value="#{model.photoFile}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
+						auto="true" fileLimit="1" immediate="true" ajax="true" fileUploadListener="#{model.photoAdded}" />
+				<p:message for="item10" id="messageItem10" closable="true" display="text" />
+
+			</p:panelGrid>
+			<p:commandButton value="Ajout" update=":formDataTable:datatable :addForm"
+				action="#{controller.addEntity()}"
+				oncomplete="handleRequestAdd(xhr, status, args,false,false)" />
+			<p:commandButton value="Annuler"
+				oncomplete="handleRequestAdd(xhr, status, args,false,true)" update=":addForm"
+				action="#{controller.reset()}" immediate="true"/>
+		</h:form>
+
+	</p:dialog>
+
+</ui:composition>
+
+</html>
+
+

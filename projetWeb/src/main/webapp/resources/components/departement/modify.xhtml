@@ -8,31 +8,34 @@
 	<p:dialog header="Modification"
 						widgetVar="jsModify"
 						id="modifyDialog" modal="true" showEffect="fade"
-						hideEffect="fade" resizable="false" closable="false">
+						hideEffect="fade" resizable="true" closable="false">
 						<h:form id="modifyForm">
 
-							<p:panelGrid columns="2"
+							<p:panelGrid columns="3"
 								rendered="#{not empty model.selectedEntity}"
 								columnClasses="value">
 
 							
 
-								<h:outputText value="#{msg.column2}" />
-								<p:inputText
+								<p:outputLabel for="item1" value="#{msg.column2}" />
+								<p:inputText id="item1"
 									value="#{model.selectedEntity.nom}" />
+								<p:message for="item1" closable="true" display="text"/>
 
-								<h:outputText value="#{msg.column3}" />
-								<p:inputText
+								<p:outputLabel for="item2" value="#{msg.column3}" />
+								<p:inputText id="item2"
 									value="#{model.selectedEntity.chef}" />
+								<p:message for="item2" closable="true" display="text"/>
+									
 							</p:panelGrid>
 							<p:commandButton value="Modifier"
-								update=":formDataTable:datatable"
+								update=":formDataTable:datatable :modifyForm"
 								actionListener="#{model.modifyEntity()}"
 								oncomplete="handleRequestModify(xhr, status, args)" />
 							<p:commandButton value="Annuler"
-								update=":formDataTable:datatable"
-								actionListener="#{model.cancleModifyEntity()}"
-								oncomplete="handleRequestModify(xhr, status, args)" />
+								update=":formDataTable:datatable :modifyForm"
+								actionListener="#{model.unselect()}"
+								oncomplete="handleRequestModify(xhr, status, args, false,true)"  immediate="true" />
 						</h:form>
 
 					</p:dialog>

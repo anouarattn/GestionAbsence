@@ -8,19 +8,25 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "departement")
 public class Departement extends EntityBase {
 
     
-
+	@NotEmpty
     private String nom;
     private String chef;
 
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="departement",cascade={CascadeType.REMOVE})
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="departement",cascade={CascadeType.REMOVE},orphanRemoval=true)
     private Set<Filiere> filieres;
     
-
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="departement",cascade={CascadeType.REMOVE},orphanRemoval=true)
+    private Set<Enseignent> enseignents;
+    
+    
     public String getNom() {
 	return nom;
     }
@@ -38,26 +44,22 @@ public class Departement extends EntityBase {
         this.chef = chef;
     }
 
-    public Departement(String nom) {
-	super();
-	this.nom = nom;
-    }
 
     public Departement() {
 	super();
-	// TODO Auto-generated constructor stub
     }
 
-    public Departement(String nom, String chef) {
-	super();
-	this.nom = nom;
-	this.chef = chef;
-    }
+    public Set<Enseignent> getEnseignents() {
+		return enseignents;
+	}
 
-    @Override
+	public void setEnseignents(Set<Enseignent> enseignents) {
+		this.enseignents = enseignents;
+	}
+
+	@Override
     public String toString() {
-	return "Departement [id=" + id + ", nom=" + nom + ", chef=" + chef
-		+ "]";
+	return  id+":"+nom;
     }
     
 

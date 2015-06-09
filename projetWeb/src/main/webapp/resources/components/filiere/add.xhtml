@@ -10,31 +10,33 @@
 		
 		<h:form id="addForm">
 
-			<p:panelGrid columns="2" columnClasses="value">
+			<p:panelGrid columns="3" columnClasses="value">
 
-				<h:outputLabel for="item1" value="#{msg.column2}" />
+				<p:outputLabel for="item1" value="#{msg.column2}" />
 				<p:inputText id="item1" placeholder="#{msg.column2}"
 					value="#{controller.entityToAdd.nom}" />
+						<p:message for="item1" closable="true" display="text"/>
 
-				<h:outputLabel for="item2" value="#{msg.column3}" />
+				<p:outputLabel for="item2" value="#{msg.column3}" />
 				
-				<h:selectOneMenu id="item2" value="#{controller.departementString}">
-					<f:selectItems value="#{controller.departements}"  var="departement"
-					 itemLabel="#{departement.nom}" itemValue="#{departement.id}"/>
-				</h:selectOneMenu>
+				<p:selectOneMenu id="item2" value="#{controller.entityToAdd.departement}" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{controller.departements}"  />
+				</p:selectOneMenu>
+										<p:message for="item2" closable="true" display="text"/>
 				
 				<p:outputLabel for="item3" value="#{msg.column4}" />
-				<h:selectOneMenu id="item3" value="#{controller.typeFiliereString}">
+				<p:selectOneMenu id="item3" value="#{controller.typeFiliereString}">
 					<f:selectItems value="#{controller.typeFilieres}" var="typeFiliere"
 					 itemLabel="#{typeFiliere}" itemValue="#{typeFiliere}" />
-				</h:selectOneMenu>
+				</p:selectOneMenu>
+										<p:message for="item3" closable="true" display="text"/>
 				
 			</p:panelGrid>
-			<p:commandButton value="Ajout" update=":formDataTable:datatable"
+			<p:commandButton value="Ajout" update=":formDataTable:datatable :addForm"
 				action="#{controller.addEntity()}"
 				oncomplete="handleRequestAdd(xhr, status, args)" />
-			<p:commandButton value="Annuler"
-				oncomplete="handleRequestAdd(xhr, status, args)" />
+			<p:commandButton value="Annuler" update=":addForm"
+				oncomplete="handleRequestAdd(xhr, status, args, false,true)"  immediate="true"/>
 		</h:form>
 
 	</p:dialog>

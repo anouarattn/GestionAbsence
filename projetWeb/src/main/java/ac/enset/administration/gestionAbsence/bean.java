@@ -52,14 +52,14 @@ public class bean implements Serializable{
 		//a = metier.User(name, pass);
 		//User u = metier.getUser(name);
 		//System.err.println("  "+u.getLogin()+" - id "+u.getId());
-		isLogin = metier.User(name,pass ); 
-		if(isLogin){
-			return "index.xhtml?faces-redi";
-		}else{
-			isLogin = false;
-			return "login.xhtml?faces-redi";
-		}
-		
+//		isLogin = metier.User(name,pass ); 
+//		if(isLogin){
+//			return "index.xhtml?faces-redi";
+//		}else{
+//			isLogin = false;
+//			return "login.xhtml?faces-redi";
+//		}
+		return "";
 		
 		
 		

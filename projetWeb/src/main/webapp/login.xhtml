@@ -1,24 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:sql="http://java.sun.com/jsp/jstl/sql"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<h:head></h:head> 
-<body> 
-<h1>Login</h1>
-	<h:form>
-		<h:panelGrid columns="3">
-			<h:outputLabel value="User Name" />
-			<h:inputText value="#{bean1.name}" required="true" requiredMessage="chompts obligateoir" />
-			<h:outputLabel value="Password" />
-			<h:inputText value="#{bean1.pass}" id="pass" required="true" requiredMessage="chompts obligateoir" />
-			<h:message for="pass" class="error_message" />
-			
-			<h:commandButton action="#{bean1.action()}" value="Login" />
-		</h:panelGrid>
-	</h:form>
-</body> 
+
+<ui:composition template="/WEB-INF/templates/main.xhtml">
+
+<ui:define name="jquery"></ui:define>
+ <ui:define name="content">
+ <div id="page-wrapper" style="min-height: 588px;">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Login</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+    <h:form id="login">
+
+            <h:panelGrid id="grid" columns="3" >
+                <f:facet name="header">
+                    Sign in
+                    <p:messages id="mensajes" closable="true" globalOnly="true" />
+                </f:facet>
+                <p:outputLabel for="username" value="Username:" />
+                <p:inputText id="username" value="#{login.username}" required="true" requiredMessage="You must provide a username">
+                    <f:ajax event="blur" render="m_username" />
+                </p:inputText>
+                <p:message id="m_username" for="username" />
+
+                <p:outputLabel for="password" value="Password:" />
+
+                <p:password id="password" value="#{login.password}" required="true" requiredMessage="Password can't be blank">
+                    <f:ajax event="blur" render="m_password" />
+                </p:password>
+                <p:message id="m_password" for="password" />
+
+                <p:outputLabel for="rememberMe" value="Remember Me:" />
+                <p:selectBooleanCheckbox id="rememberMe" value="#{login.remember}"/>
+                <h:panelGroup />
+                <h:panelGroup />
+                <f:facet name="footer">
+                    <p:commandButton value="Login" actionListener="#{login.submit}" process="@all"  />
+                </f:facet>
+
+
+
+            </h:panelGrid>
+        </h:form>
+        
+				</div>
+			</div>
+		</div>
+        
+	</ui:define>
+</ui:composition>
 </html>

@@ -11,50 +11,42 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="User")
+@Table(name="users")
 public class User implements Serializable {
 
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    protected Long id;
-    
-	private String login;
-	private String pass;
+    @Column(name = "username")
+	private String username;
+	private String email;
+	private String name;
+	private String password;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 	
-    public User(String login, String pass) {
-		super();
-		this.login = login;
-		this.pass = pass;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public Long getId() {
-	return id;
-    }
-
-    public void setId(Long id) {
-	this.id = id;
-    }
-    
-    public User() {
-		super();
-		
-	}
+ 
 }

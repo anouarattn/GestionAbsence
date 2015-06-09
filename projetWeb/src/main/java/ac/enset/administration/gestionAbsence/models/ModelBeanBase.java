@@ -1,13 +1,18 @@
 package ac.enset.administration.gestionAbsence.models;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import ac.enset.administration.gestionAbsence.controllers.FiliereNotFoundException;
+import org.apache.commons.lang.StringEscapeUtils;
+
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
+import ac.enset.administration.gestionAbsence.metier.exception.FiliereNotFoundException;
 
 
 public abstract class ModelBeanBase<T> {
@@ -18,7 +23,8 @@ public abstract class ModelBeanBase<T> {
     protected List<? extends EntityBase> items;
     protected List<T> selectedEntities;
     protected Class clazz;
-    
+    protected final static ResourceBundle bundle = ResourceBundle.getBundle("ac.enset.administration.gestionAbsence.properties.successFrench");
+
     @PostConstruct
     public abstract void init();
 
@@ -61,6 +67,7 @@ public abstract class ModelBeanBase<T> {
     }
 
     public List<? extends EntityBase> getItems() {
+    	
 	return items;
     }
 
@@ -80,4 +87,13 @@ public abstract class ModelBeanBase<T> {
 	    this.selectedEntity = null;
 	this.selectedEntities = selectedEntities;
     }
+    
+    
+    protected void addSuccessMessage(String formID, String msg,String msg2) {
+	    FacesContext.getCurrentInstance().addMessage(formID, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg2));
+	  }
+
+	  protected void addErrorMessage(Throwable e, String msg, String msg2,String formID) {
+	      FacesContext.getCurrentInstance().addMessage(formID, new FacesMessage(FacesMessage.SEVERITY_ERROR,  StringEscapeUtils.unescapeJava(e.getMessage()), StringEscapeUtils.unescapeJava(e.getMessage())));
+	  }
 }

@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:shiro="http://shiro.apache.org/tags">
+
+<ui:composition>
+
+
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<i class="fa fa-user fa-fw logged-in"></i>
+			<i class="fa fa-caret-down logged-in"></i>
+		</a>
+		<ul class="dropdown-menu dropdown-user">
+			<li>
+				<a href="profile.xhtml">
+					<i class="fa fa-user fa-fw"></i>
+					User Profile
+				</a>
+			</li>
+			<li>
+				<a href="settings.xhtml">
+					<i class="fa fa-gear fa-fw"></i>
+					Settings
+				</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<p:commandLink actionListener="#{login.loggout}" ajax="true" process="@this" update="wrapper" >
+					<i class="fa fa-sign-out fa-fw"></i>
+					Logout
+					</p:commandLink>
+				
+			</li>
+		</ul>
+		<!-- /.dropdown-user -->
+	</li>
+
+</ui:composition>
+</html>

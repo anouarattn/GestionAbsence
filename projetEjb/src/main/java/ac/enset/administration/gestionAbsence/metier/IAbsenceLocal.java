@@ -2,6 +2,7 @@ package ac.enset.administration.gestionAbsence.metier;
 
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.ejb.Local;
 
@@ -12,7 +13,6 @@ import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Semestre;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
-import ac.enset.administration.gestionAbsence.entites.User;
 import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademicYearException;
 
 @Local
@@ -55,8 +55,6 @@ public interface IAbsenceLocal {
 
     public void add(Object entity);
     
-
-    
     public void activateAcademicYear(AnneeScolaire anneeScolaire);
     public void addAcademicYear(AnneeScolaire anneeScolaire) throws IncorrectAcademicYearException;
     public AnneeScolaire getActivatedAcademicYear();
@@ -64,8 +62,6 @@ public interface IAbsenceLocal {
 
     
     
-    public boolean User(String login,String pass );
-    public User getUser(String login);
 
     public void migrateClasses(AnneeScolaire anneeScolaire);
 	
@@ -77,5 +73,14 @@ public interface IAbsenceLocal {
 
 
     public List<TypeFiliere> getTypesFilieres();
+    
+    
+    public ResourceBundle getBundle();
+
+    public void removeAll(Class<?> clazz);
+
+
+	public void modifyClasse(Classe entityToAdd);
+    
 
 }

@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Modification"
+						widgetVar="jsModify"
+						id="modifyDialog" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="true" closable="false">
+						<h:form id="modifyForm">
+
+							<p:panelGrid columns="2"
+								rendered="#{not empty model.selectedEntity}"
+								columnClasses="value">
+
+								
+
+								<h:outputText for="item2" value="#{msg.column2}" />
+								<p:inputText id="item2"
+									value="#{model.selectedEntity.fName}" />
+									
+								<h:outputText for="item3" value="#{msg.column3}" />
+								<p:inputText id="item3"
+									value="#{model.selectedEntity.lName}" />
+								
+								<h:outputText for="item4" value="#{msg.column4}" />
+								<p:inputText id="item4"
+									value="#{model.selectedEntity.cin}" />
+								
+								<h:outputText for="item5" value="#{msg.column5}" />
+								<p:inputText id="item5"
+									value="#{model.selectedEntity.adresse}" />
+								
+								<h:outputText for="item6" value="#{msg.column6}" />
+								<p:inputText id="item6"
+									value="#{model.selectedEntity.email}" />
+								
+								
+								
+								<h:outputText for="item8" value="#{msg.column8}" />
+								<p:inputText id="item8"
+									value="#{model.selectedEntity.tel}" />	
+
+							
+								
+								
+							</p:panelGrid>
+							<p:commandButton value="Modifier"
+								update=":formDataTable:datatable"
+								actionListener="#{model.modifyEntity()}"
+								oncomplete="handleRequestModify(xhr, status, args)" />
+							<p:commandButton value="Annuler"
+								update=":formDataTable:datatable"
+								actionListener="#{model.cancleModifyEntity()}"
+								oncomplete="handleRequestModify(xhr, status, args)" />
+						</h:form>
+
+					</p:dialog>
+
+</ui:composition>
+
+</html>

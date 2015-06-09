@@ -8,27 +8,29 @@
 	<f:loadBundle
 		basename="ac.enset.administration.gestionAbsence.properties.anneesScolaires"
 		var="anneesScolaires" />
+		
 	<p:dialog header="Ajout" widgetVar="jsAddAnneeScolaire"
 		id="addAnneeScolaireDialog" modal="true" showEffect="fade"
-		hideEffect="fade" resizable="false" closable="false">
+		hideEffect="fade" resizable="true" closable="false">
 		<c:set var="modelas" value="#{modelBeanAnneeScolaire}" />
 		<c:set var="controlleras" value="#{controllerBeanAnneesScolaires}" />
 		<h:form id="addAnneeScolaireForm">
 
-			<p:panelGrid columns="2" columnClasses="value" rendered="#{empty model.items}">
+			<p:panelGrid columns="3" columnClasses="value" rendered="#{empty model.items}">
 
-				<h:outputLabel for="item1"  value="#{anneesScolaires.column3}"  />
+				<p:outputLabel for="item1"  value="#{anneesScolaires.column3}"  />
 				<p:inputText id="item1" placeholder="#{anneesScolaires.column3}" value="#{controlleras.academicYear}"/>
+						<p:message   for="item1" closable="true"  display="text"/>
 				
 			</p:panelGrid>
 			<p:panelGrid columns="1" columnClasses="value">				
 				<h:outputLabel for="item1" value="#{anneesScolaires.column2}" />
 			</p:panelGrid>
-			<p:commandButton value="Confirmé" update=":wrapper"
+			<p:commandButton value="Confirmé" update=":addAnneeScolaireForm"
 				action="#{controlleras.addEntity()}" 
-				oncomplete="PF('jsAddAnneeScolaire').hide()" />
+				oncomplete="handleRequestAdd(xhr, status, args, true,false)" />
 			<p:commandButton value="Annuler"
-				oncomplete="PF('jsAddAnneeScolaire').hide()" />
+				oncomplete="handleRequestAdd(xhr, status, args, true,true)" update=":addAnneeScolaireForm"  immediate="true"/>
 		</h:form>
 
 	</p:dialog>

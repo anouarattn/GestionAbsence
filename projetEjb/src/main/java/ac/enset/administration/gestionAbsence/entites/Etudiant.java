@@ -1,47 +1,56 @@
 package ac.enset.administration.gestionAbsence.entites;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
+@SuppressWarnings("serial")
 @Entity
 @Table(name="etudiant")
 public class Etudiant  extends EntityBase {
 	
-	private String nom;
-	private String prenom;
+	@NotBlank
+	private String fName;
+	@NotBlank
+	private String lName;
 	private String adresse;
-	private String codind;
+	/**
+	 * school specific code
+	 */
+	private String code;
 	private String tel;
+	@Email
 	private String email;
-	private double cne;
+	private String cne;
+	private String cin;
+	@Lob
+	private String photo;
+	
+	private byte[] authentication;
 	
 	@ManyToOne
     @JoinColumn(name="FK_Classe")
 	private Classe classe;
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="etudiant")
-    private Set<AbsenceEtud> absenceEtud;
 
-	public String getNom() {
-		return nom;
+	public String getfName() {
+		return fName;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setfName(String fName) {
+		this.fName = fName;
 	}
 
-	public String getPrenom() {
-		return prenom;
+	public String getlName() {
+		return lName;
 	}
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setlName(String lName) {
+		this.lName = lName;
 	}
 
 	public String getAdresse() {
@@ -52,12 +61,12 @@ public class Etudiant  extends EntityBase {
 		this.adresse = adresse;
 	}
 
-	public String getCodind() {
-		return codind;
+	public String getCode() {
+		return code;
 	}
 
-	public void setCodind(String codind) {
-		this.codind = codind;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getTel() {
@@ -76,12 +85,28 @@ public class Etudiant  extends EntityBase {
 		this.email = email;
 	}
 
-	public double getCne() {
+	public String getCne() {
 		return cne;
 	}
 
-	public void setCne(double cne) {
+	public void setCne(String cne) {
 		this.cne = cne;
+	}
+
+	public String getCin() {
+		return cin;
+	}
+
+	public void setCin(String cin) {
+		this.cin = cin;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	public Classe getClasse() {
@@ -92,30 +117,16 @@ public class Etudiant  extends EntityBase {
 		this.classe = classe;
 	}
 
-	public Set<AbsenceEtud> getAbsenceEtud() {
-		return absenceEtud;
+	public byte[] getAuthentication() {
+		return authentication;
 	}
 
-	public void setAbsenceEtud(Set<AbsenceEtud> absenceEtud) {
-		this.absenceEtud = absenceEtud;
+	public void setAuthentication(byte[] authentication) {
+		this.authentication = authentication;
 	}
 
-	public Etudiant(String nom, String prenom, String adresse, String codind,
-			String tel, String email, double cne) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.codind = codind;
-		this.tel = tel;
-		this.email = email;
-		this.cne = cne;
-	}
 
-	public Etudiant() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	
 	
 }

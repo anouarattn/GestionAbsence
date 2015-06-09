@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+	<p:dialog header="Détail" widgetVar="jsShow"
+		modal="true" showEffect="fade" id="showDialog" hideEffect="fade" resizable="true"
+		closable="false">
+		<h:form id="show">
+			
+			<p:panelGrid columns="2"  style="width : 50px;"
+				rendered="#{not empty model.selectedEntity}"
+				columnClasses="value">
+ <f:facet name="header">
+<img width="90px"  height="70px" style="text-align: center;" alt="etudiant image" 
+			src="data:image/png;base64,#{model.selectedEntity.photo}"/>    </f:facet>
+
+		
+				<h:outputText value="#{msg.column1}" />
+				<h:outputText value="#{model.selectedEntity.id}" />
+			
+				<h:outputText value="#{msg.column4}" />
+				<h:outputText value="#{model.selectedEntity.code}" />
+				<h:outputText value="#{model.selectedEntity.fName}" />
+				<h:outputText value="#{model.selectedEntity.lName}" />
+				<h:outputText value="#{msg.column5}" />
+				<h:outputText value="#{model.selectedEntity.cne}" />
+				
+				<h:outputText value="#{msg.column6}" />
+				<h:outputText value="#{model.selectedEntity.adresse}" />
+				
+				<h:outputText value="#{msg.column7}" />
+				<h:outputText value="#{model.selectedEntity.tel}" />
+				
+				<h:outputText value="#{msg.column8}" />
+				<h:outputText value="#{model.selectedEntity.email}" />
+				
+				<h:outputText value="#{msg.column9}" />
+				<h:outputText
+					value="#{model.selectedEntity.classe.niveau}" />
+					
+					
+			</p:panelGrid>
+			<p:commandButton value="Fermer"
+				update=":formDataTable:datatable"
+				actionListener="#{model.unselect()}"
+				oncomplete="handleRequestshow(xhr, status, args)" />
+		</h:form>
+	</p:dialog>
+</ui:composition>
+
+</html>

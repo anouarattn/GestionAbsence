@@ -6,7 +6,7 @@
 <ui:composition>
 
 	<p:dialog header="Ajout" widgetVar="jsAdd" id="addDialog" modal="true"
-		showEffect="fade" hideEffect="fade" resizable="false" closable="false">
+		showEffect="fade" hideEffect="fade" resizable="true" closable="false">
 		<h:form id="addForm">
 
 			<p:panelGrid columns="2" columnClasses="value">
@@ -19,13 +19,12 @@
 				
 				
 				<h:outputLabel for="item3" value="#{msg.column3}" />
-					<h:selectOneMenu id="item3" value="#{controller.filiereString}">
-					<f:selectItems value="#{controller.filieres()}" var="filiere"
-						itemLabel="#{filiere.nom}" itemValue="#{filiere.id}" />
+					<h:selectOneMenu id="item3" value="#{controller.filiere}"  converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{controller.filieres()}"/>
 				</h:selectOneMenu>
 				
 				<h:outputLabel for="item4" value="#{msg.column4}" />
-					<h:selectOneMenu id="item4" value="#{controller.semestre}">
+					<h:selectOneMenu id="item4" value="#{controller.semestre}" >
 					<f:selectItems value="#{controller.getSemestres()}" var="semestre"
 						itemLabel="#{semestre.getSemestre()}" itemValue="#{semestre}" />
 				</h:selectOneMenu>
