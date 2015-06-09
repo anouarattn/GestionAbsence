@@ -1,17 +1,21 @@
 package ac.enset.administration.gestionAbsence.controllers;
 
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
 
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
@@ -38,8 +42,10 @@ public class ControllerBeanEtudiant extends ControllerBeanBase<Etudiant>
 	@PostConstruct
 	public void init() throws IOException {
 		entityToAdd = new Etudiant();
-		defaultImage = Base64.encodeBase64String( IOUtils.toByteArray(Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream("image-not-found.jpg")) );
+//		System.out.println(this.getClass()
+//				);
+//		defaultImage = Base64.encodeBase64String(IOUtils.toByteArray(this.getClass()
+//				.getResourceAsStream("/image-not-found.jpg")));
 	}
 
 	@Override
@@ -67,9 +73,46 @@ public class ControllerBeanEtudiant extends ControllerBeanBase<Etudiant>
 	public void reset() {
 		entityToAdd = new Etudiant();
 	}
-	
-	
 
+
+	private Etudiant etudiant ;
+	
+	 public Etudiant getEtudiant() {
+		return etudiant;
+	}
+
+	public void setEtudiant(Etudiant etudiant) {
+		this.etudiant = etudiant;
+	}
+
+	@ManagedProperty(value="#{param.idetu}")
+	    private String idetu;
+	 
+	    
+	    public String getIdetu() {
+			return idetu;
+		}
+
+		public void setIdetu(String idetu) {
+			this.idetu = idetu;
+		}
+		
+		private String getidetuFromJSF(FacesContext context) {
+			Map<String, String> parameters = context.getExternalContext().getRequestParameterMap();
+			
+			return parameters.get("idetu");
+		}
+		
+		public String outcome() {
+			FacesContext context = FacesContext.getCurrentInstance();
+			this.idetu = getidetuFromJSF(context);
+					
+			HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
+			HttpSession httpSession = request.getSession(false);
+			httpSession.setAttribute("idetu", idetu);
+			
+			return "absenceetu?facses-redirect=true";
+		}
 	
 
 }

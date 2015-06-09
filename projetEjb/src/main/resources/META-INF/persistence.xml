@@ -13,7 +13,12 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 		<!-- glassfish -->
 		<!-- <jta-data-source>jdbc/mysql_projetabsencetest</jta-data-source> -->	
 		<properties>
+<<<<<<< HEAD
 <!--     			 <property name="hibernate.hbm2ddl.auto" value="create-drop" />	 
  --> 		</properties>
+=======
+     	<!--		 <property name="hibernate.hbm2ddl.auto" value="create" />	 -->
+  		</properties>
+>>>>>>> branch 'master' of https://github.com/anouarattn/GestionAbsence.git
 	</persistence-unit>
 </persistence> 

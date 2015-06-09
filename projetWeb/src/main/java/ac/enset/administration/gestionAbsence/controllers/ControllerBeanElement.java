@@ -10,6 +10,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import ac.enset.administration.gestionAbsence.entites.Element;
+
+import ac.enset.administration.gestionAbsence.entites.Enseignant;
+import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.models.ModelBeanElement;
@@ -34,6 +37,8 @@ public class ControllerBeanElement extends ControllerBeanBase<Element> implement
 	private ModelBeanElement modelBeanElement;
 	
     private Filiere filiere;
+    private Module module;
+    private Enseignant enseignant;
     
     private List<Filiere> filieres;
     private List<Module> modules;
@@ -46,12 +51,32 @@ public class ControllerBeanElement extends ControllerBeanBase<Element> implement
 
     @Override
     public void addEntity() throws Exception {
+    	entityToAdd.setModule(module);
+    	entityToAdd.setEnseignant(enseignant);
+    	System.out.println("enseignant : "+enseignant.getPrenom());
     	metier.add(entityToAdd);
     	modelBeanElement.update();
     }
 
   
-   
+
+    public Module getModule() {
+		return module;
+	}
+
+	public void setModule(Module module) {
+		this.module = module;
+	}
+
+	public Enseignant getEnseignant() {
+		return enseignant;
+	}
+
+	public void setEnseignant(Enseignant enseignant) {
+		this.enseignant = enseignant;
+	}
+    
+	
 
    
     
@@ -72,16 +97,18 @@ public class ControllerBeanElement extends ControllerBeanBase<Element> implement
     }
 
     public void filiereChanged() {
-	if(filiere != null){
-		modules.clear();
-		modules.addAll(filiere.getModules());
-	}
+		if(filiere != null){
+			modules.clear();
+			modules.addAll(filiere.getModules());
+		}
     }
     
-    
-    
 
-
+    public List<? extends EntityBase> enseignants()
+    {
+	return metier.get(Enseignant.class);
+    } 
+    
     public List<Module> getModules() {
     	if(filiere != null){
     	    List<Module> list = new ArrayList<Module>();

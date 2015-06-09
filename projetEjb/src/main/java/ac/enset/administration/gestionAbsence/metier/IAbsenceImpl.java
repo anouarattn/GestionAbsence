@@ -13,10 +13,13 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ac.enset.administration.gestionAbsence.entites.AbsenceEtud;
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.entites.Classe;
 import ac.enset.administration.gestionAbsence.entites.Departement;
+import ac.enset.administration.gestionAbsence.entites.Element;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
+import ac.enset.administration.gestionAbsence.entites.Etudiant;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Niveau;
 import ac.enset.administration.gestionAbsence.entites.Semestre;
@@ -344,4 +347,35 @@ public class IAbsenceImpl implements IAbsenceLocal {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+    public List<Element> getElemnentmoduleEtudiant(Long id){
+    	
+    	/*Query myQuery = em.createQuery("SELECT elm FROM ElementModule elm , Etudiant etu, Classe classe WHERE etu.classe.id = classe.id and elm.module.filiere.classes.id = etu.classe.id and etu.id = :x and  classe.currentAcademicYear.activated = true");*/
+    	Query myQuery = em.createQuery("SELECT elm FROM Element elm where elm.module.id like :x ");
+    	
+    	myQuery.setParameter("x", id);
+    	
+    	return myQuery.getResultList();
+    }
+    
+    @Override
+    public List<AbsenceEtud> getElemnentmoduleEtudiantAbsence(Long id){
+    	
+    	/*Query myQuery = em.createQuery("SELECT elm FROM ElementModule elm , Etudiant etu, Classe classe WHERE etu.classe.id = classe.id and elm.module.filiere.classes.id = etu.classe.id and etu.id = :x and  classe.currentAcademicYear.activated = true");*/
+    	Query myQuery = em.createQuery("SELECT abs FROM Element elm, AbsenceEtud abs where elm.id =  abs.elementModule.id and abs.etudiant.id like :x ");
+    	
+    	myQuery.setParameter("x", id);
+    	
+    	return myQuery.getResultList();
+    }
+    @Override
+    public List<Etudiant> getEtudiantByActivatedYears() {
+	Query myQuery = em
+		.createQuery("SELECT etu FROM Etudiant etu, Classe classe WHERE etu.classe.id = classe.id and  classe.currentAcademicYear.activated = true");
+	return myQuery.getResultList();
+
+    }
+
+		
 }

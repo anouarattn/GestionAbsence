@@ -96,5 +96,6 @@ public class ControllerBeanClasse extends ControllerBeanBase<Classe> {
 		this.academicYearBean = academicYearBean;
 	}
 
+
     
 }
