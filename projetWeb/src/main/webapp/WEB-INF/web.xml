@@ -33,7 +33,6 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-<<<<<<< HEAD
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 	<context-param>
@@ -58,7 +57,7 @@ org.primefaces.webapp.filter.FileUploadFilter
 	
 		
 <!-- ##################APACHE SHIRO##################### -->
-<listener>
+<!-- <listener>
     <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
 </listener>
 
@@ -74,41 +73,9 @@ org.primefaces.webapp.filter.FileUploadFilter
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
-</filter-mapping>
+</filter-mapping> -->
 <!-- ################################################### -->
 
-=======
-		<welcome-file>login.xhtml</welcome-file>
-	</welcome-file-list>
-	<context-param>
-   <param-name>primefaces.UPLOADER</param-name>
-   <param-value>commons</param-value>
-</context-param>
-	<filter>
-<filter-name>PrimeFaces FileUpload Filter</filter-name>
-<filter-class>
-org.primefaces.webapp.filter.FileUploadFilter
-</filter-class>
-<init-param>
-    <param-name>thresholdSize</param-name>
-    <param-value>51200</param-value>
-  </init-param>
 
-</filter>
-<filter-mapping>
-<filter-name>PrimeFaces FileUpload Filter</filter-name>
-<servlet-name>Faces Servlet</servlet-name>
-</filter-mapping>
-	
-		
-<!--   <filter>
-  	<filter-name>LoginFilter</filter-name>
-  	<filter-class>ac.enset.administration.gestionAbsence.models.loginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>LoginFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
-  </filter-mapping> -->
->>>>>>> branch 'master' of https://github.com/anouarattn/GestionAbsence.git
   
 </web-app>  

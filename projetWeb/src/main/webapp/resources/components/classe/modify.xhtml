@@ -10,7 +10,6 @@
 						id="modifyDialog" modal="true" showEffect="fade"
 						hideEffect="fade" resizable="true" closable="false">
 						<h:form id="modifyForm">
-<<<<<<< HEAD
 									<p:message for="panelGrid" closable="true" display="text"/>
 
 							<p:panelGrid  id="panelGrid" columns="2"
@@ -29,25 +28,8 @@
 									
 								<p:outputLabel for="item3" value="#{msg.column4}" />
 								<p:selectOneMenu id="item3" value="#{controller.entityToAdd.filiere}" converter="omnifaces.SelectItemsConverter">
-=======
 
-							<p:panelGrid columns="2"
-								rendered="#{not empty model.selectedEntity}"
-								columnClasses="value">
-
-								
-
-								<p:outputLabel for="item1" value="#{msg.column2}" />
-								<p:inputText id="item1"
-									value="#{model.modifyEntityPromotonAcademicYear}" />
-								
-								<p:outputLabel for="item2" value="#{msg.column3}" />
-								<p:inputText id="item2"
-									value="#{model.modifyEntityBeginAcademicYear}" />
-									
-								<p:outputLabel for="item3" value="#{msg.column4}" />
-								<p:selectOneMenu id="item3" value="#{controller.filiereString}">
->>>>>>> branch 'master' of https://github.com/anouarattn/GestionAbsence.git
+	
 								<f:selectItems value="#{controller.filieres()}" var="filiere"
 								itemLabel="#{filiere.nom}" itemValue="#{filiere.id}" />
 								</p:selectOneMenu>

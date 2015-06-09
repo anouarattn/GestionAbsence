@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:shiro="http://shiro.apache.org/tags">
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
 <f:loadBundle
@@ -50,13 +49,19 @@
 					</a></li>
 				</ul> <!-- /.dropdown-alerts --></li>
 			<!-- /.dropdown -->
-			<shiro:authenticated>
-					<ui:include src="/resources/components/login/loggedIn_menuItem.xhtml" />
-			</shiro:authenticated>
-			<!-- /.dropdown -->
-			<shiro:guest>
-				<ui:include src="/resources/components/login/loggedOut_menuItem.xhtml" />
-			</shiro:guest>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+					<i class="fa fa-caret-down"></i>
+			</a>
+				<ul class="dropdown-menu dropdown-user">
+					<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+							Profile</a></li>
+					<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+					</li>
+					<li class="divider"></li>
+					<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+							Logout</a></li>
+				</ul> <!-- /.dropdown-user --></li>
 			<!-- /.dropdown -->
 		</ul>
 		<!-- /.navbar-top-links -->
@@ -86,14 +91,9 @@
 							<li><a href="module.xhtml">Module</a></li>
 							<li><a href="element.xhtml">Element</a></li>
 							<li><a href="etudiant.xhtml">Etudiant</a></li>
-<<<<<<< HEAD
-							<li><a href="enseignent.xhtml">Enseignent</a></li>
-							
-=======
 							<li><a href="enseignant.xhtml">enseignant</a></li>
 							
 							<li><a href="statistique.xhtml">Statistique</a></li>
->>>>>>> branch 'master' of https://github.com/anouarattn/GestionAbsence.git
 						</ul> <!-- /.nav-second-level --></li>
 
 				</ul>
