@@ -39,13 +39,6 @@ public class Classe extends EntityBase  {
     @JoinColumn(name = "FK_beginAcademicYear")
     private AnneeScolaire beginAcademicYear;
     
-  
-    
-    
-    
-    
-
-
     public Classe() {
 	super();
 	niveau = Niveau.NonDefini;
@@ -111,7 +104,7 @@ public class Classe extends EntityBase  {
     }
     
     public String toString() {
-        return String.format("%s",  getNiveau() );
+        return String.format("%s", getFiliere().getNom() +" - "+getNiveau() );
     }
     
     

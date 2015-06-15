@@ -28,6 +28,9 @@ public class Etudiant  extends EntityBase {
 	private String email;
 	private String cne;
 	private String cin;
+	private String genre;
+	
+
 	@Lob
 	private String photo;
 	
@@ -124,7 +127,14 @@ public class Etudiant  extends EntityBase {
 	public void setAuthentication(byte[] authentication) {
 		this.authentication = authentication;
 	}
+	
+	public String getGenre() {
+		return genre;
+	}
 
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 
 	
 	

@@ -21,6 +21,7 @@ import ac.enset.administration.gestionAbsence.entites.Element;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Etudiant;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
+import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.Niveau;
 import ac.enset.administration.gestionAbsence.entites.Semestre;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
@@ -185,7 +186,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 					bundle.getString("GreaterThanTheLastAcademicYearByMoreThanOneYear"));
 		em.merge(anneeScolaire);
 	}
-
+	
 	private AnneeScolaire getLastAcademicYear() {
 		Query myQuery = em
 				.createQuery("SELECT annee FROM AnneeScolaire annee WHERE annee.isLast = true");
@@ -197,6 +198,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
 		}
 		return anneeScolaire;
 	}
+	
 
 	@Override
 	public AnneeScolaire getActivatedAcademicYear() {
@@ -349,13 +351,22 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	}
 
 	@Override
+	public Long getStatistiqueEtudiantbyYears(Long id, String genre){
+		// Query myQuery = em.createQuery("SELECT annee FROM AnneeScolaire annee WHERE  AND annee.isLast = true");
+		
+		Long a= 0L;
+		Query myQuery = em.
+				createQuery("SELECT SUM(abs.nbrheurAbsence) FROM  AbsenceEtud abs, Element elm, AnneeScolaire ane where  abs.elementModule.id = elm.id and abs.etudiant.classe.currentAcademicYear = ane.id and ane.id = :x and abs.etudiant.genre = :y "); 
+				myQuery.setParameter("x", id);
+				myQuery.setParameter("y", genre);
+				a = (Long)myQuery.getSingleResult();	
+		return a;
+	}
+
+	@Override
     public List<Element> getElemnentmoduleEtudiant(Long id){
-    	
-    	/*Query myQuery = em.createQuery("SELECT elm FROM ElementModule elm , Etudiant etu, Classe classe WHERE etu.classe.id = classe.id and elm.module.filiere.classes.id = etu.classe.id and etu.id = :x and  classe.currentAcademicYear.activated = true");*/
     	Query myQuery = em.createQuery("SELECT elm FROM Element elm where elm.module.id like :x ");
-    	
-    	myQuery.setParameter("x", id);
-    	
+    	myQuery.setParameter("x", id);    	
     	return myQuery.getResultList();
     }
     
@@ -376,6 +387,21 @@ public class IAbsenceImpl implements IAbsenceLocal {
 	return myQuery.getResultList();
 
     }
-
+    
+    @Override
+    public List<Module> getModuleByActivatedYears(){
+    	
+    	Query myQuery = em
+    			.createQuery("SELECT mod FROM Module mod, Classe cl  where mod.filiere.id = cl.filiere.id and cl.currentAcademicYear.activated = true ");
+    		return myQuery.getResultList();
+    }
+    
+    @Override
+    public List<Element> getElementByActivatedYears(){
+    	
+    	Query myQuery = em
+    			.createQuery("SELECT elm FROM Element elm, Module mod, Classe cl  where elm.module.id = mod.id and  mod.filiere.id = cl.filiere.id and cl.currentAcademicYear.activated = true ");
+    		return myQuery.getResultList();
+    }
 		
 }

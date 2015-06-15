@@ -14,6 +14,7 @@ import ac.enset.administration.gestionAbsence.entites.Element;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Etudiant;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
+import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.entites.Semestre;
 import ac.enset.administration.gestionAbsence.entites.TypeFiliere;
 import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademicYearException;
@@ -62,7 +63,7 @@ public interface IAbsenceLocal {
     public void addAcademicYear(AnneeScolaire anneeScolaire) throws IncorrectAcademicYearException;
     public AnneeScolaire getActivatedAcademicYear();
     
-
+    public Long getStatistiqueEtudiantbyYears(Long id,String genre);
     
     
 
@@ -90,4 +91,7 @@ public interface IAbsenceLocal {
     public List<Etudiant> getEtudiantByActivatedYears();
     public List<Element> getElemnentmoduleEtudiant(Long id);
     public List<AbsenceEtud> getElemnentmoduleEtudiantAbsence(Long id);
+    
+    public List<Module> getModuleByActivatedYears();
+    public List<Element> getElementByActivatedYears();
 }

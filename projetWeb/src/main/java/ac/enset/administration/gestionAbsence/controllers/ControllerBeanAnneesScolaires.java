@@ -16,7 +16,9 @@ import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
 import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademicYearException;
 import ac.enset.administration.gestionAbsence.models.ModelBeanAnneeScolaire;
 import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
+import ac.enset.administration.gestionAbsence.models.ModelBeanElement;
 import ac.enset.administration.gestionAbsence.models.ModelBeanEtudiant;
+import ac.enset.administration.gestionAbsence.models.ModelBeanModule;
 
 
 @Named
@@ -31,6 +33,12 @@ public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScola
     
     @Inject
     private ModelBeanEtudiant modelBeanEtudiant;
+    
+    @Inject
+    private ModelBeanModule modelBeanModule;
+    
+    @Inject
+    private ModelBeanElement modelBeanElement;
     
     @NotBlank
     @Pattern(regexp="2[0-9]{3}/2[0-9]{3}",message="L'année Scolaire doit être de la forme ex:2014/2015")
@@ -69,6 +77,9 @@ public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScola
     {	
 	metier.activateAcademicYear(anneeScolaire);
 	modelBeanClasse.setItems(metier.getClassesByActivatedYears());
+	modelBeanEtudiant.setItems(metier.getEtudiantByActivatedYears());
+	modelBeanModule.setItems(metier.getModuleByActivatedYears());
+	modelBeanElement.setItems(metier.getElementByActivatedYears());
 	modelBean.update();	
     }
 
