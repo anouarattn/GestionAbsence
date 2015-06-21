@@ -19,7 +19,7 @@ GestionAbsence
 
 - Un serveur Jboss 7.1.1 démarré
 - une base de données avec le nom projetAbsenceTest
-```
+
 ## deployement ##
 
 - dans le dossier parent  
