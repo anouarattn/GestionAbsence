@@ -54,6 +54,14 @@
 				<p:inputText id="item8" placeholder="#{msg.column8}"
 					value="#{controllerBeanEtudiant.entityToAdd.email}" />
 				<p:message for="item8" closable="true" display="text" />
+				
+				<h:outputLabel for="item13" value="#{msg.column13}" />
+				<h:selectOneMenu id="item13" value="#{controller.entityToAdd.genre}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem itemLabel="Homme" itemValue="Homme" />
+					<f:selectItem itemLabel="Femme" itemValue="Femme" />					
+				</h:selectOneMenu>
+				<p:message for="item13" closable="true" display="text" />
 
 				<h:outputLabel for="item9" value="#{msg.column9}" />
 				<h:selectOneMenu id="item9" value="#{controller.entityToAdd.classe}"

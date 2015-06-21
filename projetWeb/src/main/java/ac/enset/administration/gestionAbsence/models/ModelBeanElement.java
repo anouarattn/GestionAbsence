@@ -24,7 +24,8 @@ public class ModelBeanElement extends ModelBeanBase<Element> implements Serializ
     @PostConstruct
     public void init() {
 	clazz = Element.class;
-	items = metier.get(clazz);
+	//items = metier.get(clazz);
+	items = metier.getElementByActivatedYears();
     }
    
 }

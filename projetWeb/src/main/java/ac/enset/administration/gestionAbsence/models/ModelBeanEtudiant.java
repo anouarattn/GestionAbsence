@@ -20,7 +20,8 @@ public class ModelBeanEtudiant extends ModelBeanBase<Etudiant> implements Serial
 	@Override
 	public void init() {
 		clazz = Etudiant.class;
-		items = metier.get(clazz);
+		//items = metier.get(clazz);
+		items = metier.getEtudiantByActivatedYears();
 	}
 
 	public UploadedFile getPhotoFile() {

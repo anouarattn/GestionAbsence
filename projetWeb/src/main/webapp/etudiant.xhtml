@@ -90,6 +90,11 @@
 								filterStyle="display:none">
 								<h:outputText value="#{item.lName}" />
 							</p:column>
+							<p:column filterBy="#{item.genre}" headerText="#{msg.column13}"
+								sortBy="#{item.genre}" filterMatchMode="contains"
+								filterStyle="display:none">
+								<h:outputText value="#{item.genre}" />
+							</p:column>
 							<p:column filterBy="#{item.classe.filiere}" headerText="#{msg.column12}"
 								sortBy="#{item.classe.filiere}" filterMatchMode="contains"
 								filterStyle="display:none">

@@ -23,7 +23,8 @@ public class ModelBeanModule extends ModelBeanBase<Module> implements Serializab
     @PostConstruct
     public void init() {
 	clazz = Module.class;
-	items = metier.get(clazz);
+	//items = metier.get(clazz);
+	items = metier.getModuleByActivatedYears();
     }
     
     
