@@ -2,7 +2,6 @@ package ac.enset.administration.gestionAbsence.controllers;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,74 +17,60 @@ import ac.enset.administration.gestionAbsence.models.ModelBeanAnneeScolaire;
 import ac.enset.administration.gestionAbsence.models.ModelBeanClasse;
 import ac.enset.administration.gestionAbsence.models.ModelBeanEtudiant;
 
-
 @Named
 @RequestScoped
-public class ControllerBeanAnneesScolaires extends ControllerBeanBase<AnneeScolaire>
-{
-    @Inject
-    private ModelBeanAnneeScolaire modelBean;
-    
-    @Inject
-    private ModelBeanClasse modelBeanClasse;
-    
-    @Inject
-    private ModelBeanEtudiant modelBeanEtudiant;
-    
-    @NotBlank
-    @Pattern(regexp="2[0-9]{3}/2[0-9]{3}",message="L'année Scolaire doit être de la forme ex:2014/2015")
-    private String academicYear;
-    
-    @PostConstruct
-    public void init()
-    {
-	entityToAdd = new AnneeScolaire();
-	academicYear = "";
-    }
-    
- 
+public class ControllerBeanAnneesScolaires extends
+		ControllerBeanBase<AnneeScolaire> {
+	@Inject
+	private ModelBeanAnneeScolaire modelBean;
 
-    
-    @Override
-    public void addEntity() throws IncorrectAcademicYearException {
-        try{
-	entityToAdd = StringToAcademicYear.convert(academicYear);
-	metier.addAcademicYear(entityToAdd);
-	modelBean.update();
-	RequestContext.getCurrentInstance().update("wrapper");
-	addSuccessMessage("growl",bundle.getString("addedAcademicYear"),"");
+	@Inject
+	private ModelBeanClasse modelBeanClasse;
 
-        }catch(Exception e)
-        {
-        	FacesContext.getCurrentInstance().validationFailed();
-            addErrorMessage(e, "","","addAnneeScolaireForm:item1");
-        	RequestContext.getCurrentInstance().update("addAnneeScolaireForm");
-        }finally{
-        	academicYear = "";
-        }
-    }
-    
-    public void activateAcademicYear(AnneeScolaire anneeScolaire)
-    {	
-	metier.activateAcademicYear(anneeScolaire);
-	modelBeanClasse.setItems(metier.getClassesByActivatedYears());
-	modelBean.update();	
-    }
+	@Inject
+	private ModelBeanEtudiant modelBeanEtudiant;
 
+	@NotBlank
+	@Pattern(regexp = "2[0-9]{3}/2[0-9]{3}", message = "L'année Scolaire doit être de la forme ex:2014/2015")
+	private String academicYear;
 
+	@PostConstruct
+	public void init() {
+		entityToAdd = new AnneeScolaire();
+		academicYear = "";
+	}
 
+	@Override
+	public void addEntity() throws IncorrectAcademicYearException {
+		try {
+			entityToAdd = StringToAcademicYear.convert(academicYear);
+			metier.addAcademicYear(entityToAdd);
+			modelBean.update();
+			RequestContext.getCurrentInstance().update("wrapper");
+			addSuccessMessage("growl", bundle.getString("addedAcademicYear"),
+					"");
 
-    public String getAcademicYear() {
-        return academicYear;
-    }
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().validationFailed();
+			addErrorMessage(e, "", "", "addAnneeScolaireForm:item1");
+			RequestContext.getCurrentInstance().update("addAnneeScolaireForm");
+		} finally {
+			academicYear = "";
+		}
+	}
 
+	public void activateAcademicYear(AnneeScolaire anneeScolaire) {
+		metier.activateAcademicYear(anneeScolaire);
+		modelBeanClasse.setItems(metier.getClassesByActivatedYears());
+		modelBean.update();
+	}
 
+	public String getAcademicYear() {
+		return academicYear;
+	}
 
+	public void setAcademicYear(String academicYear) {
+		this.academicYear = academicYear;
+	}
 
-    public void setAcademicYear(String academicYear) {
-        this.academicYear = academicYear;
-    }
-    
-
-    
 }

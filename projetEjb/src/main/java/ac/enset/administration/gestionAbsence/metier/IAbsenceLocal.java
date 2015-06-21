@@ -1,6 +1,5 @@
 package ac.enset.administration.gestionAbsence.metier;
 
-
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -21,73 +20,60 @@ import ac.enset.administration.gestionAbsence.metier.exception.IncorrectAcademic
 @Local
 public interface IAbsenceLocal {
 
-    public void ajouterDepartement(Departement d);
+	public void ajouterDepartement(Departement d);
 
-    
-    public void ajouterFiliere(Filiere f, Long idDepartement);
-    
-    
-    public void ajouterAnneeScolaire(AnneeScolaire as);
-    
-    
-    public List<AnneeScolaire> getAnneesScollaires();
+	public void ajouterFiliere(Filiere f, Long idDepartement);
 
-    public List<Departement> getDepartements();
-    
-    
-    public void modifierDepartement(Departement departement);
+	public void ajouterAnneeScolaire(AnneeScolaire as);
 
+	public List<AnneeScolaire> getAnneesScollaires();
 
-    public void modifierFiliere(Filiere selectedFiliere);
+	public List<Departement> getDepartements();
 
-    
-        
-    
+	public void modifierDepartement(Departement departement);
 
-    
-    public boolean exist(Class<? extends EntityBase> clazz, Long id);
-    
-    public List<Classe> getClasses();
+	public void modifierFiliere(Filiere selectedFiliere);
 
-    public void remove(Object entity);
+	public boolean exist(Class<? extends EntityBase> clazz, Long id);
 
-    public void modify(Object selectedEntity);
-    
-    public List<?  extends EntityBase> get(Class<? extends EntityBase> clazz);
-    public EntityBase get(Class<? extends EntityBase> clazz, Long id);
+	public List<Classe> getClasses();
 
-    public void add(Object entity);
-    
-    public void activateAcademicYear(AnneeScolaire anneeScolaire);
-    public void addAcademicYear(AnneeScolaire anneeScolaire) throws IncorrectAcademicYearException;
-    public AnneeScolaire getActivatedAcademicYear();
-    
+	public void remove(Object entity);
 
-    
-    
+	public void modify(Object selectedEntity);
 
-    public void migrateClasses(AnneeScolaire anneeScolaire);
-	
-    public List<Classe> getClassesByActivatedYears();
+	public List<? extends EntityBase> get(Class<? extends EntityBase> clazz);
 
-    public void addClasse(Classe classe) throws IncorrectAcademicYearException;
+	public EntityBase get(Class<? extends EntityBase> clazz, Long id);
 
-    public Semestre[] getSemestres();
+	public void add(Object entity);
 
+	public void activateAcademicYear(AnneeScolaire anneeScolaire);
 
-    public List<TypeFiliere> getTypesFilieres();
-    
-    
-    public ResourceBundle getBundle();
+	public void addAcademicYear(AnneeScolaire anneeScolaire)
+			throws IncorrectAcademicYearException;
 
-    public void removeAll(Class<?> clazz);
+	public AnneeScolaire getActivatedAcademicYear();
 
+	public void migrateClasses(AnneeScolaire anneeScolaire);
+
+	public List<Classe> getClassesByActivatedYears();
+
+	public void addClasse(Classe classe) throws IncorrectAcademicYearException;
+
+	public Semestre[] getSemestres();
+
+	public List<TypeFiliere> getTypesFilieres();
+
+	public ResourceBundle getBundle();
+
+	public void removeAll(Class<?> clazz);
 
 	public void modifyClasse(Classe entityToAdd);
-    
 
-    
-    public List<Etudiant> getEtudiantByActivatedYears();
-    public List<Element> getElemnentmoduleEtudiant(Long id);
-    public List<AbsenceEtud> getElemnentmoduleEtudiantAbsence(Long id);
+	public List<Etudiant> getEtudiantByActivatedYears();
+
+	public List<Element> getElemnentmoduleEtudiant(Long id);
+
+	public List<AbsenceEtud> getElemnentmoduleEtudiantAbsence(Long id);
 }

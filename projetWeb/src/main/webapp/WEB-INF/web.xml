@@ -15,6 +15,12 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>bootstrap</param-value>
 	</context-param>
+	<!--     <context-param>
+	    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+	        <param-value>client</param-value>
+	    
+	    </context-param> -->
+	
     <context-param>
     <description>
         Enables the ui:debug facelets tag.
@@ -56,8 +62,7 @@ org.primefaces.webapp.filter.FileUploadFilter
 </filter-mapping>
 	
 		
-<!-- ##################APACHE SHIRO##################### -->
-<!-- <listener>
+<listener>
     <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
 </listener>
 
@@ -73,8 +78,7 @@ org.primefaces.webapp.filter.FileUploadFilter
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
-</filter-mapping> -->
-<!-- ################################################### -->
+</filter-mapping> 
 
 
   

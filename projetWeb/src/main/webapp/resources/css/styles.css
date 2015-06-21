@@ -24,3 +24,15 @@
 {
 	color: #47bc14;
 }
+
+
+.ui-datepicker
+{
+	width: 90%;
+	margin: 30px auto 0 auto;
+}
+
+#page-wrapper
+{
+	min-height: 700px!important;
+}

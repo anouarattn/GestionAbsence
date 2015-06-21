@@ -19,10 +19,10 @@
 		<!--java version -->
 		<java-version>1.7</java-version>
 		<!-- plugin versions -->
-		<ejb-plugin-version>2.3</ejb-plugin-version>
-		<war-plugin-version>2.4</war-plugin-version>
-		<ear-plugin-version>2.9</ear-plugin-version>
-		<compiler-plugin-version>3.1</compiler-plugin-version>
+		<ejb-plugin-version>2.5.1</ejb-plugin-version>
+		<war-plugin-version>2.6</war-plugin-version>
+		<ear-plugin-version>2.10</ear-plugin-version>
+		<compiler-plugin-version>3.3</compiler-plugin-version>
 		<!-- dependency versions -->
 		<javaee-api-version>3.0.3.Final</javaee-api-version>
 		<junit-version>4.12</junit-version>
@@ -34,7 +34,8 @@
 		<joda-time-version>1.6.2</joda-time-version>
 		<arquillian-protocol-servlet-version>1.1.5.Final</arquillian-protocol-servlet-version>
 		<jboss-as-arquillian-container-remote-version>7.1.1.Final</jboss-as-arquillian-container-remote-version>
-
+		<!--  starting from mysql jconnector  5.1.30, adding datasource mysql not working   http://goo.gl/WWQJ8M-->
+		<mysql.driver.version>5.1.29</mysql.driver.version>
 	</properties>
 	<developers>
 		<developer>
@@ -164,6 +165,12 @@
 				<artifactId>shiro-faces</artifactId>
 				<version>2.0-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.driver.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -201,7 +208,7 @@
 					<artifactId>maven-ear-plugin</artifactId>
 					<version>${ear-plugin-version}</version>
 				</plugin>
-				<!-- war plugin -skinny wars mode! -->
+				<!-- war plugin -not skinny wars mode! -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
@@ -211,15 +218,9 @@
 							Set to false if you want you WAR built without a web.xml file. This may be 
 							useful if you are building an overlay that has no web.xml file. -->
 						<failOnMissingWebXml>false</failOnMissingWebXml>
-						<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->
 						<archive>
-							<manifestEntries>
-								<!-- tell jboss container to add jdoa internal module to our project -->
-								<Dependencies>org.joda.time</Dependencies>
-							</manifestEntries>
 							<manifest>
-								<addClasspath>true</addClasspath>
-								<!-- <classpathPrefix>lib/</classpathPrefix> -->
+								<!-- <addClasspath>true</addClasspath> -->								<!-- <classpathPrefix>WEB-INF/lib/</classpathPrefix> -->
 							</manifest>
 						</archive>
 						<webResources>
@@ -236,7 +237,46 @@
 				<plugin>
 					<groupId>org.jboss.as.plugins</groupId>
 					<artifactId>jboss-as-maven-plugin</artifactId>
-					<version>7.6.Final</version>
+					<version>7.7.Final</version>
+					<executions>
+					  <!-- deploy the mysql connectorj -->
+                <execution>
+                    <id>deploy-mysql-driver</id>
+                    <phase>install</phase>
+                    <goals>
+                        <goal>deploy-artifact</goal>
+                    </goals>
+                    <configuration>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <name>mysql-connector-java-${mysql.driver.version}.jar</name>
+                    </configuration>
+                </execution>
+					<!-- add mysql datasource -->
+						<execution>
+							<id>add-datasource</id>
+							<phase>install</phase>
+							<configuration>
+								<address>subsystem=datasources,data-source=myDatasource</address>
+								<resource>
+									<enableResource>true</enableResource>
+									<properties>
+										<connection-url>jdbc:mysql://localhost:3306/projetAbsenceTest</connection-url>
+										<jndi-name>java:/MySqlDS2</jndi-name>
+										<enabled>true</enabled>
+										<enable>true</enable>
+										<pool-name>MySqlDS_Pool2</pool-name>
+										<user-name>root</user-name>
+										<driver-name>mysql-connector-java-${mysql.driver.version}.jar</driver-name>
+										<use-ccm>false</use-ccm>
+									</properties>
+								</resource>
+							</configuration>
+							<goals>
+								<goal>add-resource</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>

@@ -11,7 +11,7 @@
         <h:outputText value="Année Scolaire #{annee.getAcademicYearAsString()}" />
    		 </p:commandLink>
 
-		<p:commandLink   styleClass="fa" rendered="#{annee.activated eq false and annee.showable eq true}"
+		<p:commandLink process="@this"  styleClass="fa" rendered="#{annee.activated eq false and annee.showable eq true}"
 		actionListener="#{controllerBeanAnneesScolaires.activateAcademicYear(annee)}" update=":wrapper">
         <h:outputText value="Année Scolaire #{annee.getAcademicYearAsString()}" />
    		 </p:commandLink>

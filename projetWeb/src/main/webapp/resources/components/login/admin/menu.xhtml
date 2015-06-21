@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:shiro="http://shiro.apache.org/tags">
+
+<ui:composition>
+
+	<ul class="nav in" id="side-menu">
+		<li class="sidebar-search">
+			<strong>#{modelBeanAnneeScolaire.getCurrentAcademicYear()}</strong>
+		</li>
+		<li>
+			<a href="index.xhtml" class="active">
+				<i class="fa fa-dashboard fa-fw"></i>
+				Administration
+			</a>
+		</li>
+		<li>
+			<a href="departement.xhtml">Departement</a>
+		</li>
+		<li>
+			<a href="filiere.xhtml">
+				<i class="fa fa-language"></i>
+				<span class="fa arrow"></span>
+				Filière
+			</a>
+		</li>
+		<li>
+
+
+			<a href="classe.xhtml">
+				<i class="fa fa-users"></i>
+				<span class="fa arrow"></span>
+				Classe
+			</a>
+		</li>
+		<li>
+			<a href="module.xhtml">
+				<i class="fa fa-building-o"></i>
+				<span class="fa arrow"></span>
+				Module
+			</a>
+		</li>
+		<li>
+			<a href="element.xhtml">
+				<i class="fa fa-hdd-o"></i>
+				<span class="fa arrow"></span>
+				Element
+			</a>
+		</li>
+		<li>
+			<a href="etudiant.xhtml">
+				<i class="fa fa-child"></i>
+				<span class="fa arrow"></span>
+				Etudiant
+			</a>
+		</li>
+		<li>
+			<a href="enseignant.xhtml">
+				<i class="fa fa-male"></i>
+				<span class="fa arrow"></span>
+				Enseignant
+			</a>
+		</li>
+
+		<li>
+			<a href="statistique.xhtml">
+				<i class="fa fa-bar-chart"></i>
+				<span class="fa arrow"></span>
+				Statistique
+			</a>
+
+		</li>
+	</ul>
+
+</ui:composition>
+</html>

@@ -14,86 +14,89 @@ import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
 import ac.enset.administration.gestionAbsence.metier.exception.FiliereNotFoundException;
 
-
 public abstract class ModelBeanBase<T> {
 
-    @Inject
-    protected IAbsenceLocal metier;
-    protected T selectedEntity;
-    protected List<? extends EntityBase> items;
-    protected List<T> selectedEntities;
-    protected Class clazz;
-    protected final static ResourceBundle bundle = ResourceBundle.getBundle("ac.enset.administration.gestionAbsence.properties.successFrench");
+	@Inject
+	protected IAbsenceLocal metier;
+	protected T selectedEntity;
+	protected List<? extends EntityBase> items;
+	protected List<T> selectedEntities;
+	protected Class clazz;
+	protected final static ResourceBundle bundle = ResourceBundle
+			.getBundle("ac.enset.administration.gestionAbsence.properties.successFrench");
 
-    @PostConstruct
-    public abstract void init();
+	@PostConstruct
+	public abstract void init();
 
-    public void unselect() {
-	setSelectedEntities(null);
-    }
-
-    public void modifyEntity() throws FiliereNotFoundException {
-	metier.modify(selectedEntity);
-	items =  metier.get(clazz);
-	unselect();
-    }
-
-    public void deleteEntity() {
-	for (T entity : selectedEntities) {
-	    metier.remove(entity);
-	    items.remove(entity);
+	public void unselect() {
+		setSelectedEntities(null);
 	}
-	unselect();
-    }
 
-    public void cancleModifyEntity()
-    {
-	update();
-    }
+	public void modifyEntity() throws FiliereNotFoundException {
+		metier.modify(selectedEntity);
+		items = metier.get(clazz);
+		unselect();
+	}
 
-    public void update()
-    {
+	public void deleteEntity() {
+		for (T entity : selectedEntities) {
+			metier.remove(entity);
+			items.remove(entity);
+		}
+		unselect();
+	}
 
-	items =  metier.get(clazz);
-	unselect();
-    }
+	public void cancleModifyEntity() {
+		update();
+	}
 
-    public T getSelectedEntity() {
-	return selectedEntity;
-    }
+	public void update() {
 
-    public void setSelectedEntity(T selectedEntity) {
-	this.selectedEntity = selectedEntity;
-    }
+		items = metier.get(clazz);
+		unselect();
+	}
 
-    public List<? extends EntityBase> getItems() {
-    	
-	return items;
-    }
+	public T getSelectedEntity() {
+		return selectedEntity;
+	}
 
-    public void setItems(List<? extends EntityBase> items) {
-	this.items = items;
-    }
+	public void setSelectedEntity(T selectedEntity) {
+		this.selectedEntity = selectedEntity;
+	}
 
-    public List<T> getSelectedEntities() {
-	return selectedEntities;
-    }
+	public List<? extends EntityBase> getItems() {
 
-    public void setSelectedEntities(List<T> selectedEntities) {
-	if (selectedEntities != null && selectedEntities.size() != 0)
-	    this.selectedEntity = selectedEntities
-		    .get(selectedEntities.size() - 1);
-	else
-	    this.selectedEntity = null;
-	this.selectedEntities = selectedEntities;
-    }
-    
-    
-    protected void addSuccessMessage(String formID, String msg,String msg2) {
-	    FacesContext.getCurrentInstance().addMessage(formID, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg2));
-	  }
+		return items;
+	}
 
-	  protected void addErrorMessage(Throwable e, String msg, String msg2,String formID) {
-	      FacesContext.getCurrentInstance().addMessage(formID, new FacesMessage(FacesMessage.SEVERITY_ERROR,  StringEscapeUtils.unescapeJava(e.getMessage()), StringEscapeUtils.unescapeJava(e.getMessage())));
-	  }
+	public void setItems(List<? extends EntityBase> items) {
+		this.items = items;
+	}
+
+	public List<T> getSelectedEntities() {
+		return selectedEntities;
+	}
+
+	public void setSelectedEntities(List<T> selectedEntities) {
+		if (selectedEntities != null && selectedEntities.size() != 0)
+			this.selectedEntity = selectedEntities
+					.get(selectedEntities.size() - 1);
+		else
+			this.selectedEntity = null;
+		this.selectedEntities = selectedEntities;
+	}
+
+	protected void addSuccessMessage(String formID, String msg, String msg2) {
+		FacesContext.getCurrentInstance().addMessage(formID,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg2));
+	}
+
+	protected void addErrorMessage(Throwable e, String msg, String msg2,
+			String formID) {
+		FacesContext.getCurrentInstance().addMessage(
+				formID,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, StringEscapeUtils
+						.unescapeJava(e.getMessage()), StringEscapeUtils
+						.unescapeJava(e.getMessage())));
+	}
 }
