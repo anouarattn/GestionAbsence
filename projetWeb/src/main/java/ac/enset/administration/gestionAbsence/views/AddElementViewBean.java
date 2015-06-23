@@ -11,6 +11,8 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 
 import ac.enset.administration.gestionAbsence.entites.Element;
+import ac.enset.administration.gestionAbsence.entites.Enseignant;
+import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
@@ -38,9 +40,11 @@ public class AddElementViewBean implements Serializable {
 	
 	private Element entityToAdd;
 	private Filiere filiere;
+	private Enseignant enseignant;
 	
 	private List<Filiere> filieres;
     private List<Module> modules;
+    private List<Enseignant> enseignants;
     
     @PostConstruct
     public void init() {
@@ -101,5 +105,23 @@ public class AddElementViewBean implements Serializable {
 		modules= new ArrayList<Module>();
 	 }
 
+	 public List<? extends EntityBase> enseignants()
+	    {
+		return metier.get(Enseignant.class);
+	    }
+	 
 
+		public Enseignant getEnseignant() {
+			return enseignant;
+		}
+
+
+		public void setEnseignant(Enseignant enseignant) {
+			this.enseignant = enseignant;
+		}
+
+
+		public void setEnseignants(List<Enseignant> enseignants) {
+			this.enseignants = enseignants;
+		}
 }

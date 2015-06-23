@@ -61,7 +61,11 @@ public class ModelBeanModule extends ModelBeanBase<Module> implements Serializab
 
 
 
-
+    public void update()
+    {
+	items =  metier.getModuleByActivatedYears();
+	unselect();
+    }
     
     
     

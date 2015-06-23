@@ -61,7 +61,7 @@ org.primefaces.webapp.filter.FileUploadFilter
 <servlet-name>Faces Servlet</servlet-name>
 </filter-mapping>
 	
-		
+
 <listener>
     <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
 </listener>
@@ -70,6 +70,7 @@ org.primefaces.webapp.filter.FileUploadFilter
     <filter-name>ShiroFilter</filter-name>
     <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
 </filter>
+
 
 <filter-mapping>
     <filter-name>ShiroFilter</filter-name>

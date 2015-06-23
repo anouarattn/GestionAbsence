@@ -36,5 +36,10 @@ public class ModelBeanEtudiant extends ModelBeanBase<Etudiant> implements Serial
 	{
 		this.photoFile = event.getFile();
 	}
-
+	
+	public void update()
+    {
+	items =  metier.getEtudiantByActivatedYears();
+	unselect();
+    }
 }

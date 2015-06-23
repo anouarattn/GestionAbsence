@@ -163,9 +163,9 @@ public class ChartView {
         
  
         
- 
-        areaModel.addSeries(boys);
         areaModel.addSeries(girls);
+        areaModel.addSeries(boys);
+        
          
         areaModel.setTitle("Area Chart");
         areaModel.setLegendPosition("ne");
