@@ -69,13 +69,13 @@
 							
 							<p:column selectionMode="multiple"
 								style="width:46px;text-align:center" />
-							<p:column filterBy="#{item.id}" headerText="#{msg.column1}"
+							<p:column filterBy="#{item.id}" headerText="Absences "
 								sortBy="#{item.id}" filterMatchMode="contains"
 								filterStyle="display:none"
-								style="width:120px;text-align: center;">
+								style="width:150px;text-align: center;">
 								
 								<h:commandButton id="submit" 
-									value="Absence #{item.id}" action="#{controllerBeanEtudiant.outcome()}">
+									value="Afficher Absence" action="#{controllerBeanEtudiant.outcome()}">
 								 	<f:param name="idetu" value="#{item.id}" />
 								</h:commandButton>
 								

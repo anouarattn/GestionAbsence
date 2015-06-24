@@ -1,104 +1,108 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:shiro="http://shiro.apache.org/tags">
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-	<f:loadBundle
-		basename="ac.enset.administration.gestionAbsence.properties.anneesScolaires"
-		var="msg" />
+<f:loadBundle
+			basename="ac.enset.administration.gestionAbsence.properties.anneesScolaires"
+			var="msg" />
 	<nav class="navbar navbar-default navbar-static-top" role="navigation"
 		style="margin-bottom: 0">
-
+		
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="index.xhtml">################</a>
 		</div>
 		<!-- /.navbar-header -->
 
 		<ul class="nav navbar-top-links navbar-right">
-		
-		<shiro:hasRole name="administrator">
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<strong>Année Scolaire </strong>
-					<i class="fa fa-caret-down"></i>
-				</a>
-				<ui:insert name="anneesListe">
-
-				</ui:insert>
-
-			</li>
-		</shiro:hasRole>
+			<li  class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <strong>Année Scolaire
+				</strong> <i class="fa fa-caret-down"></i>
+			</a>
+					<ui:insert name="anneesListe">
+						
+					</ui:insert>
+					
+				</li>
 			<!-- /.dropdown -->
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="fa fa-bell fa-fw"></i>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-fw"></i>
 					<i class="fa fa-caret-down"></i>
-				</a>
+			</a>
 				<ul class="dropdown-menu dropdown-alerts">
-					<li>
-						<a href="#">
+					<li><a href="#">
 							<div>
-								<i class="fa fa-comment fa-fw"></i>
-								New Comment
-								<span class="pull-right text-muted small">4 minutes ago</span>
+								<i class="fa fa-comment fa-fw"></i> New Comment <span
+									class="pull-right text-muted small">4 minutes ago</span>
 							</div>
-						</a>
+					</a></li>
+					<li class="divider"></li>
+					<li><a class="text-center" href="#"> <strong>See
+								All Alerts</strong> <i class="fa fa-angle-right"></i>
+					</a></li>
+				</ul> <!-- /.dropdown-alerts --></li>
+			<!-- /.dropdown -->
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+					<i class="fa fa-caret-down"></i>
+			</a>
+				<ul class="dropdown-menu dropdown-user">
+					<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+							Profile</a></li>
+					<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
 					</li>
 					<li class="divider"></li>
-					<li>
-						<a class="text-center" href="#">
-							<strong>See All Alerts</strong>
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</li>
-				</ul>
-				<!-- /.dropdown-alerts -->
-			</li>
-			<!-- /.dropdown -->
-			<shiro:authenticated>
-				<ui:include
-					src="/resources/components/login/loggedIn_menuItem.xhtml" />
-			</shiro:authenticated>
-			<!-- /.dropdown -->
-			<shiro:guest>
-				<ui:include
-					src="/resources/components/login/loggedOut_menuItem.xhtml" />
-			</shiro:guest>
+					<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+							Logout</a></li>
+				</ul> <!-- /.dropdown-user --></li>
 			<!-- /.dropdown -->
 		</ul>
 		<!-- /.navbar-top-links -->
 
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
-				
-									<shiro:hasRole name="administrator">
-									<ui:include src="/resources/components/login/admin/menu.xhtml" />
-									</shiro:hasRole>
-									<shiro:hasRole name="professor">
-									<ui:include src="/resources/components/login/professor/menu.xhtml" />
-									</shiro:hasRole>
-									<shiro:hasRole name="student">
-									<ui:include src="/resources/components/login/student/menu.xhtml" />
-									</shiro:hasRole>
+				<ul class="nav in" id="side-menu">
+					<li class="sidebar-search">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search..." /><span
+								class="input-group-btn">
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div> <!-- /input-group -->
+					</li>
+					<li><a href="index.xhtml" class="active"><i
+							class="fa fa-dashboard fa-fw"></i> Administration</a></li>
+					<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
+							Edition des données<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+							<li><a href="departement.xhtml">Departement</a></li>
 
-				<div>
-					<p:calendar id="inline" value="#{calendarView.date1}" mode="inline" />
-				</div>
+							<li><a href="filiere.xhtml">Filière</a></li>
+							<li><a href="classe.xhtml">Classe</a></li>
+							<li><a href="module.xhtml">Module</a></li>
+							<li><a href="element.xhtml">Element</a></li>
+							<li><a href="etudiant.xhtml">Etudiant</a></li>
+							<li><a href="enseignent.xhtml">enseignent</a></li>
+							
+							<li><a href="statistique.xhtml">Statistique</a></li>
+						</ul> <!-- /.nav-second-level --></li>
+
+				</ul>
 			</div>
 			<!-- /.sidebar-collapse -->
 		</div>
 		<!-- /.navbar-static-side -->
 	</nav>
-
+	
 </ui:composition>
 </html>
 

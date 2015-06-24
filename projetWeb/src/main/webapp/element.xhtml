@@ -102,10 +102,10 @@
 							</p:column>
 
 							
-							<p:column filterBy="#{item.enseignant.nom}"
-								headerText="#{msg.column6}" sortBy="#{item.enseignant.nom}"
+							<p:column filterBy="#{item.enseignent.fName}"
+								headerText="#{msg.column6}" sortBy="#{item.enseignent.fName}"
 								filterStyle="display:none" filterMatchMode="contains">
-								<h:outputText value="#{item.enseignant.nom}" />
+								<h:outputText value="#{item.enseignent.fName}" />
 							</p:column>
 
 						</p:dataTable>

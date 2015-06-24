@@ -24,21 +24,21 @@
 					<p:selectOneMenu id="item3" value="#{addElementViewBean.filiere}" converter="omnifaces.SelectItemsConverter">
 					<f:ajax  listener="#{addElementViewBean.filiereChanged}" render="modulesMenu"  />
 					<f:selectItem itemLabel="Selectionner" itemValue="" />	
-					<f:selectItems value="#{addElementViewBean.filieres()}"/>
+					<f:selectItems value="#{addElementViewBean.filieres}"/>
 				</p:selectOneMenu>
 				<p:message for="item3" closable="true" display="text"/>
 				
 				<h:outputLabel for="modulesMenu" value="#{msg.column3}" />
 				<p:selectOneMenu id="modulesMenu" value="#{addElementViewBean.entityToAdd.module}" converter="omnifaces.SelectItemsConverter" >
 					<f:selectItem itemLabel="Selectionner" itemValue="" />	
-					<f:selectItems value="#{addElementViewBean.modules()}"   />
+					<f:selectItems value="#{addElementViewBean.modules}"   />
 				</p:selectOneMenu>
 				<p:message for="modulesMenu" closable="true" display="text" />
 				
 				<h:outputLabel for="item6" value="#{msg.column6}" />
-				<p:selectOneMenu id="item6" value="#{addElementViewBean.entityToAdd.enseignant}" converter="omnifaces.SelectItemsConverter" >
+				<p:selectOneMenu id="item6" value="#{addElementViewBean.entityToAdd.enseignent}" converter="omnifaces.SelectItemsConverter" >
 					<f:selectItem itemLabel="Selectionner" itemValue="" />	
-					<f:selectItems value="#{addElementViewBean.enseignants()}"   />
+					<f:selectItems value="#{addElementViewBean.enseignents()}"   />
 				</p:selectOneMenu>
 				<p:message for="item6" closable="true" display="text" />
 							

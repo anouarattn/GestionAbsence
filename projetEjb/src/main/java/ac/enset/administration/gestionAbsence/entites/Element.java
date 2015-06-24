@@ -23,8 +23,8 @@ public class Element extends EntityBase {
     private Module module;
     
     @ManyToOne
-    @JoinColumn(name="FK_Enseignant")
-	private Enseignant enseignant;
+    @JoinColumn(name="FK_Enseignent")
+	private Enseignent enseignent;
     
     @OneToMany(fetch=FetchType.LAZY,mappedBy="elementModule")
     private Set<AbsenceEtud> absenceEtud;
@@ -50,11 +50,11 @@ public class Element extends EntityBase {
     }
     
 
-	public Enseignant getEnseignant() {
-		return enseignant;
+	public Enseignent getEnseignent() {
+		return enseignent;
 	}
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
+	public void setEnseignent(Enseignent enseignent) {
+		this.enseignent = enseignent;
 	}
     
 	public Set<AbsenceEtud> getAbsenceEtud() {

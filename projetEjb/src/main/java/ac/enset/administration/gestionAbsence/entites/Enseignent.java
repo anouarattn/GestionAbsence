@@ -1,9 +1,13 @@
 package ac.enset.administration.gestionAbsence.entites;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -30,6 +34,9 @@ public class Enseignent extends EntityBase{
 	private String photo;
 	
 	private byte[] authentication;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "enseignent")
+	private Set<Element> elementModule;
 	
 	@ManyToOne
     @JoinColumn(name="FK_Departement")
@@ -107,5 +114,19 @@ public class Enseignent extends EntityBase{
 		this.departement = departement;
 	}
 	
+	public Set<Element> getElementModule() {
+		return elementModule;
+	}
+
+
+	public void setElementModule(Set<Element> elementModule) {
+		this.elementModule = elementModule;
+	}
 	
+	public String toString() {
+        return String.format("%s",getfName()+" "+getlName());
+        
+	}
+	
+
 }

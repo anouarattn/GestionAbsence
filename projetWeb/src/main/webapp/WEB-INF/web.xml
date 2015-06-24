@@ -61,7 +61,7 @@ org.primefaces.webapp.filter.FileUploadFilter
 <servlet-name>Faces Servlet</servlet-name>
 </filter-mapping>
 	
-
+<!-- 		
 <listener>
     <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
 </listener>
@@ -80,7 +80,7 @@ org.primefaces.webapp.filter.FileUploadFilter
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
 </filter-mapping> 
-
+ -->
 
   
 </web-app>  

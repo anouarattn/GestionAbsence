@@ -10,8 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import ac.enset.administration.gestionAbsence.entites.Element;
-
-import ac.enset.administration.gestionAbsence.entites.Enseignant;
+import ac.enset.administration.gestionAbsence.entites.Enseignent;
 import ac.enset.administration.gestionAbsence.entites.EntityBase;
 import ac.enset.administration.gestionAbsence.entites.Filiere;
 import ac.enset.administration.gestionAbsence.entites.Module;
@@ -38,7 +37,7 @@ public class ControllerBeanElement extends ControllerBeanBase<Element> implement
 	
     private Filiere filiere;
     private Module module;
-    private Enseignant enseignant;
+    private Enseignent enseignent;
     
     private List<Filiere> filieres;
     private List<Module> modules;
@@ -52,8 +51,8 @@ public class ControllerBeanElement extends ControllerBeanBase<Element> implement
     @Override
     public void addEntity() throws Exception {
     	entityToAdd.setModule(module);
-    	entityToAdd.setEnseignant(enseignant);
-    	System.out.println("enseignant : "+enseignant.getPrenom());
+    	entityToAdd.setEnseignent(enseignent);
+    	
     	metier.add(entityToAdd);
     	modelBeanElement.update();
     }
@@ -68,12 +67,12 @@ public class ControllerBeanElement extends ControllerBeanBase<Element> implement
 		this.module = module;
 	}
 
-	public Enseignant getEnseignant() {
-		return enseignant;
+	public Enseignent getEnseignent() {
+		return enseignent;
 	}
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
+	public void setEnseignant(Enseignent enseignent) {
+		this.enseignent = enseignent;
 	}
     
 	
@@ -104,9 +103,9 @@ public class ControllerBeanElement extends ControllerBeanBase<Element> implement
     }
     
 
-    public List<? extends EntityBase> enseignants()
+    public List<? extends EntityBase> enseignents()
     {
-	return metier.get(Enseignant.class);
+	return metier.get(Enseignent.class);
     } 
     
     public List<Module> getModules() {
