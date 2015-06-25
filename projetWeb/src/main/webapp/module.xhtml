@@ -43,6 +43,7 @@
 							value="#{model.items}" var="item"
 							paginator="true" rows="40" rowKey="#{item.id}"
 							filteredValue="#{controller.filtredEntities}"
+							paginatorTemplate="{Exporters}"
 							widgetVar="jsTable" id="datatable"
 							paginatorPosition="bottom"
 							selection="#{model.selectedEntities}">
@@ -56,7 +57,7 @@
 									</h:commandLink>
 									<h:commandLink style="margin-right:5px;">
 										<p:graphicImage name="img/excel.png" width="24" />
-										<p:dataExporter type="xls" target="tbl" fileName="cars" />
+										<p:dataExporter type="xls" target="tbl" fileName="items" />
 									</h:commandLink>
 									<h:commandLink style="margin-right:5px;">
 										<p:graphicImage name="img/pdf.png" width="24" />

@@ -27,5 +27,10 @@ public class ModelBeanElement extends ModelBeanBase<Element> implements Serializ
 	//items = metier.get(clazz);
 	items = metier.getElementByActivatedYears();
     }
+    
+    @Override
+    public void update() {
+    	items = metier.getElementByActivatedYears();
+    }
    
 }

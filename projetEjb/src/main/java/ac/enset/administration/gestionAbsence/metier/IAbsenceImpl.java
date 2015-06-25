@@ -372,8 +372,7 @@ public class IAbsenceImpl implements IAbsenceLocal {
     
     @Override
     public List<AbsenceEtud> getElemnentmoduleEtudiantAbsence(Long id){
-    	
-    	/*Query myQuery = em.createQuery("SELECT elm FROM ElementModule elm , Etudiant etu, Classe classe WHERE etu.classe.id = classe.id and elm.module.filiere.classes.id = etu.classe.id and etu.id = :x and  classe.currentAcademicYear.activated = true");*/
+    	    	
     	Query myQuery = em.createQuery("SELECT abs FROM Element elm, AbsenceEtud abs where elm.id =  abs.elementModule.id and abs.etudiant.id like :x ");
     	
     	myQuery.setParameter("x", id);
@@ -403,5 +402,13 @@ public class IAbsenceImpl implements IAbsenceLocal {
     			.createQuery("SELECT elm FROM Element elm, Module mod, Classe cl  where elm.module.id = mod.id and  mod.filiere.id = cl.filiere.id and cl.currentAcademicYear.activated = true ");
     		return myQuery.getResultList();
     }
-		
+	
+    @Override
+    public List<AbsenceEtud> getElemnentmoduleAbsences(Long id){
+    	    	
+    	Query myQuery = em.
+    			createQuery("SELECT abs FROM  AbsenceEtud abs where   abs.etudiant.id  = :x  "); 
+		myQuery.setParameter("x", id);
+    	return myQuery.getResultList();
+    }
 }

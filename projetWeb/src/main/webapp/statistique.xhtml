@@ -24,13 +24,25 @@
 				<div class="col-lg-12">
 				
 					<br/><br/>
-					<h:panelGrid id="graphe" columns="2" columnClasses="left,right" style="width:100%">
-					    <p:chart type="line" model="#{chartView.animatedModel1}" style="width:400px;" /><br/>
-					    <p:chart type="bar" model="#{chartView.animatedModel2}" style="width:600px; " /><br/>
-					    <p:chart type="line" model="#{chartView.areaModel}" style="height:300px" />
+					<h:panelGrid id="graphe" columns="2" columnClasses="left,right" style="width:100%">					    					   
+					    <p:chart type="bar" model="#{chartView.animatedModel2}" widgetVar="chart" style="width:600px; "  />
+					    					    					    
 					</h:panelGrid>
-					<br/><br/>
-				
+					<br/>
+					<p:commandButton type="button" value="Export " icon="ui-icon-extlink" onclick="exportChart()"/>
+					<br/>
+					<h:panelGrid id="line" columns="2" columnClasses="left,right" style="width:100%">					    
+					   
+					    <p:chart type="line" model="#{chartView.areaModel}" style="height:350px" widgetVar="line" />
+					    
+					</h:panelGrid>
+				<br/><p:commandButton type="button" value="Export" icon="ui-icon-extlink" onclick="exportLine()"/>
+				<p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Chart comme Image" resizable="false">
+				    <p:outputPanel id="output" layout="block" style="width:600px;height:450px"/>
+				</p:dialog>
+				<p:dialog widgetVar="dlgl" showEffect="fade" modal="true" header="Chart comme Image" resizable="false">
+				    <p:outputPanel id="outputl" layout="block" style="width:800px;height:450px"/>
+				</p:dialog>
 				<ui:debug hotkey="x" />					
 			
 				</div>
@@ -39,7 +51,23 @@
 	
 	</ui:define>
 		<ui:define name="js">
-		
+		<script type="text/javascript">
+function exportChart() {
+    //export image
+    $('#output').empty().append(PF('chart').exportAsImage());
+ 
+    //show the dialog
+    PF('dlg').show();
+}
+
+function exportLine() {
+    //export image
+    $('#outputl').empty().append(PF('line').exportAsImage());
+ 
+    //show the dialog
+    PF('dlgl').show();
+}
+</script>
 		</ui:define>
 	<ui:define name="dialog">
 	

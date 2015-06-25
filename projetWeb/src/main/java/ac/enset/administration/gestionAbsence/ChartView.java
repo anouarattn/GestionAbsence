@@ -17,8 +17,11 @@ import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartSeries;
 
+import ac.enset.administration.gestionAbsence.entites.AbsenceEtud;
 import ac.enset.administration.gestionAbsence.entites.AnneeScolaire;
+import ac.enset.administration.gestionAbsence.entites.Etudiant;
 import ac.enset.administration.gestionAbsence.metier.IAbsenceLocal;
+import ac.enset.administration.gestionAbsence.models.ModelBeanAnneeScolaire;
  
 @ManagedBean
 public class ChartView {
@@ -27,15 +30,30 @@ public class ChartView {
 	@Inject
     protected IAbsenceLocal metier; 
 	
+	@Inject
+	protected ModelBeanAnneeScolaire modannee;
+	
     private LineChartModel animatedModel1;
     private BarChartModel animatedModel2;
     private LineChartModel areaModel;
- 
-    @PostConstruct
+    
+
+	@PostConstruct
     public void init() {
-    	
+		
     	createAreaModel();
         createAnimatedModels();
+        
+    }
+    
+    public List<AnneeScolaire> anneescolaires(){
+    	
+    	return (List<AnneeScolaire>) metier.get(AnneeScolaire.class);
+    }
+    
+    public List<AbsenceEtud> absences(Long id){
+    	
+    	return metier.getElemnentmoduleAbsences(id); 
     }
  
     public LineChartModel getAnimatedModel1() {
@@ -47,23 +65,27 @@ public class ChartView {
     }
  
     private void createAnimatedModels() {
-        animatedModel1 = initLinearModel();
-        animatedModel1.setTitle("Line Chart");
-        animatedModel1.setAnimate(true);
-        animatedModel1.setLegendPosition("se");
-        Axis yAxis = animatedModel1.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-        yAxis.setMax(10);
+    	
          
         animatedModel2 = initBarModel();
         animatedModel2.setTitle("Total annuelle des Absence par genre ");
         animatedModel2.setAnimate(true);
         animatedModel2.setLegendPosition("ne");
-        yAxis = animatedModel2.getAxis(AxisType.Y);
+        Axis yAxis = animatedModel2.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(180);
     }
-     
+    
+    public int totalHeurs(Long id){
+    	int toto = 0;
+		for(AbsenceEtud sale : absences(id)) {
+			if(sale.getEtudiant().getId() == id)
+			toto+= sale.getNbrheurAbsence();
+		}
+		return toto;
+    	
+    }
+    
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
  
@@ -96,39 +118,6 @@ public class ChartView {
          
         return model;
     }
-     
-    private LineChartModel initLinearModel() {
-        LineChartModel model = new LineChartModel();
- 
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Homme");
-        
-        List<AnneeScolaire> ane=  (List<AnneeScolaire>) metier.get(AnneeScolaire.class);
-        
-        for(AnneeScolaire an:ane){
-        	Long a=metier.getStatistiqueEtudiantbyYears(an.getId(),"Homme");
-        	if(a== null) a= 0L;
-        	String str= an.getBeginYear().toString();
-        	series1.set(""+str.substring(0, 4), Integer.parseInt(""+a));
-        	
-        }
-
-        LineChartSeries series2 = new LineChartSeries();
-        series2.setLabel("Femme");
-        
-        for(AnneeScolaire an:ane){
-        	Long a=metier.getStatistiqueEtudiantbyYears(an.getId(),"Homme");
-        	if(a== null) a= 0L;
-        	String str= an.getBeginYear().toString();
-        	series2.set(""+str.substring(0, 4), Integer.parseInt(""+a));
-        	
-        }
- 
-        model.addSeries(series1);
-        model.addSeries(series2);
-         
-        return model;
-    }
 	
     public LineChartModel getAreaModel() {
         return areaModel;
@@ -137,6 +126,20 @@ public class ChartView {
     private void createAreaModel() {
         areaModel = new LineChartModel();
         List<AnneeScolaire> ane=  (List<AnneeScolaire>) metier.get(AnneeScolaire.class);
+        Long max= 0L;
+        
+        LineChartSeries boys = new LineChartSeries();
+        boys.setFill(true);
+        boys.setLabel("Homme");
+        
+        for(AnneeScolaire an:ane){
+        	Long a=metier.getStatistiqueEtudiantbyYears(an.getId(),"Homme");
+        	
+        	if(a== null) a= 0L;
+        	max = max + a;
+        	String str= an.getBeginYear().toString();
+        	boys.set(""+str.substring(0, 4), Integer.parseInt(""+a));        	
+        }
         
         LineChartSeries girls = new LineChartSeries();
         girls.setFill(true);
@@ -146,28 +149,17 @@ public class ChartView {
         	Long a=metier.getStatistiqueEtudiantbyYears(an.getId(),"Femme");
         	
         	if(a== null) a= 0L;
+        	max = max + a;
         	String str= an.getBeginYear().toString();
         	girls.set(""+str.substring(0, 4), Integer.parseInt(""+a));        	
         }
         
-        LineChartSeries boys = new LineChartSeries();
-        boys.setFill(true);
-        boys.setLabel("Homme");
         
-        for(AnneeScolaire an:ane){
-        	Long a=metier.getStatistiqueEtudiantbyYears(an.getId(),"Homme");
-        	if(a== null) a= 0L;
-        	String str= an.getBeginYear().toString();
-        	boys.set(""+str.substring(0, 4), Integer.parseInt(""+a));        	
-        }
-        
- 
-        
-        areaModel.addSeries(girls);
         areaModel.addSeries(boys);
+        areaModel.addSeries(girls);        
         
          
-        areaModel.setTitle("Area Chart");
+        areaModel.setTitle("Total annuelle des Absence par genre ");
         areaModel.setLegendPosition("ne");
         areaModel.setStacked(true);
         areaModel.setShowPointLabels(true);
@@ -175,10 +167,9 @@ public class ChartView {
         Axis xAxis = new CategoryAxis("Years");
         areaModel.getAxes().put(AxisType.X, xAxis);
         Axis yAxis = areaModel.getAxis(AxisType.Y);
-        yAxis.setLabel("Births");
+        yAxis.setLabel("Nombre total des heurs d'absences");
         yAxis.setMin(0);
-        yAxis.setMax(30);
+        yAxis.setMax(30+max);
     }
     
-		
 }

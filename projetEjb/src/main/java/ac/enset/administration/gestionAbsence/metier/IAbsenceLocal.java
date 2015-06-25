@@ -83,4 +83,6 @@ public interface IAbsenceLocal {
 	public List<Module> getModuleByActivatedYears();
 
 	public List<Element> getElementByActivatedYears();
+
+	List<AbsenceEtud> getElemnentmoduleAbsences(Long id);
 }
